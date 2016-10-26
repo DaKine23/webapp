@@ -30,7 +30,7 @@ func main() {
 
 	router.GET("/hello/:name", nameParamHandler)
 
-	//GET http://localhost:3000/Rene
+	//GET http://localhost:3000/hello/Rene
 
 	// router.GET("/someGet", getting)
 	// router.POST("/somePost", posting)
