@@ -3,14 +3,28 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"runtime"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	cors "github.com/itsjamie/gin-cors"
 )
 
+func configRuntime() {
+	nuCPU := runtime.NumCPU()
+	runtime.GOMAXPROCS(nuCPU)
+	fmt.Printf("Running with %d CPUs\n", nuCPU)
+}
+
 func main() {
-	fmt.Println("Hello")
+	configRuntime()
 
 	router := gin.Default()
+	router.LoadHTMLGlob("templates/*.html")
+	router.Static("/static", "./templates/static")
+
+	//add cors
+	addCors(router)
 
 	handler := func(c *gin.Context) {
 		//c.String(http.StatusOK,"Hello World")
@@ -20,7 +34,7 @@ func main() {
 		})
 	}
 
-	router.GET("", handler)
+	router.GET("/pong", handler)
 	//GET http://localhost:3000
 
 	nameParamHandler := func(c *gin.Context) {
@@ -30,8 +44,15 @@ func main() {
 
 	router.GET("/hello/:name", nameParamHandler)
 
+	router.GET("/index.html", func(c *gin.Context) {
+		c.HTML(200, "index.html", gin.H{
+			"title": "Home Page",
+		},
+		)
+	})
 	//GET http://localhost:3000/hello/Rene
 
+	// example requests
 	// router.GET("/someGet", getting)
 	// router.POST("/somePost", posting)
 	// router.PUT("/somePut", putting)
@@ -44,4 +65,17 @@ func main() {
 
 	router.Run(":3000")
 
+}
+
+func addCors(router *gin.Engine) {
+	//if you want to use cors
+	router.Use(cors.Middleware(cors.Config{
+		Origins:         "*",
+		Methods:         "GET, PUT, POST, DELETE",
+		RequestHeaders:  "Origin, Authorization, Content-Type",
+		ExposedHeaders:  "",
+		MaxAge:          50 * time.Second,
+		Credentials:     true,
+		ValidateHeaders: false,
+	}))
 }
