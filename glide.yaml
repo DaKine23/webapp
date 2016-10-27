@@ -1,0 +1,4 @@
+package: github.com/DaKine23/webapp
+import:
+- package: github.com/gin-gonic/gin
+- package: github.com/itsjamie/gin-cors
