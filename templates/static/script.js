@@ -4,9 +4,7 @@ var Root = React.createClass({
   },
   componentDidMount: function () {
     var component = this;
-    $.get("/pong", function (data) {
-      component.setState(data)
-    });
+    doPoll(component);
   },
   render: function () {
     return (
@@ -14,6 +12,17 @@ var Root = React.createClass({
     )
   }
 });
+function doPoll(component){
+    $.get("/pong", function (data) {
+      component.setState(data)
+      i = i + 1
+      if (i<2)
+      setTimeout(function () {doPoll(component)},200);
+      i = i - 1
+    });
+};
+
+var i = 0;
 
 ReactDOM.render(
   <Root />,

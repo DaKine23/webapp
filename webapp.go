@@ -16,12 +16,38 @@ func configRuntime() {
 	fmt.Printf("Running with %d CPUs\n", nuCPU)
 }
 
+var switchingValue string
+
+func switchValue() {
+
+	if switchingValue == "ping" {
+		switchingValue = "pong"
+	} else {
+		switchingValue = "ping"
+	}
+
+}
+
+func everyXSecondsDo(sec int, dof do) {
+	ticker := time.NewTicker(time.Duration(sec) * time.Second)
+	for {
+		select {
+		case <-ticker.C:
+			dof()
+		}
+	}
+}
+
+type do func()
+
 func main() {
 	configRuntime()
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 	router.Static("/static", "./templates/static")
+
+	go everyXSecondsDo(1, switchValue)
 
 	//add cors
 	addCors(router)
@@ -30,7 +56,7 @@ func main() {
 		//c.String(http.StatusOK,"Hello World")
 
 		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
+			"message": switchingValue,
 		})
 	}
 
