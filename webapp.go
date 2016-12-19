@@ -1,13 +1,14 @@
 package main
 
 import (
+	_ "expvar"
 	"fmt"
 	"net/http"
 	"runtime"
 	"time"
 
-	"github.com/gin-gonic/gin"
-	cors "github.com/itsjamie/gin-cors"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 func configRuntime() {
@@ -16,7 +17,13 @@ func configRuntime() {
 	fmt.Printf("Running with %d CPUs\n", nuCPU)
 }
 
+func configMonitoring() {
+	http.ListenAndServe(":1234", nil)
+}
+
 var switchingValue string
+
+type do func()
 
 func switchValue() {
 
@@ -38,70 +45,45 @@ func everyXSecondsDo(sec int, dof do) {
 	}
 }
 
-type do func()
-
 func main() {
 	configRuntime()
 
-	router := gin.Default()
-	router.LoadHTMLGlob("templates/*.html")
-	router.Static("/static", "./templates/static")
+	router := echo.New()
+
+	router.Use(middleware.Logger())
+	router.Use(middleware.Recover())
+
+	//router.LoadHTMLGlob("templates/*.html")
+	router.Static("/", "public")
 
 	go everyXSecondsDo(1, switchValue)
 
 	//add cors
-	addCors(router)
+	// addCors(router)
 
-	handler := func(c *gin.Context) {
-		//c.String(http.StatusOK,"Hello World")
-
-		c.JSON(http.StatusOK, gin.H{
-			"message": switchingValue,
-		})
+	handler := func(c echo.Context) error {
+		m := ResponseJSON{switchingValue}
+		return c.JSON(http.StatusOK, m)
 	}
 
 	router.GET("/pong", handler)
-	//GET http://localhost:3000
+	//GET http://localhost:8080
 
-	nameParamHandler := func(c *gin.Context) {
+	nameParamHandler := func(c echo.Context) error {
 		name := c.Param("name")
-		c.String(http.StatusOK, "Hello %s", name)
+
+		return c.String(http.StatusOK, "Hello "+name)
 	}
 
 	router.GET("/hello/:name", nameParamHandler)
+	router.File("favicon.ico", "public/favicon.ico")
+	go configMonitoring()
 
-	router.GET("/index.html", func(c *gin.Context) {
-		c.HTML(200, "index.html", gin.H{
-			"title": "Home Page",
-		},
-		)
-	})
-	//GET http://localhost:3000/hello/Rene
-
-	// example requests
-	// router.GET("/someGet", getting)
-	// router.POST("/somePost", posting)
-	// router.PUT("/somePut", putting)
-	// router.DELETE("/someDelete", deleting)
-	// router.PATCH("/somePatch", patching)
-	// router.HEAD("/someHead", head)
-	// router.OPTIONS("/someOptions", options)
-
-	router.StaticFile("/favicon.ico", "./favicon.ico")
-
-	router.Run(":3000")
+	router.Logger.Fatal(router.Start(":8080"))
 
 }
 
-func addCors(router *gin.Engine) {
-	//if you want to use cors
-	router.Use(cors.Middleware(cors.Config{
-		Origins:         "*",
-		Methods:         "GET, PUT, POST, DELETE",
-		RequestHeaders:  "Origin, Authorization, Content-Type",
-		ExposedHeaders:  "",
-		MaxAge:          50 * time.Second,
-		Credentials:     true,
-		ValidateHeaders: false,
-	}))
+// ResponseJSON provides a stucture for a message response
+type ResponseJSON struct {
+	Message string `json:"message" xml:"message"`
 }

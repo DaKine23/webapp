@@ -5,7 +5,7 @@ I created this project to get an idea of web development using go and react
 ## tech stack
 
 + Golang
-    + gin-gonic
+    + echo
 + React.js
     + react
     + jquery
