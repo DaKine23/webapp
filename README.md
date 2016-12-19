@@ -18,4 +18,4 @@ go build
 ```
 open Browser on
 
-`http://localhost:3000`
+`http://localhost:8080`
