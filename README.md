@@ -19,3 +19,11 @@ go build
 open Browser on
 
 `http://localhost:8080`
+
+## P.S.
+
+for further monitoring you can install and run
+
+`expvarmon -ports="1234"`
+
+if https://github.com/divan/expvarmon/ is installed
