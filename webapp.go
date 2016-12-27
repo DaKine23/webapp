@@ -21,7 +21,7 @@ import (
 
 func main() {
 	flag.Parse()
-	data = []*hb.HtmlTableRow{}
+	data = []*hb.HTMLTableRow{}
 	configRuntime()
 	go configMonitoring()
 
@@ -46,7 +46,7 @@ func configRuntime() {
 
 var switchingValue string
 
-var data []*hb.HtmlTableRow
+var data []*hb.HTMLTableRow
 var id int
 
 func switchValue() {
@@ -118,8 +118,8 @@ func configController() {
 		//c.HTML(200, "index.html", gin.H{})
 	})
 
-	tableResultType := hb.JsResult{
-		Names: []hb.JsResultName{{"table"}},
+	tableResultType := hb.JSONResult{
+		Names: []hb.JSONResultName{{"table"}},
 	}
 	titles := []string{"ping or pong", "timestamp", "id", "delete"}
 	tableHandler := func(c *gin.Context) {
@@ -130,19 +130,23 @@ func configController() {
 		newrow = append(newrow, id)
 		ids := strconv.Itoa(id)
 
-		deletebutton := hb.NewPart("deletebutton", "", "")
+		deletebutton := hb.NewHTMLPart("deletebutton", "", "")
 
 		script := hb.NewScript("tablebutton"+ids, "click", "tablecontainer", "DELETE", "datatable/delete/"+ids, tableResultType, tableResultType.Names[0].Value())
-		button := hb.NewPart("button", "tablebutton"+ids, "del")
-		deletebutton.AddSubPart(script.HtmlPart)
+		button := hb.NewHTMLPart("button", "tablebutton"+ids, "del")
+		button.AddOption(&hb.HTMLOption{
+			Name:  "class",
+			Value: "btn btn-danger",
+		})
+		deletebutton.AddSubPart(script.HTMLPart)
 		deletebutton.AddSubPart(button)
 		newrow = append(newrow, deletebutton.String())
-		data = append(data, hb.NewTableRow(newrow))
+		data = append(data, hb.NewHTMLTableRow(newrow))
 
-		table := hb.NewHtmlTable("mytable", "tablecontainer", titles, data, []string{})
+		table := hb.NewHTMLTable("mytable", "tablecontainer", titles, data, []string{})
 		c.JSON(http.StatusOK, responseTableJSON{table.String()})
 	}
-	router.POST("/datatable", tableHandler)
+	router.POST("/datatable/add", tableHandler)
 
 	tableDeleteHandler := func(c *gin.Context) {
 
@@ -155,7 +159,7 @@ func configController() {
 			}
 		}
 
-		table := hb.NewHtmlTable("mytable", "tablecontainer", titles, data, []string{})
+		table := hb.NewHTMLTable("mytable", "tablecontainer", titles, data, []string{})
 		c.JSON(http.StatusOK, responseTableJSON{table.String()})
 	}
 
@@ -170,18 +174,15 @@ func configController() {
 			reducedTitle = strings.ToLower(reducedTitle)
 
 			if tbc == reducedTitle {
-				sortme := hb.Sorter{}
-				sortme.Data = data
-				sortme.Sort(i)
 
-				data = sortme.Data
+				data = hb.Sort(i, data)
 
 				break
 			}
 
 		}
 
-		table := hb.NewHtmlTable(tbn, "tablecontainer", titles, data, []string{})
+		table := hb.NewHTMLTable(tbn, "tablecontainer", titles, data, []string{})
 		c.JSON(http.StatusOK, responseTableJSON{table.String()})
 	}
 
@@ -211,24 +212,25 @@ func Page() string {
 
 	result := "<!DOCTYPE html>\n"
 
-	html := hb.NewPart("html", "", "")
-	head := hb.NewPart("head", "", `<meta charset="utf-8">`)
+	html := hb.NewHTMLPart("html", "", "")
+	head := hb.NewHTMLPart("head", "", `<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">`)
 	//<link rel="stylesheet" href="static/base.css" />
-	//<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">)
-	head.AddSubPart(hb.NewPart("title", "", "Webapp Example"))
-	head.AddSubPart(hb.NewCSSStyle(`table {width: 95%;} 
-		th { 
-			background-color: #666; color: #fff; 
-		} 
-		tr { 
-			background-color: #fffbf0; color: #000; 
-		} 
-		tr:nth-child(odd) {
-			background-color: #e4ebf2 ; 
-		}
-		#tablecontainer tr:hover { 
-   			background-color: #ccc;
-		}`))
+	//)
+	head.AddSubPart(hb.NewHTMLPart("title", "", "Webapp Example"))
+	// head.AddSubPart(hb.NewCSSStyle(`table {width: 95%;}
+	// 	th {
+	// 		background-color: #666; color: #fff;
+	// 	}
+	// 	tr {
+	// 		background-color: #fffbf0; color: #000;
+	// 	}
+	// 	tr:nth-child(odd) {
+	// 		background-color: #e4ebf2 ;
+	// 	}
+	// 	#tablecontainer tr:hover {
+	// 		background-color: #ccc;
+	// 	}`))
 	jsLibraries := []string{
 
 		"https://unpkg.com/babel-standalone@6.15.0/babel.min.js",
@@ -236,57 +238,68 @@ func Page() string {
 	}
 
 	for _, v := range jsLibraries {
-		part := hb.NewPart("script", "", "")
-		part.AddOption(&hb.HtmlOption{
+		part := hb.NewHTMLPart("script", "", "")
+		part.AddOption(&hb.HTMLOption{
 			Name:  "src",
 			Value: v,
 		})
 		head.AddSubPart(part)
 	}
 
-	body := hb.NewPart("body", "", "")
-	div := hb.NewPart("div", "root", "")
+	body := hb.NewHTMLPart("body", "", "")
+	div := hb.NewHTMLPart("div", "root", "")
 
 	source := "button1"
 	destination := "drawdestination"
 	source2 := "button2"
-	destination2 := "tablecontainer"
+	tablecontainer := "tablecontainer"
 
-	resultType := hb.JsResult{
-		Names: []hb.JsResultName{{"message"}, {"time"}},
+	resultType := hb.JSONResult{
+		Names: []hb.JSONResultName{{"message"}, {"time"}},
 	}
 
-	tableResultType := hb.JsResult{
-		Names: []hb.JsResultName{{"table"}},
+	tableResultType := hb.JSONResult{
+		Names: []hb.JSONResultName{{"table"}},
 	}
 
 	script := hb.NewScript(source, "click", destination, "GET", "/pong", resultType, resultType.Names[0].Value()+`+" !!! " +`+resultType.Names[1].Value())
-	script2 := hb.NewScript(source2, "click", destination2, "POST", "/datatable", tableResultType, tableResultType.Names[0].Value())
+	scriptToAddARow := hb.NewScript(source2, "click", tablecontainer, "POST", "/datatable/add", tableResultType, tableResultType.Names[0].Value())
 
-	///datatable/sort
-	script.AddOption(&hb.HtmlOption{
+	script.AddOption(&hb.HTMLOption{
 		Name:  "type",
 		Value: "text/babel",
 	})
 
-	rows := []*hb.HtmlTableRow{}
+	rows := []*hb.HTMLTableRow{}
 
-	table := hb.NewHtmlTable("mytable", "tablecontainer", []string{"ping or pong", "timestamp"}, rows, []string{})
+	table := hb.NewHTMLTable("mytable", tablecontainer, []string{"ping or pong", "timestamp"}, rows, []string{})
 
-	tp := hb.NewPart("mytable", "tablecontainer", table.String())
+	tp := hb.NewHTMLPart("mytable", tablecontainer, table.String())
 
 	html.AddSubPart(head)
 	html.AddSubPart(body)
 
 	body.AddSubPart(div)
-	body.AddSubPart(script.HtmlPart)
-	body.AddSubPart(script2.HtmlPart)
+	body.AddSubPart(script.HTMLPart)
+	body.AddSubPart(scriptToAddARow.HTMLPart)
 
-	body.AddSubPart(hb.NewPart("button", source2, "Add Table Entry"))
+	button := hb.NewHTMLPart("button", source2, "Add Table Entry")
+	button.AddOption(&hb.HTMLOption{
+		Name:  "class",
+		Value: "btn btn-primary",
+	})
+	body.AddSubPart(button)
 
 	body.AddSubPart(tp)
-	body.AddSubPart(hb.NewPart("button", source, "Click Me"))
-	div2 := hb.NewPart("div", destination, "content")
+
+	button2 := hb.NewHTMLPart("button", source, "Click Me")
+	button2.AddOption(&hb.HTMLOption{
+		Name:  "class",
+		Value: "btn btn-default",
+	})
+
+	body.AddSubPart(button2)
+	div2 := hb.NewHTMLPart("div", destination, "content")
 
 	body.AddSubPart(div2)
 
