@@ -5,7 +5,8 @@ I created this project to get an idea of web development using go and react
 ## tech stack
 
 + Golang
-    + echo
+    + gin
+    + gin-oauth
 + React.js
     + react
     + jquery
@@ -13,8 +14,7 @@ I created this project to get an idea of web development using go and react
 ## make it run
 
 ```
-go build
-./webapp
+go run webapp.go
 ```
 open Browser on
 
