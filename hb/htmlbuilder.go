@@ -5,6 +5,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	bstable "github.com/DaKine23/webapp/hb/bstable"
 )
 
 //HTMLOption represents an HTMLPart Option
@@ -15,7 +17,8 @@ type HTMLOption struct {
 
 //HTMLPart represents a general HTML Tag and its contents
 type HTMLPart struct {
-	Name     string
+	ID       string
+	Class    string
 	Options  *[]HTMLOption
 	SubParts *[]HTMLPart
 	Content  string
@@ -50,17 +53,19 @@ type HTMLTable struct {
 type HTMLTableRow struct {
 	Row         *[]interface{}
 	ParentTable *HTMLTable
+	Status      string
 }
 
 //NewHTMLPart should be used as an constructor for *HTMLPart objects
-func NewHTMLPart(name, id, content string) *HTMLPart {
+func NewHTMLPart(class, id, content string) *HTMLPart {
 	subParts := []HTMLPart{}
 	options := []HTMLOption{}
 	htmlp := HTMLPart{
-		Name:     name,
+		Class:    class,
 		Content:  content,
 		Options:  &options,
 		SubParts: &subParts,
+		ID:       id,
 	}
 	if len(id) != 0 {
 		htmlp.AddOption(&HTMLOption{
@@ -69,6 +74,11 @@ func NewHTMLPart(name, id, content string) *HTMLPart {
 		})
 	}
 	return &htmlp
+}
+
+//NewHTMLTableContainer should be used as an constructor for table containing HTMLParts
+func NewHTMLTableContainer(ht *HTMLTable) *HTMLPart {
+	return NewHTMLPart("tablecontainer", ht.ID+"container", ht.String())
 }
 
 //NewScript should be used as an constructor for *Script objects
@@ -90,7 +100,7 @@ func NewScript(source, action, target, restType, apicall string, result JSONResu
 }
 
 //NewHTMLTable should be used as an constructor for *HTMLTable objects
-func NewHTMLTable(id, parentid string, titles []string, rows []*HTMLTableRow, alligns []string) *HTMLTable {
+func NewHTMLTable(id string, titles []string, rows []*HTMLTableRow, alligns []string) *HTMLTable {
 
 	ht := HTMLTable{}
 	ht.ID = id
@@ -122,7 +132,7 @@ func NewHTMLTable(id, parentid string, titles []string, rows []*HTMLTableRow, al
 	for _, v := range titles {
 		reducedTitle := strings.Replace(fmt.Sprint(v), " ", "", -1)
 		reducedTitle = strings.ToLower(reducedTitle)
-		script := NewScript(id+"_"+reducedTitle, "click", parentid, "GET", "/table/"+id+"/"+reducedTitle+"/sort", tableResultType, tableResultType.Names[0].Value())
+		script := NewScript(id+"_"+reducedTitle, "click", id+"container", "GET", "/table/"+id+"/sort/"+reducedTitle, tableResultType, tableResultType.Names[0].Value())
 		ht.Scripts = append(ht.Scripts, script)
 	}
 
@@ -130,12 +140,13 @@ func NewHTMLTable(id, parentid string, titles []string, rows []*HTMLTableRow, al
 }
 
 //NewHTMLTableRow should be used as an constructor for *HTMLTableRow objects
-func NewHTMLTableRow(data []interface{}) *HTMLTableRow {
+func NewHTMLTableRow(data []interface{}, status ...string) *HTMLTableRow {
 
 	htr := HTMLTableRow{}
 	row := []interface{}{}
-	//par := HTMLTable{}
-	//htr.ParentTable = &par
+	if len(status) > 0 {
+		htr.Status = status[0]
+	}
 	htr.Row = &row
 	for _, v := range data {
 		*htr.Row = append(*htr.Row, v)
@@ -145,7 +156,7 @@ func NewHTMLTableRow(data []interface{}) *HTMLTableRow {
 
 //String returns the HTML String for the HTMLPart struct includes all subparts subsubparts ...
 func (hp HTMLPart) String() string {
-	result := fmt.Sprintf("<%s", hp.Name)
+	result := fmt.Sprintf("<%s", hp.Class)
 
 	for _, v := range *hp.Options {
 		result += fmt.Sprintf(" %s=\"%s\"", v.Name, v.Value)
@@ -159,7 +170,7 @@ func (hp HTMLPart) String() string {
 		result += v.String()
 	}
 
-	result += fmt.Sprintf("</%s>", hp.Name)
+	result += fmt.Sprintf("</%s>", hp.Class)
 
 	return result
 }
@@ -173,9 +184,10 @@ func (ht HTMLTable) String() string {
 	}
 
 	table := NewHTMLPart("table", ht.ID, result)
+	classes := []string{bstable.BsTable, bstable.BsTableHoverRows, bstable.BsTableStripedRows}
 	table.AddOption(&HTMLOption{
 		Name:  "class",
-		Value: "table table-hover table-striped",
+		Value: strings.Join(classes, " "),
 	})
 
 	result = table.String()
@@ -198,6 +210,13 @@ func (htr HTMLTableRow) String() string {
 func (htr HTMLTableRow) string(rowType string) string {
 	tr := NewHTMLPart("tr", "", "")
 
+	if rowType != "th" && len(htr.Status) > 0 {
+		tr.AddOption(&HTMLOption{
+			Name:  "class",
+			Value: htr.Status,
+		})
+	}
+
 	for i, v := range *htr.Row {
 		var th *HTMLPart
 		if rowType == "th" {
@@ -205,13 +224,14 @@ func (htr HTMLTableRow) string(rowType string) string {
 		} else {
 			th = NewHTMLPart(rowType, "", fmt.Sprint(v))
 		}
+
 		if htr.ParentTable != nil && i < len(htr.ParentTable.Alligns) {
 			th.AddOption(&HTMLOption{
 				Name:  "align",
 				Value: htr.ParentTable.Alligns[i],
 			})
 		}
-		tr.AddSubPart(th)
+		tr.addSubPart(th)
 	}
 
 	return tr.String()
@@ -222,22 +242,41 @@ func (jsResultName JSONResultName) Value() string {
 	return "result." + jsResultName.Name
 }
 
-//AddSubPart adds a HTMLPart (subpart) in your HTMLPart
-func (hp *HTMLPart) AddSubPart(subpart *HTMLPart) {
+func (hp *HTMLPart) addSubPart(subpart *HTMLPart) *HTMLPart {
 
 	*hp.SubParts = append(*hp.SubParts, *subpart)
+	return hp
 }
 
-//AddOptions adds an Option to you HTMLParts
-func (hp *HTMLPart) AddOptions(options *[]HTMLOption) {
-
-	*hp.Options = append(*hp.Options, *options...)
+//AddSubParts adds one or more HTMLParts (subparts) in your HTMLPart
+func (hp *HTMLPart) AddSubParts(subparts ...*HTMLPart) *HTMLPart {
+	for _, v := range subparts {
+		*hp.SubParts = append(*hp.SubParts, *v)
+	}
+	return hp
 }
 
 //AddOptions adds Options to you HTMLParts
-func (hp *HTMLPart) AddOption(option *HTMLOption) {
+func (hp *HTMLPart) AddOptions(options *[]HTMLOption) *HTMLPart {
+
+	*hp.Options = append(*hp.Options, *options...)
+	return hp
+}
+
+//AddOption adds an Option to you HTMLParts
+func (hp *HTMLPart) AddOption(option *HTMLOption) *HTMLPart {
 
 	*hp.Options = append(*hp.Options, *option)
+	return hp
+}
+
+//AddBootstrapClasses adds Bootstrap class as and Option to the HTMLPart. Dont forget to add the base class if existent
+func (hp *HTMLPart) AddBootstrapClasses(classes ...string) *HTMLPart {
+	hp.AddOption(&HTMLOption{
+		Name:  "class",
+		Value: strings.Join(classes, " "),
+	})
+	return hp
 }
 
 //NewCSSStyle creates a HTMLPart for plain CSS styles

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"runtime"
-	"strconv"
 	"strings"
 	"time"
 
@@ -12,6 +11,8 @@ import (
 	"flag"
 
 	"github.com/DaKine23/webapp/hb"
+	bsbutton "github.com/DaKine23/webapp/hb/bsbutton"
+	bstable "github.com/DaKine23/webapp/hb/bstable"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	cors "github.com/itsjamie/gin-cors"
@@ -21,14 +22,49 @@ import (
 
 func main() {
 	flag.Parse()
-	data = []*hb.HTMLTableRow{}
+	initData()
+
 	configRuntime()
 	go configMonitoring()
 
 	configController()
 }
 
-// ResponseJSON provides a stucture for a message response
+var data = make(map[string]*[]*hb.HTMLTableRow)
+var titles = make(map[string][]string)
+
+func initData() {
+	titles["mytable"] = []string{"ping or pong", "timestamp", "delete", "id"}
+	data["mytable"] = &[]*hb.HTMLTableRow{}
+	titles["mytable2"] = []string{"one", "two", "three"}
+	//sample data
+	data["mytable2"] = &[]*hb.HTMLTableRow{
+		&hb.HTMLTableRow{
+			Row: &[]interface{}{"asome", "rontent", 1},
+		},
+		&hb.HTMLTableRow{
+			Row:    &[]interface{}{"bknow", "yblubb", 3},
+			Status: bstable.BsTableRowStatusDanger,
+		},
+		&hb.HTMLTableRow{
+			Row:    &[]interface{}{"csome", "xcontent", 2},
+			Status: bstable.BsTableRowStatusInfo,
+		},
+		&hb.HTMLTableRow{
+			Row:    &[]interface{}{"dknow", "cblubb", 6},
+			Status: bstable.BsTableRowStatusSuccess,
+		},
+		&hb.HTMLTableRow{
+			Row:    &[]interface{}{"esome", "fcontent", 5},
+			Status: bstable.BsTableRowStatusWarning,
+		},
+		&hb.HTMLTableRow{
+			Row: &[]interface{}{"fknow", "ablubb", 42},
+		},
+	}
+}
+
+// responseJSON provides a stucture for a JSON message response
 type responseJSON struct {
 	Message string    `json:"message" xml:"message"`
 	Time    time.Time `json:"time" xml:"time"`
@@ -36,6 +72,11 @@ type responseJSON struct {
 
 type responseTableJSON struct {
 	Table string `json:"table" xml:"table"`
+}
+
+//the result type JSON schema the script expects
+var tableResultType = hb.JSONResult{
+	Names: []hb.JSONResultName{{"table"}},
 }
 
 func configRuntime() {
@@ -46,7 +87,6 @@ func configRuntime() {
 
 var switchingValue string
 
-var data []*hb.HTMLTableRow
 var id int
 
 func switchValue() {
@@ -84,7 +124,7 @@ func configController() {
 	ginoauth2.VarianceTimer = 300 * time.Millisecond // defaults to 30s
 
 	//router.LoadHTMLGlob("public/*.html")
-	router.Static("/static", "./public/static")
+	//router.Static("/static", "./public/static")
 
 	go everyXSecondsDo(1, switchValue)
 
@@ -112,83 +152,17 @@ func configController() {
 	router.RedirectTrailingSlash = true
 
 	router.GET("/index.html", func(c *gin.Context) {
-		c.Writer.WriteString(Page())
+		c.Writer.WriteString(page())
 
 		//fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
 		//c.HTML(200, "index.html", gin.H{})
 	})
 
-	tableResultType := hb.JSONResult{
-		Names: []hb.JSONResultName{{"table"}},
-	}
-	titles := []string{"ping or pong", "timestamp", "id", "delete"}
-	tableHandler := func(c *gin.Context) {
-		newrow := []interface{}{}
-		id++
-		newrow = append(newrow, switchingValue)
-		newrow = append(newrow, time.Now())
-		newrow = append(newrow, id)
-		ids := strconv.Itoa(id)
+	router.POST("/table/:tablename/add", addNewLineToUpperTableHandler)
 
-		deletebutton := hb.NewHTMLPart("deletebutton", "", "")
+	router.DELETE("/table/:tablename/delete/:id", deleteHandler)
 
-		script := hb.NewScript("tablebutton"+ids, "click", "tablecontainer", "DELETE", "datatable/delete/"+ids, tableResultType, tableResultType.Names[0].Value())
-		button := hb.NewHTMLPart("button", "tablebutton"+ids, "del")
-		button.AddOption(&hb.HTMLOption{
-			Name:  "class",
-			Value: "btn btn-danger",
-		})
-		deletebutton.AddSubPart(script.HTMLPart)
-		deletebutton.AddSubPart(button)
-		newrow = append(newrow, deletebutton.String())
-		data = append(data, hb.NewHTMLTableRow(newrow))
-
-		table := hb.NewHTMLTable("mytable", "tablecontainer", titles, data, []string{})
-		c.JSON(http.StatusOK, responseTableJSON{table.String()})
-	}
-	router.POST("/datatable/add", tableHandler)
-
-	tableDeleteHandler := func(c *gin.Context) {
-
-		id := c.Param("id")
-
-		for i, v := range data {
-			if fmt.Sprint((*v.Row)[2]) == id {
-				data = append(data[:i], data[i+1:]...)
-				break
-			}
-		}
-
-		table := hb.NewHTMLTable("mytable", "tablecontainer", titles, data, []string{})
-		c.JSON(http.StatusOK, responseTableJSON{table.String()})
-	}
-
-	router.DELETE("/datatable/delete/:id", tableDeleteHandler)
-
-	newSortHandler := func(c *gin.Context) {
-		tbn := c.Param("tablename")
-		tbc := c.Param("column")
-
-		for i, v := range titles {
-			reducedTitle := strings.Replace(fmt.Sprint(v), " ", "", -1)
-			reducedTitle = strings.ToLower(reducedTitle)
-
-			if tbc == reducedTitle {
-
-				data = hb.Sort(i, data)
-
-				break
-			}
-
-		}
-
-		table := hb.NewHTMLTable(tbn, "tablecontainer", titles, data, []string{})
-		c.JSON(http.StatusOK, responseTableJSON{table.String()})
-	}
-
-	router.GET("/table/:tablename/:column/sort", newSortHandler)
-
-	//GET http://localhost:3000
+	router.GET("/table/:tablename/sort/:column", sortHandler)
 
 	router.StaticFile("/favicon.ico", "public/favicon.ico")
 
@@ -208,101 +182,154 @@ func addCors(router *gin.Engine) {
 	}))
 }
 
-func Page() string {
+func page() string {
 
+	//define doctype
 	result := "<!DOCTYPE html>\n"
 
+	//define <html>
 	html := hb.NewHTMLPart("html", "", "")
+
+	//define <head> with title and include bootstrap
+	title := "Webapp Example"
 	head := hb.NewHTMLPart("head", "", `<meta charset="utf-8">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">`)
-	//<link rel="stylesheet" href="static/base.css" />
-	//)
-	head.AddSubPart(hb.NewHTMLPart("title", "", "Webapp Example"))
-	// head.AddSubPart(hb.NewCSSStyle(`table {width: 95%;}
-	// 	th {
-	// 		background-color: #666; color: #fff;
-	// 	}
-	// 	tr {
-	// 		background-color: #fffbf0; color: #000;
-	// 	}
-	// 	tr:nth-child(odd) {
-	// 		background-color: #e4ebf2 ;
-	// 	}
-	// 	#tablecontainer tr:hover {
-	// 		background-color: #ccc;
-	// 	}`))
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">`).
+		AddSubParts(hb.NewHTMLPart("title", "", title))
+
+		//define js libraries you want to import
 	jsLibraries := []string{
 
 		"https://unpkg.com/babel-standalone@6.15.0/babel.min.js",
 		"https://unpkg.com/jquery@3.1.0/dist/jquery.min.js",
 	}
-
+	//add js libraries you want to import to the <head>
 	for _, v := range jsLibraries {
-		part := hb.NewHTMLPart("script", "", "")
-		part.AddOption(&hb.HTMLOption{
+		jsLibrariesPart := hb.NewHTMLPart("script", "", "").AddOption(&hb.HTMLOption{
 			Name:  "src",
 			Value: v,
 		})
-		head.AddSubPart(part)
+		head.AddSubParts(jsLibrariesPart)
 	}
 
+	//define <body>
 	body := hb.NewHTMLPart("body", "", "")
-	div := hb.NewHTMLPart("div", "root", "")
 
-	source := "button1"
-	destination := "drawdestination"
-	source2 := "button2"
-	tablecontainer := "tablecontainer"
-
-	resultType := hb.JSONResult{
-		Names: []hb.JSONResultName{{"message"}, {"time"}},
+	//define json schema a script expects when called
+	pongResultType := hb.JSONResult{
+		Names: []hb.JSONResultName{{"message"}, {"time"}}, //just message and time for demonstration
 	}
-
+	//define json schema a script expects when called
 	tableResultType := hb.JSONResult{
-		Names: []hb.JSONResultName{{"table"}},
+		Names: []hb.JSONResultName{{"table"}}, //contains table as html string
 	}
 
-	script := hb.NewScript(source, "click", destination, "GET", "/pong", resultType, resultType.Names[0].Value()+`+" !!! " +`+resultType.Names[1].Value())
-	scriptToAddARow := hb.NewScript(source2, "click", tablecontainer, "POST", "/datatable/add", tableResultType, tableResultType.Names[0].Value())
+	// define two tables for demonstration
+	table := hb.NewHTMLTable("mytable", titles["mytable"], *data["mytable"], []string{})
+	table2 := hb.NewHTMLTable("mytable2", titles["mytable2"], *data["mytable2"], []string{})
 
-	script.AddOption(&hb.HTMLOption{
-		Name:  "type",
-		Value: "text/babel",
-	})
+	// tables should be used inside of containers when defining the layout will be used as drawing destination later on
+	tp := hb.NewHTMLTableContainer(table)
+	tp2 := hb.NewHTMLTableContainer(table2)
 
-	rows := []*hb.HTMLTableRow{}
+	// add some buttons
+	button := hb.NewHTMLPart("button", "addbutton", "Add Table Entry").AddBootstrapClasses(bsbutton.BsButton, bsbutton.BsButtonPrimary)
+	button2 := hb.NewHTMLPart("button", "pongbutton", "Click Me").AddBootstrapClasses(bsbutton.BsButton, bsbutton.BsButtonDefault)
 
-	table := hb.NewHTMLTable("mytable", tablecontainer, []string{"ping or pong", "timestamp"}, rows, []string{})
+	// add some html <div>
+	div2 := hb.NewHTMLPart("div", "drawdestination", "content")
 
-	tp := hb.NewHTMLPart("mytable", tablecontainer, table.String())
+	// define scripts (ajax calls)
+	scriptToAddARow := hb.NewScript(button.ID, "click", table.ID+"container", "POST", "/table/mytable/add", tableResultType, tableResultType.Names[0].Value())
+	script := hb.NewScript(button2.ID, "click", div2.ID, "GET", "/pong", pongResultType, pongResultType.Names[0].Value()+`+" !!! " +`+pongResultType.Names[1].Value())
 
-	html.AddSubPart(head)
-	html.AddSubPart(body)
+	// add <head> and <body> to <html>
+	html.AddSubParts(head, body)
 
-	body.AddSubPart(div)
-	body.AddSubPart(script.HTMLPart)
-	body.AddSubPart(scriptToAddARow.HTMLPart)
+	// add all the other html tags to the <body>
+	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, button, tp, button2, div2, tp2)
 
-	button := hb.NewHTMLPart("button", source2, "Add Table Entry")
-	button.AddOption(&hb.HTMLOption{
-		Name:  "class",
-		Value: "btn btn-primary",
-	})
-	body.AddSubPart(button)
-
-	body.AddSubPart(tp)
-
-	button2 := hb.NewHTMLPart("button", source, "Click Me")
-	button2.AddOption(&hb.HTMLOption{
-		Name:  "class",
-		Value: "btn btn-default",
-	})
-
-	body.AddSubPart(button2)
-	div2 := hb.NewHTMLPart("div", destination, "content")
-
-	body.AddSubPart(div2)
-
+	// return DOCTYPE definition + <html> as string (includes all the subparts)
 	return result + html.String()
 
+}
+
+// hb tables enforce "/table/:tablename/sort/:column" api
+// hb.Sort helps you sort as it sorts the rows using the value on provided index
+// and discovers integer float64 and time.Time or uses the string representation for sorting
+func sortHandler(c *gin.Context) {
+
+	tbn := c.Param("tablename")
+	tbc := c.Param("column")
+
+	for i, v := range titles[tbn] {
+		reducedTitle := strings.Replace(fmt.Sprint(v), " ", "", -1)
+		reducedTitle = strings.ToLower(reducedTitle)
+
+		if tbc == reducedTitle {
+
+			*data[tbn] = hb.Sort(i, *data[tbn])
+
+			break
+		}
+
+	}
+
+	table := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{})
+	c.JSON(http.StatusOK, responseTableJSON{table.String()})
+}
+
+func deleteHandler(c *gin.Context) {
+
+	id := c.Param("id")
+	tbn := c.Param("tablename")
+	index := 0
+
+	//get the index of the "id column"
+	for i, v := range *(*data[tbn])[0].ParentTable.Titles.Row {
+		if v == "id" {
+			index = i
+			break
+		}
+
+	}
+	//remove row search on row index of the "id column"
+	for i, v := range *data[tbn] {
+		if fmt.Sprint((*v.Row)[index]) == id {
+			*data[tbn] = append((*data[tbn])[:i], (*data[tbn])[i+1:]...)
+			break
+		}
+	}
+
+	table := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{})
+	c.JSON(http.StatusOK, responseTableJSON{table.String()})
+}
+
+func addNewLineToUpperTableHandler(c *gin.Context) {
+
+	//read table name from uri
+	tbn := c.Param("tablename")
+	//for i := 0; i < 100; i++ {
+	//increment serial (would be done on the database usually)
+	id++
+
+	ids := fmt.Sprint(id)
+	//create a HTMLPart to hold a button and script
+	buttoncontainer := hb.NewHTMLPart("deletebutton", "", "")
+
+	// create a Bootstrap styled Button
+	button := hb.NewHTMLPart("button", "tablebutton"+ids, "del").AddBootstrapClasses(bsbutton.BsButton, bsbutton.BsButtonDanger)
+	// create a deletion script for the Button to delete the row containing the button
+	script := hb.NewScript(button.ID, "click", tbn+"container", "DELETE", "table/"+tbn+"/delete/"+ids, tableResultType, tableResultType.Names[0].Value())
+	// add button and script to the container
+	buttoncontainer.AddSubParts(script.HTMLPart, button)
+
+	// data creation and appending could may be done on the database
+	// create a new row to insert
+	newrow := []interface{}{switchingValue, time.Now(), buttoncontainer.String(), id}
+	// append it to the data
+	*data[tbn] = append(*data[tbn], hb.NewHTMLTableRow(newrow))
+	//}
+	//create table using the Data and return the HTML
+	table := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{})
+	c.JSON(http.StatusOK, responseTableJSON{table.String()})
 }
