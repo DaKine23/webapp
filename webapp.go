@@ -43,8 +43,30 @@ func initData() {
 	data["mytable"] = &[]*hb.HTMLTableRow{}
 	pagesize["mytable"] = 10
 	titles["mytable2"] = []string{"one", "two", "three"}
-	pagesize["mytable2"] = 4
+	pagesize["mytable2"] = 10
 	data["mytable2"] = &[]*hb.HTMLTableRow{
+		&hb.HTMLTableRow{
+			Row: &[]interface{}{"asome", "rontent", 1},
+		},
+		&hb.HTMLTableRow{
+			Row:    &[]interface{}{"bknow", "yblubb", 3},
+			Status: bstable.TableRowStatusDanger,
+		},
+		&hb.HTMLTableRow{
+			Row:    &[]interface{}{"csome", "xcontent", 2},
+			Status: bstable.TableRowStatusInfo,
+		},
+		&hb.HTMLTableRow{
+			Row:    &[]interface{}{"dknow", "cblubb", 6},
+			Status: bstable.TableRowStatusSuccess,
+		},
+		&hb.HTMLTableRow{
+			Row:    &[]interface{}{"esome", "fcontent", 5},
+			Status: bstable.TableRowStatusWarning,
+		},
+		&hb.HTMLTableRow{
+			Row: &[]interface{}{"fknow", "ablubb", 42},
+		},
 		&hb.HTMLTableRow{
 			Row: &[]interface{}{"asome", "rontent", 1},
 		},
@@ -78,11 +100,6 @@ type responseJSON struct {
 
 type responseTableJSON struct {
 	Table string `json:"table" xml:"table"`
-}
-
-//the result type JSON schema the script expects
-var tableResultType = hb.JSONResult{
-	Names: []hb.JSONResultName{{"table"}},
 }
 
 func configRuntime() {
@@ -222,18 +239,9 @@ func page() string {
 	//define <body>
 	body := hb.NewHTMLPart("body", "", "")
 
-	//define json schema a script expects when called
-	pongResultType := hb.JSONResult{
-		Names: []hb.JSONResultName{{"message"}, {"time"}}, //just message and time for demonstration
-	}
-	//define json schema a script expects when called
-	tableResultType := hb.JSONResult{
-		Names: []hb.JSONResultName{{"table"}}, //contains table as html string
-	}
-
 	// define two tables for demonstration
-	table := hb.NewHTMLTable("mytable", titles["mytable"], *data["mytable"], []string{}, 10, 1)
-	table2 := hb.NewHTMLTable("mytable2", titles["mytable2"], *data["mytable2"], []string{}, 4, 1)
+	table := hb.NewHTMLTable("mytable", titles["mytable"], *data["mytable"], []string{}, pagesize["mytable"], 1)
+	table2 := hb.NewHTMLTable("mytable2", titles["mytable2"], *data["mytable2"], []string{}, pagesize["mytable2"], 1)
 
 	// tables should be used inside of containers when defining the layout will be used as drawing destination later on
 	tp := hb.NewHTMLTableContainer(table)
@@ -253,9 +261,9 @@ func page() string {
 	div2 := hb.NewHTMLPart("div", "drawdestination", "content")
 
 	// define scripts (ajax calls)
-	scriptToAddARow := hb.NewScript(button.ID, "click", table.ID+"container", "POST", "/table/mytable/add/1", tableResultType, tableResultType.Names[0].Value())
-	scriptToAdd1000Rows := hb.NewScript(button3.ID, "click", table.ID+"container", "POST", "/table/mytable/add/1000", tableResultType, tableResultType.Names[0].Value())
-	script := hb.NewScript(button2.ID, "click", div2.ID, "GET", "/pong", pongResultType, pongResultType.Names[0].Value()+`+" !!! " +`+pongResultType.Names[1].Value())
+	scriptToAddARow := hb.NewScript(button.ID, "click", table.ID+"container", "POST", "/table/mytable/add/1", hb.JSONResultValue("table"))
+	scriptToAdd1000Rows := hb.NewScript(button3.ID, "click", table.ID+"container", "POST", "/table/mytable/add/1000", hb.JSONResultValue("table"))
+	script := hb.NewScript(button2.ID, "click", div2.ID, "GET", "/pong", hb.JSONResultValue("message")+`+" !!! " +`+hb.JSONResultValue("timestamp"))
 
 	// add <head> and <body> to <html>
 	html.AddSubParts(head, body)
@@ -266,30 +274,27 @@ func page() string {
 	cell11 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
 	cell11.AddSubParts(buttongroup)
 	row1.AddSubParts(cell11)
-	root.AddSubParts(row1)
+
 	row2 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
 	cell21 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
 	cell21.AddSubParts(tp)
 	row2.AddSubParts(cell21)
-	root.AddSubParts(row2)
 
 	row3 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
 	cell31 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
 	cell31.AddSubParts(button2)
 	row3.AddSubParts(cell31)
-	root.AddSubParts(row3)
 
 	row4 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
 	cell41 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
 	cell41.AddSubParts(div2)
 	row4.AddSubParts(cell41)
-	root.AddSubParts(row4)
 
 	row5 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
 	cell51 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
 	cell51.AddSubParts(tp2)
 	row5.AddSubParts(cell51)
-	root.AddSubParts(row5)
+	root.AddSubParts(row1, row2, row3, row4, row5)
 
 	// add all the other html tags to the <body>
 	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, root)
@@ -389,9 +394,9 @@ func addNewLineToUpperTableHandler(c *gin.Context) {
 		buttoncontainer := hb.NewHTMLPart("deletebutton", "", "")
 
 		// create a Bootstrap styled Button
-		button := hb.NewHTMLPart("button", "tablebutton"+ids, "del").AddBootstrapClasses(bsbutton.Button, bsbutton.ButtonDanger)
+		button := hb.NewHTMLPart("button", "tablebutton"+ids, "del").AddBootstrapClasses(bsbutton.Button, bsbutton.ButtonSizeVerySmall, bsbutton.ButtonDanger)
 		// create a deletion script for the Button to delete the row containing the button
-		script := hb.NewTableButtonScript(button.ID, "click", tbn+"container", tbn, "DELETE", "table/"+tbn+"/delete/"+ids, tableResultType, tableResultType.Names[0].Value())
+		script := hb.NewTableButtonScript(button.ID, "click", tbn+"container", tbn, "DELETE", "table/"+tbn+"/delete/"+ids, hb.JSONResultValue("table"))
 		// add button and script to the container
 		buttoncontainer.AddSubParts(script.HTMLPart, button)
 
