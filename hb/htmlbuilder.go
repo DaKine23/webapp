@@ -6,7 +6,9 @@ import (
 	"strings"
 	"time"
 
-	bstable "github.com/DaKine23/webapp/hb/bstable"
+	"github.com/DaKine23/webapp/hb/bsgrid"
+	"github.com/DaKine23/webapp/hb/bspagination"
+	"github.com/DaKine23/webapp/hb/bstable"
 )
 
 //HTMLOption represents an HTMLPart Option
@@ -42,11 +44,14 @@ type JSONResultName struct {
 
 //HTMLTable represents a HTML table
 type HTMLTable struct {
-	ID      string
-	Titles  *HTMLTableRow
-	Alligns []string
-	Rows    []*HTMLTableRow
-	Scripts []*Script
+	ID       string
+	Titles   *HTMLTableRow
+	Alligns  []string
+	Rows     []*HTMLTableRow
+	Scripts  []*Script
+	PageSize int
+	Page     int
+	Rowcount int
 }
 
 //HTMLTableRow represents a HTML tables row
@@ -54,6 +59,10 @@ type HTMLTableRow struct {
 	Row         *[]interface{}
 	ParentTable *HTMLTable
 	Status      string
+}
+
+var tableResultType = JSONResult{
+	Names: []JSONResultName{{"table"}},
 }
 
 //NewHTMLPart should be used as an constructor for *HTMLPart objects
@@ -78,15 +87,20 @@ func NewHTMLPart(class, id, content string) *HTMLPart {
 
 //NewHTMLTableContainer should be used as an constructor for table containing HTMLParts
 func NewHTMLTableContainer(ht *HTMLTable) *HTMLPart {
-	return NewHTMLPart("tablecontainer", ht.ID+"container", ht.String())
+	return NewHTMLPart("tablecontainer", ht.ID+"container", ht.String()).AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
 }
 
 //NewScript should be used as an constructor for *Script objects
 func NewScript(source, action, target, restType, apicall string, result JSONResult, newContent string) *Script {
 
+	return script(source, action, target, restType, apicall+`"`, result, newContent)
+}
+
+func script(source, action, target, restType, apicall string, result JSONResult, newContent string) *Script {
+
 	part := NewHTMLPart("script", "", fmt.Sprintf(`$(document).ready(function(){
     $("#%s").%s(function(){
-        $.ajax({type: "%s", url: "%s", async: true, success: function(result){
+        $.ajax({type: "%s", url: "%s, async: true, success: function(result){
             $("#%s").html(%s);
         }});
     });
@@ -99,10 +113,19 @@ func NewScript(source, action, target, restType, apicall string, result JSONResu
 	return &script
 }
 
+//NewTableButtonScript adds current page of the table in the end of the apicall
+func NewTableButtonScript(source, action, target, table, restType, apicall string, result JSONResult, newContent string) *Script {
+
+	return script(source, action, target, restType, apicall+`/"+document.getElementById("`+table+`currentpage").getAttribute("currentpage")`, result, newContent)
+}
+
 //NewHTMLTable should be used as an constructor for *HTMLTable objects
-func NewHTMLTable(id string, titles []string, rows []*HTMLTableRow, alligns []string) *HTMLTable {
+func NewHTMLTable(id string, titles []string, rows []*HTMLTableRow, alligns []string, pagesize, page int) *HTMLTable {
 
 	ht := HTMLTable{}
+	ht.Page = page
+	ht.PageSize = pagesize
+	ht.Rowcount = len(rows)
 	ht.ID = id
 	ht.Scripts = []*Script{}
 	al := []string{}
@@ -120,19 +143,30 @@ func NewHTMLTable(id string, titles []string, rows []*HTMLTableRow, alligns []st
 	} else {
 		ht.Alligns = alligns
 	}
-	for _, v := range rows {
-		v.ParentTable = &ht
+	if pagesize > 0 && page > 0 {
+
+		end := pagesize * page
+		start := end - pagesize
+		if len(rows) < end {
+			end = len(rows)
+		}
+		for i := start; i < end; i++ {
+			rows[i].ParentTable = &ht
+		}
+		ht.Rows = rows[start:end]
+	} else {
+		for _, v := range rows {
+			v.ParentTable = &ht
+		}
+		ht.Rows = rows
 	}
-	ht.Rows = rows
+
 	ht.Titles.ParentTable = &ht
-	tableResultType := JSONResult{
-		Names: []JSONResultName{{"table"}},
-	}
 
 	for _, v := range titles {
 		reducedTitle := strings.Replace(fmt.Sprint(v), " ", "", -1)
 		reducedTitle = strings.ToLower(reducedTitle)
-		script := NewScript(id+"_"+reducedTitle, "click", id+"container", "GET", "/table/"+id+"/sort/"+reducedTitle, tableResultType, tableResultType.Names[0].Value())
+		script := NewTableButtonScript(id+"_"+reducedTitle, "click", id+"container", id, "GET", "/table/"+id+"/sort/"+reducedTitle, tableResultType, tableResultType.Names[0].Value())
 		ht.Scripts = append(ht.Scripts, script)
 	}
 
@@ -178,23 +212,95 @@ func (hp HTMLPart) String() string {
 //String returns the HTML String for the HTMLTable struct
 func (ht HTMLTable) String() string {
 
-	result := ht.Titles.asTableHeader()
+	content := ht.Titles.asTableHeader()
 	for _, v := range ht.Rows {
-		result += v.String()
+		content += v.String()
 	}
 
-	table := NewHTMLPart("table", ht.ID, result)
-	classes := []string{bstable.BsTable, bstable.BsTableHoverRows, bstable.BsTableStripedRows}
-	table.AddOption(&HTMLOption{
-		Name:  "class",
-		Value: strings.Join(classes, " "),
+	table := NewHTMLPart("table", ht.ID, content).AddBootstrapClasses(bstable.Table, bstable.TableHoverRows, bstable.TableStripedRows)
+
+	tabledata := NewHTMLPart("div", ht.ID+"currentpage", "").AddOption(&HTMLOption{
+		Name:  "style",
+		Value: "display: none;",
+	}).AddOption(&HTMLOption{
+		Name:  "currentpage",
+		Value: fmt.Sprint(ht.Page),
 	})
 
-	result = table.String()
+	table.AddSubParts(tabledata)
 	for _, v := range ht.Scripts {
-		result += v.String()
+		table.AddSubParts(v.HTMLPart)
 	}
+
+	container := NewHTMLPart("ul", ht.ID+"buttoncontainer", "")
+
+	if ht.Page > 0 && ht.PageSize > 0 && ht.Rowcount > ht.PageSize {
+
+		lastpage := ht.Rowcount / ht.PageSize
+		if ht.Rowcount%ht.PageSize != 0 {
+			lastpage++
+		}
+
+		list := []*HTMLPart{}
+		for i := 0; i < 5; i++ {
+			list = append(list, NewHTMLPart("li", "", ""))
+		}
+		buttonfirst := NewHTMLPart("a", ht.ID+"buttonfirst", "<<")
+		buttonbefore := NewHTMLPart("a", ht.ID+"buttonbefore", "<")
+		if ht.Page > 1 {
+			buttonfirst.addSubPart(pagingButtonScript(buttonfirst.ID, ht.ID, 1).HTMLPart)
+			buttonbefore.addSubPart(pagingButtonScript(buttonbefore.ID, ht.ID, ht.Page-1).HTMLPart)
+		} else {
+			list[0].AddBootstrapClasses(bspagination.Disabled)
+			list[1].AddBootstrapClasses(bspagination.Disabled)
+		}
+
+		buttonlast := NewHTMLPart("a", ht.ID+"buttonlast", ">>")
+		buttonnext := NewHTMLPart("a", ht.ID+"buttonnext", ">")
+		if ht.Page*ht.PageSize < ht.Rowcount {
+
+			buttonlast.addSubPart(pagingButtonScript(buttonlast.ID, ht.ID, lastpage).HTMLPart)
+			buttonnext.addSubPart(pagingButtonScript(buttonnext.ID, ht.ID, ht.Page+1).HTMLPart)
+		} else {
+			list[3].AddBootstrapClasses(bspagination.Disabled)
+			list[4].AddBootstrapClasses(bspagination.Disabled)
+		}
+
+		list[0].addSubPart(buttonfirst).AddBootstrapClasses(bspagination.Previous)
+		list[1].addSubPart(buttonbefore)
+		list[2].addSubPart(
+			NewHTMLPart("li", "", "").
+				AddBootstrapClasses(bspagination.Disabled).
+				addSubPart(
+					NewHTMLPart("a", "", fmt.Sprintf("%d / %d (%d)", ht.Page, lastpage, ht.Rowcount)),
+				),
+		)
+		list[3].addSubPart(buttonnext)
+		list[4].addSubPart(buttonlast).AddBootstrapClasses(bspagination.Next)
+		container.AddSubParts(list...).AddBootstrapClasses(bspagination.Pager, bspagination.Small)
+
+	}
+	result := table.String()
+
+	if len(*container.SubParts) > 0 || len(container.Content) > 0 {
+		result += container.String()
+	}
+
 	return result
+}
+
+// GET http://127.0.0.1:3000/index.html
+func pagingButtonScript(buttonID, tableID string, page int) *Script {
+
+	return NewScript(
+		buttonID,
+		"click",
+		tableID+"container",
+		"GET",
+		"/table/"+tableID+"/show/"+fmt.Sprint(page),
+		tableResultType,
+		tableResultType.Names[0].Value(),
+	)
 }
 
 func (htr HTMLTableRow) asTableHeader() string {
@@ -211,10 +317,7 @@ func (htr HTMLTableRow) string(rowType string) string {
 	tr := NewHTMLPart("tr", "", "")
 
 	if rowType != "th" && len(htr.Status) > 0 {
-		tr.AddOption(&HTMLOption{
-			Name:  "class",
-			Value: htr.Status,
-		})
+		tr.AddBootstrapClasses(htr.Status)
 	}
 
 	for i, v := range *htr.Row {
@@ -263,8 +366,39 @@ func (hp *HTMLPart) AddOptions(options *[]HTMLOption) *HTMLPart {
 	return hp
 }
 
-//AddOption adds an Option to you HTMLParts
+//AddOption adds an option to you HTMLParts if name is already there it concats the Value to the existing option
 func (hp *HTMLPart) AddOption(option *HTMLOption) *HTMLPart {
+
+	for i, v := range *hp.Options {
+		if v.Name == option.Name {
+
+			newOption := HTMLOption{
+				Name:  option.Name,
+				Value: v.Value + " " + option.Value,
+			}
+			*hp.Options = append((*hp.Options)[:i], (*hp.Options)[i+1:]...)
+			*hp.Options = append(*hp.Options, newOption)
+			return hp
+
+		}
+	}
+
+	*hp.Options = append(*hp.Options, *option)
+	return hp
+}
+
+//SetOption adds an option to you HTMLParts if name is already there it replaces the Value of the existing option
+func (hp *HTMLPart) SetOption(option *HTMLOption) *HTMLPart {
+
+	for i, v := range *hp.Options {
+		if v.Name == option.Name {
+
+			*hp.Options = append((*hp.Options)[:i], (*hp.Options)[i+1:]...)
+			*hp.Options = append(*hp.Options, *option)
+			return hp
+
+		}
+	}
 
 	*hp.Options = append(*hp.Options, *option)
 	return hp

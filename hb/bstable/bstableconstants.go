@@ -1,49 +1,49 @@
 package bstable
 
-//BsTable base class for tables
-const BsTable = "table"
+//Table base class for tables
+const Table = "table"
 
-//BsTableCellStatusActive Applies the hover color to the table row or table cell
-const BsTableCellStatusActive = "active"
+//TableCellStatusActive Applies the hover color to the table row or table cell
+const TableCellStatusActive = "active"
 
-//BsTableCellStatusSuccess Indicates a successful or positive action
-const BsTableCellStatusSuccess = "success"
+//TableCellStatusSuccess Indicates a successful or positive action
+const TableCellStatusSuccess = "success"
 
-//BsTableCellStatusInfo Indicates a neutral informative change or action
-const BsTableCellStatusInfo = "info"
+//TableCellStatusInfo Indicates a neutral informative change or action
+const TableCellStatusInfo = "info"
 
-//BsTableCellStatusWarning Indicates a warning that might need attention
-const BsTableCellStatusWarning = "warning"
+//TableCellStatusWarning Indicates a warning that might need attention
+const TableCellStatusWarning = "warning"
 
-//BsTableCellStatusDanger Indicates a dangerous or potentially negative action
-const BsTableCellStatusDanger = "danger"
+//TableCellStatusDanger Indicates a dangerous or potentially negative action
+const TableCellStatusDanger = "danger"
 
-//BsTableRowStatusActive Applies the hover color to the table row or table cell
-const BsTableRowStatusActive = BsTableCellStatusActive
+//TableRowStatusActive Applies the hover color to the table row or table cell
+const TableRowStatusActive = TableCellStatusActive
 
-//BsTableRowStatusSuccess Indicates a successful or positive action
-const BsTableRowStatusSuccess = BsTableCellStatusSuccess
+//TableRowStatusSuccess Indicates a successful or positive action
+const TableRowStatusSuccess = TableCellStatusSuccess
 
-//BsTableRowStatusInfo Indicates a neutral informative change or action
-const BsTableRowStatusInfo = BsTableCellStatusInfo
+//TableRowStatusInfo Indicates a neutral informative change or action
+const TableRowStatusInfo = TableCellStatusInfo
 
-//BsTableRowStatusWarning Indicates a warning that might need attention
-const BsTableRowStatusWarning = BsTableCellStatusWarning
+//TableRowStatusWarning Indicates a warning that might need attention
+const TableRowStatusWarning = TableCellStatusWarning
 
-//BsTableRowStatusDanger Indicates a dangerous or potentially negative action
-const BsTableRowStatusDanger = BsTableCellStatusDanger
+//TableRowStatusDanger Indicates a dangerous or potentially negative action
+const TableRowStatusDanger = TableCellStatusDanger
 
-//BsTableHoverRows adds a hover effect (grey background color) on table rows
-const BsTableHoverRows = "table-hover"
+//TableHoverRows adds a hover effect (grey background color) on table rows
+const TableHoverRows = "table-hover"
 
-//BsTableBorderedTable adds borders on all sides of the table and cells
-const BsTableBorderedTable = "table-bordered"
+//TableBorderedTable adds borders on all sides of the table and cells
+const TableBorderedTable = "table-bordered"
 
-//BsTableStripedRows adds zebra-stripes to a tabl
-const BsTableStripedRows = "table-striped"
+//TableStripedRows adds zebra-stripes to a tabl
+const TableStripedRows = "table-striped"
 
-//BsTableCondensedTable makes a table more compact by cutting cell padding in half
-const BsTableCondensedTable = "table-condensed"
+//TableCondensedTable makes a table more compact by cutting cell padding in half
+const TableCondensedTable = "table-condensed"
 
-//BsTableResponsiveTable creates a responsive table. The table will then scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, there is no difference
-const BsTableResponsiveTable = "table-responsive"
+//TableResponsiveTable creates a responsive table. The table will then scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, there is no difference
+const TableResponsiveTable = "table-responsive"
