@@ -7,8 +7,7 @@ I created this project to get an idea of web development using go and react
 + Golang
     + gin
     + gin-oauth
-+ React.js
-    + react
++ React.js   
     + jquery
 
 ## make it run
