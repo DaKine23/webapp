@@ -204,8 +204,8 @@ func (ht HTMLTable) String() string {
 		buttonfirst := NewHTMLPart("a", ht.ID+"buttonfirst", arrowleft+arrowleft)
 		buttonbefore := NewHTMLPart("a", ht.ID+"buttonbefore", arrowleft)
 		if ht.Page > 1 {
-			buttonfirst.addSubPart(pagingButtonScript(buttonfirst.ID, ht.ID, 1).HTMLPart)
-			buttonbefore.addSubPart(pagingButtonScript(buttonbefore.ID, ht.ID, ht.Page-1).HTMLPart)
+			buttonfirst.addSubPart(pagingScript(buttonfirst.ID, ht.ID, 1).HTMLPart)
+			buttonbefore.addSubPart(pagingScript(buttonbefore.ID, ht.ID, ht.Page-1).HTMLPart)
 		} else {
 			list[0].AddBootstrapClasses(bspagination.Disabled)
 			list[1].AddBootstrapClasses(bspagination.Disabled)
@@ -215,8 +215,8 @@ func (ht HTMLTable) String() string {
 		buttonnext := NewHTMLPart("a", ht.ID+"buttonnext", arrowright)
 		if ht.Page*ht.PageSize < ht.Rowcount {
 
-			buttonlast.addSubPart(pagingButtonScript(buttonlast.ID, ht.ID, lastpage).HTMLPart)
-			buttonnext.addSubPart(pagingButtonScript(buttonnext.ID, ht.ID, ht.Page+1).HTMLPart)
+			buttonlast.addSubPart(pagingScript(buttonlast.ID, ht.ID, lastpage).HTMLPart)
+			buttonnext.addSubPart(pagingScript(buttonnext.ID, ht.ID, ht.Page+1).HTMLPart)
 		} else {
 			list[4].AddBootstrapClasses(bspagination.Disabled)
 			list[5].AddBootstrapClasses(bspagination.Disabled)
@@ -252,7 +252,7 @@ func (ht HTMLTable) String() string {
 	return result
 }
 
-func pagingButtonScript(buttonID, tableID string, page int) *Script {
+func pagingScript(buttonID, tableID string, page int) *Script {
 
 	return NewScript(
 		buttonID,

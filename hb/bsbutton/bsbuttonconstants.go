@@ -1,46 +1,46 @@
 package bsbutton
 
-//Button Bootstrap base class for Buttons
-const Button = "btn"
+//B Bootstrap base class for buttons
+const B = "btn"
 
-//ButtonDefault Bootstrap default class for Buttons
-const ButtonDefault = "btn-default"
+//Default Bootstrap default class for buttons
+const Default = "btn-default"
 
-//ButtonPrimary Bootstrap primary class for Buttons
-const ButtonPrimary = "btn-primary"
+//Primary Bootstrap primary class for buttons
+const Primary = "btn-primary"
 
-//ButtonSuccess Bootstrap success class for Buttons
-const ButtonSuccess = "btn-success"
+//Success Bootstrap success class for buttons
+const Success = "btn-success"
 
-//ButtonInfo Bootstrap info class for Buttons
-const ButtonInfo = "btn-info"
+//Info Bootstrap info class for buttons
+const Info = "btn-info"
 
-//ButtonWarning Bootstrap warning class for Buttons
-const ButtonWarning = "btn-warning"
+//Warning Bootstrap warning class for buttons
+const Warning = "btn-warning"
 
-//ButtonDanger Bootstrap danger class for Buttons
-const ButtonDanger = "btn-danger"
+//Danger Bootstrap danger class for buttons
+const Danger = "btn-danger"
 
-//ButtonLink Bootstrap link class for Buttons
-const ButtonLink = "btn-link"
+//Link Bootstrap link class for buttons
+const Link = "btn-link"
 
-//ButtonDisabled  makes a button unclickable
-const ButtonDisabled = "disabled"
+//Disabled  makes a button unclickable
+const Disabled = "disabled"
 
-//ButtonActive makes a button appear pressed
-const ButtonActive = "active"
+//Active makes a button appear pressed
+const Active = "active"
 
-//ButtonBlockLevel A block level button spans the entire width of the parent element
-const ButtonBlockLevel = "btn-block"
+//BlockLevel A block level button spans the entire width of the parent element
+const BlockLevel = "btn-block"
 
-//ButtonSizeLarge resizes the Button
-const ButtonSizeLarge = "btn-lg"
+//SizeLarge resizes the button
+const SizeLarge = "btn-lg"
 
-//ButtonSizeMedium resizes the Button
-const ButtonSizeMedium = "btn-md"
+//SizeMedium resizes the button
+const SizeMedium = "btn-md"
 
-//ButtonSizeSmall resizes the Button
-const ButtonSizeSmall = "btn-sm"
+//SizeSmall resizes the button
+const SizeSmall = "btn-sm"
 
-//ButtonSizeVerySmall resizes the Button
-const ButtonSizeVerySmall = "btn-xs"
+//SizeVerySmall resizes the button
+const SizeVerySmall = "btn-xs"

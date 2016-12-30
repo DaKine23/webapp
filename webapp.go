@@ -15,8 +15,10 @@ import (
 	"github.com/DaKine23/webapp/hb/bsbutton"
 	"github.com/DaKine23/webapp/hb/bsbuttongroup"
 	"github.com/DaKine23/webapp/hb/bscontainer"
+	"github.com/DaKine23/webapp/hb/bsglyphicons"
 	"github.com/DaKine23/webapp/hb/bsgrid"
 	"github.com/DaKine23/webapp/hb/bstable"
+	"github.com/DaKine23/webapp/hb/jqaction"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	cors "github.com/itsjamie/gin-cors"
@@ -248,9 +250,9 @@ func page() string {
 	tp2 := hb.NewHTMLTableContainer(table2)
 
 	// add some buttons  ("a" for bootstrap buttongroups)
-	button := hb.NewHTMLPart("a", "addbutton", "Add Table Entry").AddBootstrapClasses(bsbutton.Button, bsbutton.ButtonPrimary)
-	button3 := hb.NewHTMLPart("a", "addbutton2", "Add 1000 Table Entries").AddBootstrapClasses(bsbutton.Button, bsbutton.ButtonPrimary)
-	button2 := hb.NewHTMLPart("button", "pongbutton", "Click Me").AddBootstrapClasses(bsbutton.Button, bsbutton.ButtonDefault)
+	button := hb.NewHTMLPart("a", "addbutton", "Add Table Entry").AddBootstrapClasses(bsbutton.B, bsbutton.Primary)
+	button3 := hb.NewHTMLPart("a", "addbutton2", "Add 1000 Table Entries").AddBootstrapClasses(bsbutton.B, bsbutton.Primary)
+	button2 := hb.NewHTMLPart("button", "pongbutton", "Click Me").AddBootstrapClasses(bsbutton.B, bsbutton.Default)
 
 	//Create a buttongroup
 	buttongroup := hb.NewHTMLPart("div", "", "").
@@ -261,9 +263,9 @@ func page() string {
 	div2 := hb.NewHTMLPart("div", "drawdestination", "content")
 
 	// define scripts (ajax calls)
-	scriptToAddARow := hb.NewScript(button.ID, "click", table.ID+"container", "POST", "/table/mytable/add/1", hb.JSONResultValue("table"))
-	scriptToAdd1000Rows := hb.NewScript(button3.ID, "click", table.ID+"container", "POST", "/table/mytable/add/1000", hb.JSONResultValue("table"))
-	script := hb.NewScript(button2.ID, "click", div2.ID, "GET", "/pong", hb.JSONResultValue("message")+`+" !!! " +`+hb.JSONResultValue("timestamp"))
+	scriptToAddARow := hb.NewScript(button.ID, jqaction.Click, table.ID+"container", "POST", "/table/mytable/add/1", hb.JSONResultValue("table"))
+	scriptToAdd1000Rows := hb.NewScript(button3.ID, jqaction.Click, table.ID+"container", "POST", "/table/mytable/add/1000", hb.JSONResultValue("table"))
+	script := hb.NewScript(button2.ID, jqaction.Click, div2.ID, "GET", "/pong", hb.JSONResultValue("message")+`+" !!! " +`+hb.JSONResultValue("timestamp"))
 
 	// add <head> and <body> to <html>
 	html.AddSubParts(head, body)
@@ -294,7 +296,23 @@ func page() string {
 	cell51 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
 	cell51.AddSubParts(tp2)
 	row5.AddSubParts(cell51)
-	root.AddSubParts(row1, row2, row3, row4, row5)
+
+	row6 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
+
+	cell61 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(4, bsgrid.Large))
+	cell62 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(4, bsgrid.Large))
+	cell63 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(4, bsgrid.Large))
+
+	edit := hb.NewLineEdit("myinput", "Mighty Input", "may type sth here", "standard content")
+	edit2 := hb.NewLineEdit("myinput2", hb.NewGlyphicon(bsglyphicons.GlyphiconEurGlyphiconEuro).String(), "money money money", "")
+	searchedit := hb.NewLineEdit("myinput2", "", "Search some thing", "").AddLineEditSearch("searchbutton")
+
+	cell61.AddSubParts(edit)
+	cell62.AddSubParts(edit2)
+	cell63.AddSubParts(searchedit)
+	row6.AddSubParts(cell61, cell62, cell63)
+
+	root.AddSubParts(row1, row2, row3, row4, row5, row6)
 
 	// add all the other html tags to the <body>
 	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, root)
@@ -394,9 +412,9 @@ func addNewLineToUpperTableHandler(c *gin.Context) {
 		buttoncontainer := hb.NewHTMLPart("deletebutton", "", "")
 
 		// create a Bootstrap styled Button
-		button := hb.NewHTMLPart("button", "tablebutton"+ids, "del").AddBootstrapClasses(bsbutton.Button, bsbutton.ButtonSizeVerySmall, bsbutton.ButtonDanger)
+		button := hb.NewHTMLPart("button", "tablebutton"+ids, "del").AddBootstrapClasses(bsbutton.B, bsbutton.SizeVerySmall, bsbutton.Danger)
 		// create a deletion script for the Button to delete the row containing the button
-		script := hb.NewTableButtonScript(button.ID, "click", tbn+"container", tbn, "DELETE", "table/"+tbn+"/delete/"+ids, hb.JSONResultValue("table"))
+		script := hb.NewTableButtonScript(button.ID, jqaction.Click, tbn+"container", tbn, "DELETE", "table/"+tbn+"/delete/"+ids, hb.JSONResultValue("table"))
 		// add button and script to the container
 		buttoncontainer.AddSubParts(script.HTMLPart, button)
 

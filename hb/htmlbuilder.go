@@ -71,29 +71,41 @@ func script(source, action, target, restType, apicall string, newContent string)
 
 //NewGlyphicon returns the HTMLPart needed to display the Icon
 func NewGlyphicon(icon string) *HTMLPart {
-	return NewHTMLPart("span", "", "").AddBootstrapClasses(bsglyphicons.Glyphicon, icon)
+	return NewHTMLPart("i", "", "").AddBootstrapClasses(bsglyphicons.Glyphicon, icon)
 
 }
 
 //String returns the HTML String for the HTMLPart struct includes all subparts subsubparts ...
 func (hp HTMLPart) String() string {
-	result := fmt.Sprintf("<%s", hp.Class)
 
+	return string(hp.bytes())
+
+}
+
+func (hp HTMLPart) bytes() []byte {
+	bb := make([]byte, 0, 1024)
+	bb = append(bb, '<')
+	bb = append(bb, hp.Class...)
 	for _, v := range *hp.Options {
-		result += fmt.Sprintf(" %s=\"%s\"", v.Name, v.Value)
+		bb = append(bb, ' ')
+		bb = append(bb, v.Name...)
+		bb = append(bb, '=', '"')
+		bb = append(bb, v.Value...)
+		bb = append(bb, '"')
+
 	}
-
-	result += ">"
-
-	result += hp.Content
+	bb = append(bb, '>')
+	bb = append(bb, hp.Content...)
 
 	for _, v := range *hp.SubParts {
-		result += v.String()
+		bb = append(bb, v.bytes()...)
 	}
 
-	result += fmt.Sprintf("</%s>", hp.Class)
+	bb = append(bb, '<', '/')
+	bb = append(bb, hp.Class...)
+	bb = append(bb, '>')
 
-	return result
+	return bb
 }
 
 //JSONResultValue returns the string as js ready string "result.<myvalue>"
