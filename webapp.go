@@ -314,8 +314,13 @@ func page() string {
 
 	root.AddSubParts(row1, row2, row3, row4, row5, row6)
 
+	somediv := hb.NewHTMLPart("div", "keypressdiv", "here")
+	keypressscript := hb.NewHTMLPart("script", "", `$("input").keypress(function(event){
+    $("#keypressdiv").html("Key: " + event.which);
+	});`)
+
 	// add all the other html tags to the <body>
-	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, root)
+	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, root, somediv, keypressscript)
 
 	// return DOCTYPE definition + <html> as string (includes all the subparts)
 	return result + html.String()

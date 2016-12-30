@@ -110,7 +110,8 @@ func NewLineEdit(ID, title, placeholder, content string) *HTMLPart {
 			Value: placeholder,
 		})
 	if len(content) > 0 {
-		input.addSubPart(NewHTMLPart("script", "", `$(document).ready(function(){`+setValueByID(ID, content)+";});"))
+		format := "$(document).ready(function(){%s;});"
+		input.addSubPart(NewHTMLPart("script", "", fmt.Sprintf(format, ID)))
 	}
 
 	return container.AddSubParts(input)
