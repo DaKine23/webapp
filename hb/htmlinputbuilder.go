@@ -8,10 +8,15 @@ import (
 	"github.com/DaKine23/webapp/hb/bsinput"
 )
 
-//InputGroup holds the IDs and corresponding json field names of all input elements that fill a scripts json data
+//InputGroup holds the Members of an input group
 type InputGroup struct {
-	IDs        []string
-	ValueNames []string
+	Member []InputGroupMember
+}
+
+//InputGroupMember holds the ID and the mapped json field name for an Input
+type InputGroupMember struct {
+	ID        string
+	ValueName string
 }
 
 func asJStoJSON(names, values []string, withQuotes bool) string {
@@ -45,30 +50,49 @@ func setValueByID(ID, value string) string {
 	format := `$("#%s").val("%s")`
 	return fmt.Sprintf(format, ID, value)
 }
-
-func NewInputGroupScript() {
-
+func OnResult(target, content string) string {
+	format := `$("#%s").html(%s);`
+	return fmt.Sprintf(format, target, content)
 }
 
-func newAjaxCall(source, action, restType, uri, data, onsuccess, onerror string) string {
+// NewInputGroupScript is used to create scripts for calls made by inputgroups
+func NewInputGroupScript(eventsource, action, condition, restType, uri string, inputgroup InputGroup, onsuccess, onerror string) *HTMLPart {
 
+	ids, valueNames := []string{}, []string{}
+	for _, v := range inputgroup.Member {
+		ids = append(ids, `$("#`+v.ID+`").val()`)
+		valueNames = append(valueNames, v.ValueName)
+	}
+
+	content := newAjaxCall(eventsource, action, condition, restType, uri, asJStoJSON(valueNames, ids, false), onsuccess, onerror)
+
+	script := NewHTMLPart("script", "", content).AddOption(&HTMLOption{"type", "text/javascript"})
+	return script
+}
+
+func newAjaxCall(source, action, condition, restType, uri, data, onsuccess, onerror string) string {
+
+	ifcondition := ""
+	endcondition := ""
+	if len(condition) > 0 {
+		ifcondition = ` if (` + condition + `){`
+		endcondition = "}"
+	}
 	format := `$(document).ready(function(){
-    $("#%s").%s(function(){
+    $("#%s").%s(function(event){
+	` + ifcondition + `
     $.ajax({
         type: '%s',
         url: '%s',
         dataType: 'json',
-        data: {
-            jsonData: %s
-    },
+        data:  %s ,
     success: function (result) {
         %s
     },
     error: function () {
         %s
     }
-    });
-});`
+    });` + endcondition + `});});`
 
 	return fmt.Sprintf(format, source, action, restType, uri, data, onsuccess, onerror)
 }
@@ -128,7 +152,8 @@ func NewLineEdit(ID, title, placeholder, content string, valid Validation) *HTML
 		container.AddSubParts(label)
 	}
 
-	input := NewHTMLPart("input", ID, "").AddBootstrapClasses(bsinput.FormControl).
+	input := NewHTMLPart("input", ID, "").
+		AddBootstrapClasses(bsinput.FormControl).
 		AddOption(&HTMLOption{
 			Name:  "type",
 			Value: "text",
@@ -140,13 +165,10 @@ func NewLineEdit(ID, title, placeholder, content string, valid Validation) *HTML
 		AddOption(&HTMLOption{
 			Name:  "placeholder",
 			Value: placeholder,
-		})
-	if len(content) > 0 {
-		input.AddOption(&HTMLOption{
-			Name:  "value",
-			Value: content,
-		})
-	}
+		}).AddOption(&HTMLOption{
+		Name:  "value",
+		Value: content,
+	})
 
 	return container.AddSubParts(input)
 

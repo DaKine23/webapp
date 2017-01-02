@@ -22,7 +22,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	cors "github.com/itsjamie/gin-cors"
-	ginglog "github.com/zalando/gin-glog"
 	ginoauth2 "github.com/zalando/gin-oauth2"
 )
 
@@ -141,15 +140,16 @@ func configMonitoring() {
 }
 
 func configController() {
-	router := gin.New()
-	router.Use(ginglog.Logger(3 * time.Second))
-	router.Use(ginoauth2.RequestLogger([]string{"uid"}, "data"))
-	router.Use(gin.Recovery())
+	router := gin.Default()
+	// router.Use(ginglog.Logger(3 * time.Second))
+	// router.Use(ginoauth2.RequestLogger([]string{"uid"}, "data"))
+	// router.Use(gin.Recovery())
 
 	ginoauth2.VarianceTimer = 300 * time.Millisecond // defaults to 30s
 
 	//router.LoadHTMLGlob("public/*.html")
-	//router.Static("/static", "./public/static")
+	router.Static("/static", "./public/static")
+	router.Static("/fonts", "./public/fonts")
 
 	go everyXSecondsDo(1, switchValue)
 
@@ -184,6 +184,7 @@ func configController() {
 	})
 
 	router.POST("/table/:tablename/add/:count", addNewLineToUpperTableHandler)
+	router.POST("/table/:tablename/", addNewLineToLowerTableHandler)
 
 	router.DELETE("/table/:tablename/delete/:id/:page", deleteHandler)
 
@@ -220,14 +221,15 @@ func page() string {
 	title := "Webapp Example"
 	head := hb.NewHTMLPart("head", "", `<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">`).
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="static/zalos-bootstrap-theme.min.css">`).
 		AddSubParts(hb.NewHTMLPart("title", "", title))
 
 		//define js libraries you want to import
 	jsLibraries := []string{
 
-		"https://unpkg.com/babel-standalone@6.15.0/babel.min.js",
 		"https://unpkg.com/jquery@3.1.0/dist/jquery.min.js",
+		"static/bootstrap.min.js",
 	}
 	//add js libraries you want to import to the <head>
 	for _, v := range jsLibraries {
@@ -248,6 +250,23 @@ func page() string {
 	// tables should be used inside of containers when defining the layout will be used as drawing destination later on
 	tp := hb.NewHTMLTableContainer(table)
 	tp2 := hb.NewHTMLTableContainer(table2)
+
+	// some input fields for table 2 to enter new rows
+	edit := hb.NewLineEdit("myinput", "Mighty Input", "may type sth here", "standard content", hb.Validation{nil})
+	edit2 := hb.NewLineEdit("myinput2", hb.NewGlyphicon(bsglyphicons.GlyphiconEurGlyphiconEuro).String(false), "money money money", "", hb.Validation{nil})
+	searchedit := hb.NewLineEdit("myinput3", hb.NewGlyphicon(bsglyphicons.GlyphiconBook).String(false), "Search some thing", "", hb.Validation{nil}).AddLineEditSearchButton("searchbutton")
+	submitbutton := hb.NewHTMLPart("button", "submitbutton", "submit").AddBootstrapClasses(bsbutton.B, bsbutton.Primary, bsbutton.BlockLevel)
+
+	inputcell1 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(3, bsgrid.Medium))
+	inputcell1.AddSubParts(edit)
+	inputcell2 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(3, bsgrid.Medium))
+	inputcell2.AddSubParts(edit2)
+	inputcell3 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(3, bsgrid.Medium))
+	inputcell3.AddSubParts(searchedit)
+	inputcell4 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(3, bsgrid.Medium))
+	inputcell4.AddSubParts(submitbutton)
+	inputrow := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
+	inputrow.AddSubParts(inputcell1, inputcell2, inputcell3, inputcell4)
 
 	// add some buttons  ("a" for bootstrap buttongroups)
 	button := hb.NewHTMLPart("a", "addbutton", "Add Table Entry").AddBootstrapClasses(bsbutton.B, bsbutton.Primary)
@@ -271,7 +290,7 @@ func page() string {
 	html.AddSubParts(head, body)
 
 	//create a bootstrap grid
-	root := hb.NewHTMLPart("root", "", "").AddBootstrapClasses(bscontainer.ContainerFluid)
+	root := hb.NewHTMLPart("root", "", "").AddBootstrapClasses(bscontainer.Container)
 	row1 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
 	cell11 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
 	cell11.AddSubParts(buttongroup)
@@ -297,21 +316,6 @@ func page() string {
 	cell51.AddSubParts(tp2)
 	row5.AddSubParts(cell51)
 
-	row6 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-
-	cell61 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(4, bsgrid.Large))
-	cell62 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(4, bsgrid.Large))
-	cell63 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(4, bsgrid.Large))
-
-	edit := hb.NewLineEdit("myinput", "Mighty Input", "may type sth here", "standard content", hb.Validation{nil})
-	edit2 := hb.NewLineEdit("myinput2", hb.NewGlyphicon(bsglyphicons.GlyphiconEurGlyphiconEuro).String(false), "money money money", "", hb.Validation{nil})
-	searchedit := hb.NewLineEdit("myinput3", "", "Search some thing", "", hb.Validation{nil}).AddLineEditSearchButton("searchbutton")
-
-	cell61.AddSubParts(edit)
-	cell62.AddSubParts(edit2)
-	cell63.AddSubParts(searchedit)
-	row6.AddSubParts(cell61, cell62, cell63)
-
 	row7 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
 
 	cell71 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(6, bsgrid.Large))
@@ -322,21 +326,32 @@ func page() string {
 	numberedit := hb.NewLineEdit("myinput4", "Numbers", "12.4", "", hb.Validation{nil})
 	intgeredit2 := hb.NewLineEdit("myinput5", hb.NewGlyphicon(bsglyphicons.GlyphiconKnight).String(false), "12345", "", hb.Validation{&validator})
 
+	intgeredit2.AddTooltip("I only accept Integer Values", "left")
+	body.AddScripts(hb.TooltipScript())
+
 	cell71.AddSubParts(numberedit)
 	cell72.AddSubParts(intgeredit2)
 
 	row7.AddSubParts(cell71, cell72)
 
-	root.AddSubParts(row1, row2, row3, row4, row5, row6, row7)
+	root.AddSubParts(row1, row2, row3, row4, inputrow, row5, row7)
 
 	somediv := hb.NewHTMLPart("div", "keypressdiv", "here")
 	keypressscript := hb.NewHTMLPart("script", "", `$(document).ready(function(){$("#myinput4").keypress(function(event){
     $("#keypressdiv").html("Key: " + event.which);
 	});});`).AddOption(&hb.HTMLOption{"type", "text/javascript"})
 
+	var onerr string
+	onsuc := hb.OnResult(tp2.ID, hb.JSONResultValue("table")) + `$("#myinput").focus();$("#myinput").val('');$("#myinput2").val('');$("#myinput3").val('');`
+	ig := hb.InputGroup{
+		Member: []hb.InputGroupMember{{"myinput", "one"}, {"myinput2", "two"}, {"myinput3", "three"}},
+	}
+	igscript := hb.NewInputGroupScript(submitbutton.ID, jqaction.Click, "", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
+	igscript2 := hb.NewInputGroupScript("myinput3", jqaction.Keypress, "event.which == 13", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
+
 	// add all the other html tags to the <body>
 	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, root, somediv)
-	body.AddScripts(keypressscript)
+	body.AddScripts(keypressscript, igscript, igscript2)
 	// return DOCTYPE definition + <html> as string (includes all the subparts)
 	return result + html.String(false)
 
@@ -415,6 +430,35 @@ func deleteHandler(c *gin.Context) {
 
 	table := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], tbp)
 	c.JSON(http.StatusOK, responseTableJSON{table.String()})
+}
+
+func addNewLineToLowerTableHandler(c *gin.Context) {
+	//read table name from uri
+	tbn := c.Param("tablename")
+
+	type Data struct {
+		//exists checks if field is part of the request
+		One string `json:"one" binding:"exists"`
+		//required checks if field is part of the request and not empty
+		Two   string `json:"two" binding:"required"`
+		Three string `json:"three" binding:"required"`
+	}
+
+	lastpage := len(*data[tbn]) / pagesize[tbn]
+	if len(*data[tbn])%pagesize[tbn] != 0 {
+		lastpage++
+	}
+
+	var json Data
+	if c.BindJSON(&json) == nil {
+		newrow := []interface{}{json.One, json.Two, json.Three}
+		*data[tbn] = append(*data[tbn], hb.NewHTMLTableRow(newrow))
+		table2 := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], lastpage)
+
+		c.JSON(http.StatusOK, gin.H{"table": table2.String()})
+
+	}
+
 }
 
 func addNewLineToUpperTableHandler(c *gin.Context) {

@@ -3,6 +3,9 @@ package bsinput
 //FormGroup class for input container
 const FormGroup = "form-group"
 
+//FormInline use it in a containing <form> tag to create inline inputs
+const FormInline = "form-inline"
+
 //FormGroupHasFeedback us with FormGroupHas<Success | Waring | Error>
 const FormGroupHasFeedback = "has-feedback"
 

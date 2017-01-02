@@ -72,6 +72,26 @@ func script(source, action, target, restType, apicall string, newContent string)
 	return &script
 }
 
+//AddTooltip adds a Tooltip you need to add TooltipScript() once to your page as a script
+func (hp *HTMLPart) AddTooltip(tip, placement string) *HTMLPart {
+
+	hp.AddOption(&HTMLOption{"data-toggle", "tooltip"})
+	if len(placement) > 0 {
+		hp.AddOption(&HTMLOption{"data-placement", placement})
+	}
+	hp.AddOption(&HTMLOption{"title", tip})
+
+	return hp
+
+}
+
+//TooltipScript append the returned Script once as a script to you result if you want to see Tooltips
+func TooltipScript() *HTMLPart {
+
+	return NewHTMLPart("script", "", `$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});`).AddOption(&HTMLOption{"type", "text/javascript"})
+
+}
+
 //NewGlyphicon returns the HTMLPart needed to display the Icon
 func NewGlyphicon(icon string) *HTMLPart {
 	return NewHTMLPart("i", "", "").AddBootstrapClasses(bsglyphicons.Glyphicon, icon)
