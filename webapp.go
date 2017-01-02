@@ -303,27 +303,42 @@ func page() string {
 	cell62 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(4, bsgrid.Large))
 	cell63 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(4, bsgrid.Large))
 
-	edit := hb.NewLineEdit("myinput", "Mighty Input", "may type sth here", "standard content")
-	edit2 := hb.NewLineEdit("myinput2", hb.NewGlyphicon(bsglyphicons.GlyphiconEurGlyphiconEuro).String(), "money money money", "")
-	searchedit := hb.NewLineEdit("myinput2", "", "Search some thing", "").AddLineEditSearch("searchbutton")
+	edit := hb.NewLineEdit("myinput", "Mighty Input", "may type sth here", "standard content", hb.Validation{nil})
+	edit2 := hb.NewLineEdit("myinput2", hb.NewGlyphicon(bsglyphicons.GlyphiconEurGlyphiconEuro).String(false), "money money money", "", hb.Validation{nil})
+	searchedit := hb.NewLineEdit("myinput3", "", "Search some thing", "", hb.Validation{nil}).AddLineEditSearchButton("searchbutton")
 
 	cell61.AddSubParts(edit)
 	cell62.AddSubParts(edit2)
 	cell63.AddSubParts(searchedit)
 	row6.AddSubParts(cell61, cell62, cell63)
 
-	root.AddSubParts(row1, row2, row3, row4, row5, row6)
+	row7 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
+
+	cell71 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(6, bsgrid.Large))
+	cell72 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(6, bsgrid.Large))
+
+	validator := "^[1-9]+[0-9]*$"
+
+	numberedit := hb.NewLineEdit("myinput4", "Numbers", "12.4", "", hb.Validation{nil})
+	intgeredit2 := hb.NewLineEdit("myinput5", hb.NewGlyphicon(bsglyphicons.GlyphiconKnight).String(false), "12345", "", hb.Validation{&validator})
+
+	cell71.AddSubParts(numberedit)
+	cell72.AddSubParts(intgeredit2)
+
+	row7.AddSubParts(cell71, cell72)
+
+	root.AddSubParts(row1, row2, row3, row4, row5, row6, row7)
 
 	somediv := hb.NewHTMLPart("div", "keypressdiv", "here")
-	keypressscript := hb.NewHTMLPart("script", "", `$("input").keypress(function(event){
+	keypressscript := hb.NewHTMLPart("script", "", `$(document).ready(function(){$("#myinput4").keypress(function(event){
     $("#keypressdiv").html("Key: " + event.which);
-	});`)
+	});});`).AddOption(&hb.HTMLOption{"type", "text/javascript"})
 
 	// add all the other html tags to the <body>
-	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, root, somediv, keypressscript)
-
+	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, root, somediv)
+	body.AddScripts(keypressscript)
 	// return DOCTYPE definition + <html> as string (includes all the subparts)
-	return result + html.String()
+	return result + html.String(false)
 
 }
 
@@ -425,7 +440,7 @@ func addNewLineToUpperTableHandler(c *gin.Context) {
 
 		// data creation and appending could may be done on the database
 		// create a new row to insert
-		newrow := []interface{}{switchingValue, time.Now(), buttoncontainer.String(), id}
+		newrow := []interface{}{switchingValue, time.Now(), buttoncontainer.String(false), id}
 		// append it to the data
 		*data[tbn] = append(*data[tbn], hb.NewHTMLTableRow(newrow))
 	}

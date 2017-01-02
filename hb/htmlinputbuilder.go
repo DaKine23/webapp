@@ -46,6 +46,10 @@ func setValueByID(ID, value string) string {
 	return fmt.Sprintf(format, ID, value)
 }
 
+func NewInputGroupScript() {
+
+}
+
 func newAjaxCall(source, action, restType, uri, data, onsuccess, onerror string) string {
 
 	format := `$(document).ready(function(){
@@ -87,10 +91,38 @@ func onResult(targetID, content string) string {
 	return fmt.Sprintf(format, targetID, content)
 }
 
-//NewLineEdit creates an HTMLPart containing a LineEdit
-func NewLineEdit(ID, title, placeholder, content string) *HTMLPart {
+//Validation contains a regex for validation on client side
+type Validation struct {
+	RegEx *string
+}
 
-	container := NewHTMLPart("div", "", "").AddBootstrapClasses(bsinput.InputGroup)
+//NewLineEdit creates an HTMLPart containing a LineEdit
+func NewLineEdit(ID, title, placeholder, content string, valid Validation) *HTMLPart {
+
+	container := NewHTMLPart("div", ID+"inputgroup", "").AddBootstrapClasses(bsinput.InputGroup)
+	if valid.RegEx != nil {
+
+		format := `"use strict";
+		$(document).ready(function(){
+		$("#%s").%s(function(){
+		    console.log("action is triggered");
+		    var %sregex = new RegExp("%s");
+		    if ($("#%s").val().match(%sregex) === null) {
+		         %s
+		        } else {
+		         %s
+		        }
+		});
+        });`
+		setclasses := `$("#%s").attr("class", "%s");`
+		validJs := fmt.Sprintf(setclasses, ID+"inputgroup", bsinput.InputGroup)
+		notvalidJs := fmt.Sprintf(setclasses, ID+"inputgroup", bsinput.InputGroup+" "+bsinput.FormGroupHasFeedback+" "+bsinput.FormGroupHasWarning)
+
+		script := NewHTMLPart("script", "", fmt.Sprintf(format, ID, "keyup", ID, *valid.RegEx, ID, ID, notvalidJs, validJs))
+
+		script.AddOption(&HTMLOption{"type", "text/javascript"})
+		container.AddScripts(script)
+	}
 	if len(title) > 0 {
 		label := NewHTMLPart("span", "", title).AddBootstrapClasses(bsinput.InputGroupAddon)
 		container.AddSubParts(label)
@@ -110,16 +142,23 @@ func NewLineEdit(ID, title, placeholder, content string) *HTMLPart {
 			Value: placeholder,
 		})
 	if len(content) > 0 {
-		format := "$(document).ready(function(){%s;});"
-		input.addSubPart(NewHTMLPart("script", "", fmt.Sprintf(format, ID)))
+		input.AddOption(&HTMLOption{
+			Name:  "value",
+			Value: content,
+		})
 	}
 
 	return container.AddSubParts(input)
 
 }
 
+type Range struct {
+	Min *int
+	Max *int
+}
+
 //AddLineEditSearch adds a search button in the end of a lineedit button as ID as
-func (hp *HTMLPart) AddLineEditSearch(ID string) *HTMLPart {
+func (hp *HTMLPart) AddLineEditSearchButton(ID string) *HTMLPart {
 
 	button := NewHTMLPart("div", "", "").AddBootstrapClasses(bsinput.InputGroupButton).addSubPart(
 		NewHTMLPart("button", ID, "").

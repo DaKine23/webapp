@@ -97,7 +97,7 @@ func NewHTMLTable(id string, titles []string, rows []*HTMLTableRow, alligns []st
 	for _, v := range titles {
 		reducedTitle := strings.Replace(fmt.Sprint(v), " ", "", -1)
 		reducedTitle = strings.ToLower(reducedTitle)
-		script := NewTableButtonScript(id+"_"+reducedTitle, "click", id+"container", id, "GET", "/table/"+id+"/sort/"+reducedTitle, JSONResultValue("table"))
+		script := NewTableButtonScript(id+"_"+reducedTitle, "dblclick", id+"container", id, "GET", "/table/"+id+"/sort/"+reducedTitle, JSONResultValue("table"))
 		ht.Scripts = append(ht.Scripts, script)
 	}
 
@@ -153,7 +153,7 @@ func (htr HTMLTableRow) string(rowType string) string {
 		tr.addSubPart(th)
 	}
 
-	return tr.String()
+	return tr.String(false)
 }
 
 //String returns the HTML String for the HTMLTable struct
@@ -199,8 +199,8 @@ func (ht HTMLTable) String() string {
 		for i := 0; i < 6; i++ {
 			list = append(list, NewHTMLPart("li", "", ""))
 		}
-		arrowleft := NewGlyphicon(bsglyphicons.GlyphiconMenuLeft).String()
-		arrowright := NewGlyphicon(bsglyphicons.GlyphiconMenuRight).String()
+		arrowleft := NewGlyphicon(bsglyphicons.GlyphiconMenuLeft).String(false)
+		arrowright := NewGlyphicon(bsglyphicons.GlyphiconMenuRight).String(false)
 		buttonfirst := NewHTMLPart("a", ht.ID+"buttonfirst", arrowleft+arrowleft)
 		buttonbefore := NewHTMLPart("a", ht.ID+"buttonbefore", arrowleft)
 		if ht.Page > 1 {
@@ -243,10 +243,10 @@ func (ht HTMLTable) String() string {
 		container.AddSubParts(list...).AddBootstrapClasses(bspagination.Pager, bspagination.Small)
 
 	}
-	result := table.String()
+	result := table.String(false)
 
 	if len(*container.SubParts) > 0 || len(container.Content) > 0 {
-		result += container.String()
+		result += container.String(false)
 	}
 
 	return result

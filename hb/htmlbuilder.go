@@ -19,6 +19,7 @@ type HTMLPart struct {
 	Class    string
 	Options  *[]HTMLOption
 	SubParts *[]HTMLPart
+	Scripts  *[]HTMLPart
 	Content  string
 }
 
@@ -30,12 +31,14 @@ type Script struct {
 //NewHTMLPart should be used as an constructor for *HTMLPart objects
 func NewHTMLPart(class, id, content string) *HTMLPart {
 	subParts := []HTMLPart{}
+	scripts := []HTMLPart{}
 	options := []HTMLOption{}
 	htmlp := HTMLPart{
 		Class:    class,
 		Content:  content,
 		Options:  &options,
 		SubParts: &subParts,
+		Scripts:  &scripts,
 		ID:       id,
 	}
 	if len(id) != 0 {
@@ -76,13 +79,27 @@ func NewGlyphicon(icon string) *HTMLPart {
 }
 
 //String returns the HTML String for the HTMLPart struct includes all subparts subsubparts ...
-func (hp HTMLPart) String() string {
+func (hp HTMLPart) String(withScripts bool) string {
 
-	return string(hp.bytes())
+	return string(hp.bytes(withScripts))
 
 }
 
-func (hp HTMLPart) bytes() []byte {
+func (hp HTMLPart) allScripts() *[]HTMLPart {
+
+	scripts := []HTMLPart{}
+
+	scripts = append(scripts, *hp.Scripts...)
+
+	for _, v := range *hp.SubParts {
+		scripts = append(scripts, *v.allScripts()...)
+	}
+
+	return &scripts
+
+}
+
+func (hp HTMLPart) bytes(withScripts bool) []byte {
 	bb := make([]byte, 0, 1024)
 	bb = append(bb, '<')
 	bb = append(bb, hp.Class...)
@@ -95,10 +112,17 @@ func (hp HTMLPart) bytes() []byte {
 
 	}
 	bb = append(bb, '>')
-	bb = append(bb, hp.Content...)
 
+	if hp.Class == "body" || hp.Class == "head" || withScripts {
+
+		allscripts := *hp.allScripts()
+		for _, v := range allscripts {
+			bb = append(bb, v.bytes(false)...)
+		}
+	}
+	bb = append(bb, hp.Content...)
 	for _, v := range *hp.SubParts {
-		bb = append(bb, v.bytes()...)
+		bb = append(bb, v.bytes(false)...)
 	}
 
 	bb = append(bb, '<', '/')
@@ -123,6 +147,14 @@ func (hp *HTMLPart) addSubPart(subpart *HTMLPart) *HTMLPart {
 func (hp *HTMLPart) AddSubParts(subparts ...*HTMLPart) *HTMLPart {
 	for _, v := range subparts {
 		*hp.SubParts = append(*hp.SubParts, *v)
+	}
+	return hp
+}
+
+//AddScripts adds one or more HTMLParts (subparts) in your HTMLPart
+func (hp *HTMLPart) AddScripts(subparts ...*HTMLPart) *HTMLPart {
+	for _, v := range subparts {
+		*hp.Scripts = append(*hp.Scripts, *v)
 	}
 	return hp
 }

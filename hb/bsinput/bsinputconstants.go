@@ -3,6 +3,18 @@ package bsinput
 //FormGroup class for input container
 const FormGroup = "form-group"
 
+//FormGroupHasFeedback us with FormGroupHas<Success | Waring | Error>
+const FormGroupHasFeedback = "has-feedback"
+
+//FormGroupHasSuccess feedback types
+const FormGroupHasSuccess = "has-success"
+
+//FormGroupHasWarning feedback types
+const FormGroupHasWarning = "has-warning"
+
+//FormGroupHasError feedback types
+const FormGroupHasError = "has-error"
+
 //FormControl class for basic controls
 const FormControl = "form-control"
 
@@ -19,6 +31,8 @@ const InputGroupAddon = "input-group-addon"
 const InputGroupButton = "input-group-btn"
 
 //Types
+//Number is used as type Attribute for Inputs
+const TypeNumber = "number"
 
 //TypeText is used as type Attribute for Inputs
 const TypeText = "text"
@@ -32,4 +46,12 @@ const TypeCheckbox = "checkbox"
 //TypeRadio is used as type Attribute for Inputs
 const TypeRadio = "radio"
 
-//Tags
+//Attributes
+
+const Type = "type"
+
+const Step = "step"
+
+const MinValue = "min"
+
+const MaxValue = "max"
