@@ -6,10 +6,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/DaKine23/webapp/hb/bsglyphicons"
 	"github.com/DaKine23/webapp/hb/bsgrid"
 	"github.com/DaKine23/webapp/hb/bspagination"
 	"github.com/DaKine23/webapp/hb/bstable"
+	"github.com/DaKine23/webapp/hb/faicons"
 )
 
 //HTMLTable represents a HTML table
@@ -199,8 +199,17 @@ func (ht HTMLTable) String() string {
 		for i := 0; i < 6; i++ {
 			list = append(list, NewHTMLPart("li", "", ""))
 		}
-		arrowleft := NewGlyphicon(bsglyphicons.GlyphiconMenuLeft).String(false)
-		arrowright := NewGlyphicon(bsglyphicons.GlyphiconMenuRight).String(false)
+
+		arrowleft := NewFontAwesomeIcon(
+			NewFontAwesomeIconDefinition(faicons.Circle, faicons.ModifyLargerStackIcon),
+			NewFontAwesomeIconDefinition(faicons.AngleLeft, faicons.ModifyRegularStackIcon, faicons.ModifyInverse),
+		).
+			String(false)
+		arrowright := NewFontAwesomeIcon(
+			NewFontAwesomeIconDefinition(faicons.Circle, faicons.ModifyLargerStackIcon),
+			NewFontAwesomeIconDefinition(faicons.AngleRight, faicons.ModifyRegularStackIcon, faicons.ModifyInverse),
+		).
+			String(false)
 		buttonfirst := NewHTMLPart("a", ht.ID+"buttonfirst", arrowleft+arrowleft)
 		buttonbefore := NewHTMLPart("a", ht.ID+"buttonbefore", arrowleft)
 		if ht.Page > 1 {

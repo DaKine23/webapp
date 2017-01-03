@@ -1,5 +1,35 @@
 package faicons
 
+//ContainerStack used for container <span> elements to stack icons inside
+const ContainerStack = "fa-stack"
+
+//Ul to style an <ul> element
+const Ul = "fa-ul"
+
+//Li to style an <li> element
+const Li = "fa-li"
+
+//ModifyLargerStackIcon to use a larger version for stacking
+const ModifyLargerStackIcon = "fa-stack-2x"
+
+//ModifyRegularStackIcon to use a regular version for stacking
+const ModifyRegularStackIcon = "fa-stack-1x"
+
+//ModifyRelativeToContainerLg to resize relative to sorounding container
+const ModifyRelativeToContainerLg = "fa-lg"
+
+//ModifyRelativeToContainer2x to resize relative to sorounding container
+const ModifyRelativeToContainer2x = "fa-2x"
+
+//ModifyRelativeToContainer3x to resize relative to sorounding container
+const ModifyRelativeToContainer3x = "fa-3x"
+
+//ModifyRelativeToContainer4x to resize relative to sorounding container
+const ModifyRelativeToContainer4x = "fa-4x"
+
+//ModifyRelativeToContainer5x to resize relative to sorounding container
+const ModifyRelativeToContainer5x = "fa-5x"
+
 //BaseFontAwesome base class for FontAwesome icons
 const BaseFontAwesome = "fa"
 
@@ -25,1832 +55,1832 @@ const ModifyFlipVertical = "fa-flip-vertical "
 const ModifyInverse = "fa-inverse"
 
 //AddressBook just another Font Awesome Icon
-const AddressBook = "address-book"
+const AddressBook = "fa-address-book"
 
 //AddressBookO just another Font Awesome Icon
-const AddressBookO = "address-book-o"
+const AddressBookO = "fa-address-book-o"
 
 //AddressCard just another Font Awesome Icon
-const AddressCard = "address-card"
+const AddressCard = "fa-address-card"
 
 //AddressCardO just another Font Awesome Icon
-const AddressCardO = "address-card-o"
+const AddressCardO = "fa-address-card-o"
 
 //Bandcamp just another Font Awesome Icon
-const Bandcamp = "bandcamp"
+const Bandcamp = "fa-bandcamp"
 
 //Bath just another Font Awesome Icon
-const Bath = "bath"
+const Bath = "fa-bath"
 
 //BathtubAlias just another Font Awesome Icon
-const BathtubAlias = "bathtub (alias)"
+const BathtubAlias = "fa-bathtub (alias)"
 
 //DriversLicenseAlias just another Font Awesome Icon
-const DriversLicenseAlias = "drivers-license (alias)"
+const DriversLicenseAlias = "fa-drivers-license (alias)"
 
 //DriversLicenseOAlias just another Font Awesome Icon
-const DriversLicenseOAlias = "drivers-license-o (alias)"
+const DriversLicenseOAlias = "fa-drivers-license-o (alias)"
 
 //Eercast just another Font Awesome Icon
-const Eercast = "eercast"
+const Eercast = "fa-eercast"
 
 //EnvelopeOpen just another Font Awesome Icon
-const EnvelopeOpen = "envelope-open"
+const EnvelopeOpen = "fa-envelope-open"
 
 //EnvelopeOpenO just another Font Awesome Icon
-const EnvelopeOpenO = "envelope-open-o"
+const EnvelopeOpenO = "fa-envelope-open-o"
 
 //Etsy just another Font Awesome Icon
-const Etsy = "etsy"
+const Etsy = "fa-etsy"
 
 //FreeCodeCamp just another Font Awesome Icon
-const FreeCodeCamp = "free-code-camp"
+const FreeCodeCamp = "fa-free-code-camp"
 
 //Grav just another Font Awesome Icon
-const Grav = "grav"
+const Grav = "fa-grav"
 
 //HandshakeO just another Font Awesome Icon
-const HandshakeO = "handshake-o"
+const HandshakeO = "fa-handshake-o"
 
 //IdBadge just another Font Awesome Icon
-const IdBadge = "id-badge"
+const IdBadge = "fa-id-badge"
 
 //IdCard just another Font Awesome Icon
-const IdCard = "id-card"
+const IdCard = "fa-id-card"
 
 //IdCardO just another Font Awesome Icon
-const IdCardO = "id-card-o"
+const IdCardO = "fa-id-card-o"
 
 //Imdb just another Font Awesome Icon
-const Imdb = "imdb"
+const Imdb = "fa-imdb"
 
 //Linode just another Font Awesome Icon
-const Linode = "linode"
+const Linode = "fa-linode"
 
 //Meetup just another Font Awesome Icon
-const Meetup = "meetup"
+const Meetup = "fa-meetup"
 
 //Microchip just another Font Awesome Icon
-const Microchip = "microchip"
+const Microchip = "fa-microchip"
 
 //Podcast just another Font Awesome Icon
-const Podcast = "podcast"
+const Podcast = "fa-podcast"
 
 //Quora just another Font Awesome Icon
-const Quora = "quora"
+const Quora = "fa-quora"
 
 //Ravelry just another Font Awesome Icon
-const Ravelry = "ravelry"
+const Ravelry = "fa-ravelry"
 
 //S15Alias just another Font Awesome Icon
-const S15Alias = "s15 (alias)"
+const S15Alias = "fa-s15 (alias)"
 
 //Shower just another Font Awesome Icon
-const Shower = "shower"
+const Shower = "fa-shower"
 
 //SnowflakeO just another Font Awesome Icon
-const SnowflakeO = "snowflake-o"
+const SnowflakeO = "fa-snowflake-o"
 
 //Superpowers just another Font Awesome Icon
-const Superpowers = "superpowers"
+const Superpowers = "fa-superpowers"
 
 //Telegram just another Font Awesome Icon
-const Telegram = "telegram"
+const Telegram = "fa-telegram"
 
 //ThermometerAlias just another Font Awesome Icon
-const ThermometerAlias = "thermometer (alias)"
+const ThermometerAlias = "fa-thermometer (alias)"
 
 //Thermometer0Alias just another Font Awesome Icon
-const Thermometer0Alias = "thermometer-0 (alias)"
+const Thermometer0Alias = "fa-thermometer-0 (alias)"
 
 //Thermometer1Alias just another Font Awesome Icon
-const Thermometer1Alias = "thermometer-1 (alias)"
+const Thermometer1Alias = "fa-thermometer-1 (alias)"
 
 //Thermometer2Alias just another Font Awesome Icon
-const Thermometer2Alias = "thermometer-2 (alias)"
+const Thermometer2Alias = "fa-thermometer-2 (alias)"
 
 //Thermometer3Alias just another Font Awesome Icon
-const Thermometer3Alias = "thermometer-3 (alias)"
+const Thermometer3Alias = "fa-thermometer-3 (alias)"
 
 //Thermometer4Alias just another Font Awesome Icon
-const Thermometer4Alias = "thermometer-4 (alias)"
+const Thermometer4Alias = "fa-thermometer-4 (alias)"
 
 //ThermometerEmpty just another Font Awesome Icon
-const ThermometerEmpty = "thermometer-empty"
+const ThermometerEmpty = "fa-thermometer-empty"
 
 //ThermometerFull just another Font Awesome Icon
-const ThermometerFull = "thermometer-full"
+const ThermometerFull = "fa-thermometer-full"
 
 //ThermometerHalf just another Font Awesome Icon
-const ThermometerHalf = "thermometer-half"
+const ThermometerHalf = "fa-thermometer-half"
 
 //ThermometerQuarter just another Font Awesome Icon
-const ThermometerQuarter = "thermometer-quarter"
+const ThermometerQuarter = "fa-thermometer-quarter"
 
 //ThermometerThreeQuarters just another Font Awesome Icon
-const ThermometerThreeQuarters = "thermometer-three-quarters"
+const ThermometerThreeQuarters = "fa-thermometer-three-quarters"
 
 //TimesRectangleAlias just another Font Awesome Icon
-const TimesRectangleAlias = "times-rectangle (alias)"
+const TimesRectangleAlias = "fa-times-rectangle (alias)"
 
 //TimesRectangleOAlias just another Font Awesome Icon
-const TimesRectangleOAlias = "times-rectangle-o (alias)"
+const TimesRectangleOAlias = "fa-times-rectangle-o (alias)"
 
 //UserCircle just another Font Awesome Icon
-const UserCircle = "user-circle"
+const UserCircle = "fa-user-circle"
 
 //UserCircleO just another Font Awesome Icon
-const UserCircleO = "user-circle-o"
+const UserCircleO = "fa-user-circle-o"
 
 //UserO just another Font Awesome Icon
-const UserO = "user-o"
+const UserO = "fa-user-o"
 
 //VcardAlias just another Font Awesome Icon
-const VcardAlias = "vcard (alias)"
+const VcardAlias = "fa-vcard (alias)"
 
 //VcardOAlias just another Font Awesome Icon
-const VcardOAlias = "vcard-o (alias)"
+const VcardOAlias = "fa-vcard-o (alias)"
 
 //WindowClose just another Font Awesome Icon
-const WindowClose = "window-close"
+const WindowClose = "fa-window-close"
 
 //WindowCloseO just another Font Awesome Icon
-const WindowCloseO = "window-close-o"
+const WindowCloseO = "fa-window-close-o"
 
 //WindowMaximize just another Font Awesome Icon
-const WindowMaximize = "window-maximize"
+const WindowMaximize = "fa-window-maximize"
 
 //WindowMinimize just another Font Awesome Icon
-const WindowMinimize = "window-minimize"
+const WindowMinimize = "fa-window-minimize"
 
 //WindowRestore just another Font Awesome Icon
-const WindowRestore = "window-restore"
+const WindowRestore = "fa-window-restore"
 
 //Wpexplorer just another Font Awesome Icon
-const Wpexplorer = "wpexplorer"
+const Wpexplorer = "fa-wpexplorer"
 
 //Adjust just another Font Awesome Icon
-const Adjust = "adjust"
+const Adjust = "fa-adjust"
 
 //AmericanSignLanguageInterpreting just another Font Awesome Icon
-const AmericanSignLanguageInterpreting = "american-sign-language-interpreting"
+const AmericanSignLanguageInterpreting = "fa-american-sign-language-interpreting"
 
 //Anchor just another Font Awesome Icon
-const Anchor = "anchor"
+const Anchor = "fa-anchor"
 
 //Archive just another Font Awesome Icon
-const Archive = "archive"
+const Archive = "fa-archive"
 
 //AreaChart just another Font Awesome Icon
-const AreaChart = "area-chart"
+const AreaChart = "fa-area-chart"
 
 //Arrows just another Font Awesome Icon
-const Arrows = "arrows"
+const Arrows = "fa-arrows"
 
 //ArrowsH just another Font Awesome Icon
-const ArrowsH = "arrows-h"
+const ArrowsH = "fa-arrows-h"
 
 //ArrowsV just another Font Awesome Icon
-const ArrowsV = "arrows-v"
+const ArrowsV = "fa-arrows-v"
 
 //AslInterpretingAlias just another Font Awesome Icon
-const AslInterpretingAlias = "asl-interpreting (alias)"
+const AslInterpretingAlias = "fa-asl-interpreting (alias)"
 
 //AssistiveListeningSystems just another Font Awesome Icon
-const AssistiveListeningSystems = "assistive-listening-systems"
+const AssistiveListeningSystems = "fa-assistive-listening-systems"
 
 //Asterisk just another Font Awesome Icon
-const Asterisk = "asterisk"
+const Asterisk = "fa-asterisk"
 
 //At just another Font Awesome Icon
-const At = "at"
+const At = "fa-at"
 
 //AudioDescription just another Font Awesome Icon
-const AudioDescription = "audio-description"
+const AudioDescription = "fa-audio-description"
 
 //AutomobileAlias just another Font Awesome Icon
-const AutomobileAlias = "automobile (alias)"
+const AutomobileAlias = "fa-automobile (alias)"
 
 //BalanceScale just another Font Awesome Icon
-const BalanceScale = "balance-scale"
+const BalanceScale = "fa-balance-scale"
 
 //Ban just another Font Awesome Icon
-const Ban = "ban"
+const Ban = "fa-ban"
 
 //BankAlias just another Font Awesome Icon
-const BankAlias = "bank (alias)"
+const BankAlias = "fa-bank (alias)"
 
 //BarChart just another Font Awesome Icon
-const BarChart = "bar-chart"
+const BarChart = "fa-bar-chart"
 
 //BarChartOAlias just another Font Awesome Icon
-const BarChartOAlias = "bar-chart-o (alias)"
+const BarChartOAlias = "fa-bar-chart-o (alias)"
 
 //Barcode just another Font Awesome Icon
-const Barcode = "barcode"
+const Barcode = "fa-barcode"
 
 //Bars just another Font Awesome Icon
-const Bars = "bars"
+const Bars = "fa-bars"
 
 //BatteryAlias just another Font Awesome Icon
-const BatteryAlias = "battery (alias)"
+const BatteryAlias = "fa-battery (alias)"
 
 //Battery0Alias just another Font Awesome Icon
-const Battery0Alias = "battery-0 (alias)"
+const Battery0Alias = "fa-battery-0 (alias)"
 
 //Battery1Alias just another Font Awesome Icon
-const Battery1Alias = "battery-1 (alias)"
+const Battery1Alias = "fa-battery-1 (alias)"
 
 //Battery2Alias just another Font Awesome Icon
-const Battery2Alias = "battery-2 (alias)"
+const Battery2Alias = "fa-battery-2 (alias)"
 
 //Battery3Alias just another Font Awesome Icon
-const Battery3Alias = "battery-3 (alias)"
+const Battery3Alias = "fa-battery-3 (alias)"
 
 //Battery4Alias just another Font Awesome Icon
-const Battery4Alias = "battery-4 (alias)"
+const Battery4Alias = "fa-battery-4 (alias)"
 
 //BatteryEmpty just another Font Awesome Icon
-const BatteryEmpty = "battery-empty"
+const BatteryEmpty = "fa-battery-empty"
 
 //BatteryFull just another Font Awesome Icon
-const BatteryFull = "battery-full"
+const BatteryFull = "fa-battery-full"
 
 //BatteryHalf just another Font Awesome Icon
-const BatteryHalf = "battery-half"
+const BatteryHalf = "fa-battery-half"
 
 //BatteryQuarter just another Font Awesome Icon
-const BatteryQuarter = "battery-quarter"
+const BatteryQuarter = "fa-battery-quarter"
 
 //BatteryThreeQuarters just another Font Awesome Icon
-const BatteryThreeQuarters = "battery-three-quarters"
+const BatteryThreeQuarters = "fa-battery-three-quarters"
 
 //Bed just another Font Awesome Icon
-const Bed = "bed"
+const Bed = "fa-bed"
 
 //Beer just another Font Awesome Icon
-const Beer = "beer"
+const Beer = "fa-beer"
 
 //Bell just another Font Awesome Icon
-const Bell = "bell"
+const Bell = "fa-bell"
 
 //BellO just another Font Awesome Icon
-const BellO = "bell-o"
+const BellO = "fa-bell-o"
 
 //BellSlash just another Font Awesome Icon
-const BellSlash = "bell-slash"
+const BellSlash = "fa-bell-slash"
 
 //BellSlashO just another Font Awesome Icon
-const BellSlashO = "bell-slash-o"
+const BellSlashO = "fa-bell-slash-o"
 
 //Bicycle just another Font Awesome Icon
-const Bicycle = "bicycle"
+const Bicycle = "fa-bicycle"
 
 //Binoculars just another Font Awesome Icon
-const Binoculars = "binoculars"
+const Binoculars = "fa-binoculars"
 
 //BirthdayCake just another Font Awesome Icon
-const BirthdayCake = "birthday-cake"
+const BirthdayCake = "fa-birthday-cake"
 
 //Blind just another Font Awesome Icon
-const Blind = "blind"
+const Blind = "fa-blind"
 
 //Bluetooth just another Font Awesome Icon
-const Bluetooth = "bluetooth"
+const Bluetooth = "fa-bluetooth"
 
 //BluetoothB just another Font Awesome Icon
-const BluetoothB = "bluetooth-b"
+const BluetoothB = "fa-bluetooth-b"
 
 //Bolt just another Font Awesome Icon
-const Bolt = "bolt"
+const Bolt = "fa-bolt"
 
 //Bomb just another Font Awesome Icon
-const Bomb = "bomb"
+const Bomb = "fa-bomb"
 
 //Book just another Font Awesome Icon
-const Book = "book"
+const Book = "fa-book"
 
 //Bookmark just another Font Awesome Icon
-const Bookmark = "bookmark"
+const Bookmark = "fa-bookmark"
 
 //BookmarkO just another Font Awesome Icon
-const BookmarkO = "bookmark-o"
+const BookmarkO = "fa-bookmark-o"
 
 //Braille just another Font Awesome Icon
-const Braille = "braille"
+const Braille = "fa-braille"
 
 //Briefcase just another Font Awesome Icon
-const Briefcase = "briefcase"
+const Briefcase = "fa-briefcase"
 
 //Bug just another Font Awesome Icon
-const Bug = "bug"
+const Bug = "fa-bug"
 
 //Building just another Font Awesome Icon
-const Building = "building"
+const Building = "fa-building"
 
 //BuildingO just another Font Awesome Icon
-const BuildingO = "building-o"
+const BuildingO = "fa-building-o"
 
 //Bullhorn just another Font Awesome Icon
-const Bullhorn = "bullhorn"
+const Bullhorn = "fa-bullhorn"
 
 //Bullseye just another Font Awesome Icon
-const Bullseye = "bullseye"
+const Bullseye = "fa-bullseye"
 
 //Bus just another Font Awesome Icon
-const Bus = "bus"
+const Bus = "fa-bus"
 
 //CabAlias just another Font Awesome Icon
-const CabAlias = "cab (alias)"
+const CabAlias = "fa-cab (alias)"
 
 //Calculator just another Font Awesome Icon
-const Calculator = "calculator"
+const Calculator = "fa-calculator"
 
 //Calendar just another Font Awesome Icon
-const Calendar = "calendar"
+const Calendar = "fa-calendar"
 
 //CalendarCheckO just another Font Awesome Icon
-const CalendarCheckO = "calendar-check-o"
+const CalendarCheckO = "fa-calendar-check-o"
 
 //CalendarMinusO just another Font Awesome Icon
-const CalendarMinusO = "calendar-minus-o"
+const CalendarMinusO = "fa-calendar-minus-o"
 
 //CalendarO just another Font Awesome Icon
-const CalendarO = "calendar-o"
+const CalendarO = "fa-calendar-o"
 
 //CalendarPlusO just another Font Awesome Icon
-const CalendarPlusO = "calendar-plus-o"
+const CalendarPlusO = "fa-calendar-plus-o"
 
 //CalendarTimesO just another Font Awesome Icon
-const CalendarTimesO = "calendar-times-o"
+const CalendarTimesO = "fa-calendar-times-o"
 
 //Camera just another Font Awesome Icon
-const Camera = "camera"
+const Camera = "fa-camera"
 
 //CameraRetro just another Font Awesome Icon
-const CameraRetro = "camera-retro"
+const CameraRetro = "fa-camera-retro"
 
 //Car just another Font Awesome Icon
-const Car = "car"
+const Car = "fa-car"
 
 //CaretSquareODown just another Font Awesome Icon
-const CaretSquareODown = "caret-square-o-down"
+const CaretSquareODown = "fa-caret-square-o-down"
 
 //CaretSquareOLeft just another Font Awesome Icon
-const CaretSquareOLeft = "caret-square-o-left"
+const CaretSquareOLeft = "fa-caret-square-o-left"
 
 //CaretSquareORight just another Font Awesome Icon
-const CaretSquareORight = "caret-square-o-right"
+const CaretSquareORight = "fa-caret-square-o-right"
 
 //CaretSquareOUp just another Font Awesome Icon
-const CaretSquareOUp = "caret-square-o-up"
+const CaretSquareOUp = "fa-caret-square-o-up"
 
 //CartArrowDown just another Font Awesome Icon
-const CartArrowDown = "cart-arrow-down"
+const CartArrowDown = "fa-cart-arrow-down"
 
 //CartPlus just another Font Awesome Icon
-const CartPlus = "cart-plus"
+const CartPlus = "fa-cart-plus"
 
 //Cc just another Font Awesome Icon
-const Cc = "cc"
+const Cc = "fa-cc"
 
 //Certificate just another Font Awesome Icon
-const Certificate = "certificate"
+const Certificate = "fa-certificate"
 
 //Check just another Font Awesome Icon
-const Check = "check"
+const Check = "fa-check"
 
 //CheckCircle just another Font Awesome Icon
-const CheckCircle = "check-circle"
+const CheckCircle = "fa-check-circle"
 
 //CheckCircleO just another Font Awesome Icon
-const CheckCircleO = "check-circle-o"
+const CheckCircleO = "fa-check-circle-o"
 
 //CheckSquare just another Font Awesome Icon
-const CheckSquare = "check-square"
+const CheckSquare = "fa-check-square"
 
 //CheckSquareO just another Font Awesome Icon
-const CheckSquareO = "check-square-o"
+const CheckSquareO = "fa-check-square-o"
 
 //Child just another Font Awesome Icon
-const Child = "child"
+const Child = "fa-child"
 
 //Circle just another Font Awesome Icon
-const Circle = "circle"
+const Circle = "fa-circle"
 
 //CircleO just another Font Awesome Icon
-const CircleO = "circle-o"
+const CircleO = "fa-circle-o"
 
 //CircleONotch just another Font Awesome Icon
-const CircleONotch = "circle-o-notch"
+const CircleONotch = "fa-circle-o-notch"
 
 //CircleThin just another Font Awesome Icon
-const CircleThin = "circle-thin"
+const CircleThin = "fa-circle-thin"
 
 //ClockO just another Font Awesome Icon
-const ClockO = "clock-o"
+const ClockO = "fa-clock-o"
 
 //Clone just another Font Awesome Icon
-const Clone = "clone"
+const Clone = "fa-clone"
 
 //CloseAlias just another Font Awesome Icon
-const CloseAlias = "close (alias)"
+const CloseAlias = "fa-close (alias)"
 
 //Cloud just another Font Awesome Icon
-const Cloud = "cloud"
+const Cloud = "fa-cloud"
 
 //CloudDownload just another Font Awesome Icon
-const CloudDownload = "cloud-download"
+const CloudDownload = "fa-cloud-download"
 
 //CloudUpload just another Font Awesome Icon
-const CloudUpload = "cloud-upload"
+const CloudUpload = "fa-cloud-upload"
 
 //Code just another Font Awesome Icon
-const Code = "code"
+const Code = "fa-code"
 
 //CodeFork just another Font Awesome Icon
-const CodeFork = "code-fork"
+const CodeFork = "fa-code-fork"
 
 //Coffee just another Font Awesome Icon
-const Coffee = "coffee"
+const Coffee = "fa-coffee"
 
 //Cog just another Font Awesome Icon
-const Cog = "cog"
+const Cog = "fa-cog"
 
 //Cogs just another Font Awesome Icon
-const Cogs = "cogs"
+const Cogs = "fa-cogs"
 
 //Comment just another Font Awesome Icon
-const Comment = "comment"
+const Comment = "fa-comment"
 
 //CommentO just another Font Awesome Icon
-const CommentO = "comment-o"
+const CommentO = "fa-comment-o"
 
 //Commenting just another Font Awesome Icon
-const Commenting = "commenting"
+const Commenting = "fa-commenting"
 
 //CommentingO just another Font Awesome Icon
-const CommentingO = "commenting-o"
+const CommentingO = "fa-commenting-o"
 
 //Comments just another Font Awesome Icon
-const Comments = "comments"
+const Comments = "fa-comments"
 
 //CommentsO just another Font Awesome Icon
-const CommentsO = "comments-o"
+const CommentsO = "fa-comments-o"
 
 //Compass just another Font Awesome Icon
-const Compass = "compass"
+const Compass = "fa-compass"
 
 //Copyright just another Font Awesome Icon
-const Copyright = "copyright"
+const Copyright = "fa-copyright"
 
 //CreativeCommons just another Font Awesome Icon
-const CreativeCommons = "creative-commons"
+const CreativeCommons = "fa-creative-commons"
 
 //CreditCard just another Font Awesome Icon
-const CreditCard = "credit-card"
+const CreditCard = "fa-credit-card"
 
 //CreditCardAlt just another Font Awesome Icon
-const CreditCardAlt = "credit-card-alt"
+const CreditCardAlt = "fa-credit-card-alt"
 
 //Crop just another Font Awesome Icon
-const Crop = "crop"
+const Crop = "fa-crop"
 
 //Crosshairs just another Font Awesome Icon
-const Crosshairs = "crosshairs"
+const Crosshairs = "fa-crosshairs"
 
 //Cube just another Font Awesome Icon
-const Cube = "cube"
+const Cube = "fa-cube"
 
 //Cubes just another Font Awesome Icon
-const Cubes = "cubes"
+const Cubes = "fa-cubes"
 
 //Cutlery just another Font Awesome Icon
-const Cutlery = "cutlery"
+const Cutlery = "fa-cutlery"
 
 //DashboardAlias just another Font Awesome Icon
-const DashboardAlias = "dashboard (alias)"
+const DashboardAlias = "fa-dashboard (alias)"
 
 //Database just another Font Awesome Icon
-const Database = "database"
+const Database = "fa-database"
 
 //Deaf just another Font Awesome Icon
-const Deaf = "deaf"
+const Deaf = "fa-deaf"
 
 //DeafnessAlias just another Font Awesome Icon
-const DeafnessAlias = "deafness (alias)"
+const DeafnessAlias = "fa-deafness (alias)"
 
 //Desktop just another Font Awesome Icon
-const Desktop = "desktop"
+const Desktop = "fa-desktop"
 
 //Diamond just another Font Awesome Icon
-const Diamond = "diamond"
+const Diamond = "fa-diamond"
 
 //DotCircleO just another Font Awesome Icon
-const DotCircleO = "dot-circle-o"
+const DotCircleO = "fa-dot-circle-o"
 
 //Download just another Font Awesome Icon
-const Download = "download"
+const Download = "fa-download"
 
 //EditAlias just another Font Awesome Icon
-const EditAlias = "edit (alias)"
+const EditAlias = "fa-edit (alias)"
 
 //EllipsisH just another Font Awesome Icon
-const EllipsisH = "ellipsis-h"
+const EllipsisH = "fa-ellipsis-h"
 
 //EllipsisV just another Font Awesome Icon
-const EllipsisV = "ellipsis-v"
+const EllipsisV = "fa-ellipsis-v"
 
 //Envelope just another Font Awesome Icon
-const Envelope = "envelope"
+const Envelope = "fa-envelope"
 
 //EnvelopeO just another Font Awesome Icon
-const EnvelopeO = "envelope-o"
+const EnvelopeO = "fa-envelope-o"
 
 //EnvelopeSquare just another Font Awesome Icon
-const EnvelopeSquare = "envelope-square"
+const EnvelopeSquare = "fa-envelope-square"
 
 //Eraser just another Font Awesome Icon
-const Eraser = "eraser"
+const Eraser = "fa-eraser"
 
 //Exchange just another Font Awesome Icon
-const Exchange = "exchange"
+const Exchange = "fa-exchange"
 
 //Exclamation just another Font Awesome Icon
-const Exclamation = "exclamation"
+const Exclamation = "fa-exclamation"
 
 //ExclamationCircle just another Font Awesome Icon
-const ExclamationCircle = "exclamation-circle"
+const ExclamationCircle = "fa-exclamation-circle"
 
 //ExclamationTriangle just another Font Awesome Icon
-const ExclamationTriangle = "exclamation-triangle"
+const ExclamationTriangle = "fa-exclamation-triangle"
 
 //ExternalLink just another Font Awesome Icon
-const ExternalLink = "external-link"
+const ExternalLink = "fa-external-link"
 
 //ExternalLinkSquare just another Font Awesome Icon
-const ExternalLinkSquare = "external-link-square"
+const ExternalLinkSquare = "fa-external-link-square"
 
 //Eye just another Font Awesome Icon
-const Eye = "eye"
+const Eye = "fa-eye"
 
 //EyeSlash just another Font Awesome Icon
-const EyeSlash = "eye-slash"
+const EyeSlash = "fa-eye-slash"
 
 //Eyedropper just another Font Awesome Icon
-const Eyedropper = "eyedropper"
+const Eyedropper = "fa-eyedropper"
 
 //Fax just another Font Awesome Icon
 const Fax = "fax"
 
 //FeedAlias just another Font Awesome Icon
-const FeedAlias = "feed (alias)"
+const FeedAlias = "fa-feed (alias)"
 
 //Female just another Font Awesome Icon
-const Female = "female"
+const Female = "fa-female"
 
 //FighterJet just another Font Awesome Icon
-const FighterJet = "fighter-jet"
+const FighterJet = "fa-fighter-jet"
 
 //FileArchiveO just another Font Awesome Icon
-const FileArchiveO = "file-archive-o"
+const FileArchiveO = "fa-file-archive-o"
 
 //FileAudioO just another Font Awesome Icon
-const FileAudioO = "file-audio-o"
+const FileAudioO = "fa-file-audio-o"
 
 //FileCodeO just another Font Awesome Icon
-const FileCodeO = "file-code-o"
+const FileCodeO = "fa-file-code-o"
 
 //FileExcelO just another Font Awesome Icon
-const FileExcelO = "file-excel-o"
+const FileExcelO = "fa-file-excel-o"
 
 //FileImageO just another Font Awesome Icon
-const FileImageO = "file-image-o"
+const FileImageO = "fa-file-image-o"
 
 //FileMovieOAlias just another Font Awesome Icon
-const FileMovieOAlias = "file-movie-o (alias)"
+const FileMovieOAlias = "fa-file-movie-o (alias)"
 
 //FilePdfO just another Font Awesome Icon
-const FilePdfO = "file-pdf-o"
+const FilePdfO = "fa-file-pdf-o"
 
 //FilePhotoOAlias just another Font Awesome Icon
-const FilePhotoOAlias = "file-photo-o (alias)"
+const FilePhotoOAlias = "fa-file-photo-o (alias)"
 
 //FilePictureOAlias just another Font Awesome Icon
-const FilePictureOAlias = "file-picture-o (alias)"
+const FilePictureOAlias = "fa-file-picture-o (alias)"
 
 //FilePowerpointO just another Font Awesome Icon
-const FilePowerpointO = "file-powerpoint-o"
+const FilePowerpointO = "fa-file-powerpoint-o"
 
 //FileSoundOAlias just another Font Awesome Icon
-const FileSoundOAlias = "file-sound-o (alias)"
+const FileSoundOAlias = "fa-file-sound-o (alias)"
 
 //FileVideoO just another Font Awesome Icon
-const FileVideoO = "file-video-o"
+const FileVideoO = "fa-file-video-o"
 
 //FileWordO just another Font Awesome Icon
-const FileWordO = "file-word-o"
+const FileWordO = "fa-file-word-o"
 
 //FileZipOAlias just another Font Awesome Icon
-const FileZipOAlias = "file-zip-o (alias)"
+const FileZipOAlias = "fa-file-zip-o (alias)"
 
 //Film just another Font Awesome Icon
-const Film = "film"
+const Film = "fa-film"
 
 //Filter just another Font Awesome Icon
-const Filter = "filter"
+const Filter = "fa-filter"
 
 //Fire just another Font Awesome Icon
-const Fire = "fire"
+const Fire = "fa-fire"
 
 //FireExtinguisher just another Font Awesome Icon
-const FireExtinguisher = "fire-extinguisher"
+const FireExtinguisher = "fa-fire-extinguisher"
 
 //Flag just another Font Awesome Icon
-const Flag = "flag"
+const Flag = "fa-flag"
 
 //FlagCheckered just another Font Awesome Icon
-const FlagCheckered = "flag-checkered"
+const FlagCheckered = "fa-flag-checkered"
 
 //FlagO just another Font Awesome Icon
-const FlagO = "flag-o"
+const FlagO = "fa-flag-o"
 
 //FlashAlias just another Font Awesome Icon
-const FlashAlias = "flash (alias)"
+const FlashAlias = "fa-flash (alias)"
 
 //Flask just another Font Awesome Icon
-const Flask = "flask"
+const Flask = "fa-flask"
 
 //Folder just another Font Awesome Icon
-const Folder = "folder"
+const Folder = "fa-folder"
 
 //FolderO just another Font Awesome Icon
-const FolderO = "folder-o"
+const FolderO = "fa-folder-o"
 
 //FolderOpen just another Font Awesome Icon
-const FolderOpen = "folder-open"
+const FolderOpen = "fa-folder-open"
 
 //FolderOpenO just another Font Awesome Icon
-const FolderOpenO = "folder-open-o"
+const FolderOpenO = "fa-folder-open-o"
 
 //FrownO just another Font Awesome Icon
-const FrownO = "frown-o"
+const FrownO = "fa-frown-o"
 
 //FutbolO just another Font Awesome Icon
-const FutbolO = "futbol-o"
+const FutbolO = "fa-futbol-o"
 
 //Gamepad just another Font Awesome Icon
-const Gamepad = "gamepad"
+const Gamepad = "fa-gamepad"
 
 //Gavel just another Font Awesome Icon
-const Gavel = "gavel"
+const Gavel = "fa-gavel"
 
 //GearAlias just another Font Awesome Icon
-const GearAlias = "gear (alias)"
+const GearAlias = "fa-gear (alias)"
 
 //GearsAlias just another Font Awesome Icon
-const GearsAlias = "gears (alias)"
+const GearsAlias = "fa-gears (alias)"
 
 //Gift just another Font Awesome Icon
-const Gift = "gift"
+const Gift = "fa-gift"
 
 //Glass just another Font Awesome Icon
-const Glass = "glass"
+const Glass = "fa-glass"
 
 //Globe just another Font Awesome Icon
-const Globe = "globe"
+const Globe = "fa-globe"
 
 //GraduationCap just another Font Awesome Icon
-const GraduationCap = "graduation-cap"
+const GraduationCap = "fa-graduation-cap"
 
 //GroupAlias just another Font Awesome Icon
-const GroupAlias = "group (alias)"
+const GroupAlias = "fa-group (alias)"
 
 //HandGrabOAlias just another Font Awesome Icon
-const HandGrabOAlias = "hand-grab-o (alias)"
+const HandGrabOAlias = "fa-hand-grab-o (alias)"
 
 //HandLizardO just another Font Awesome Icon
-const HandLizardO = "hand-lizard-o"
+const HandLizardO = "fa-hand-lizard-o"
 
 //HandPaperO just another Font Awesome Icon
-const HandPaperO = "hand-paper-o"
+const HandPaperO = "fa-hand-paper-o"
 
 //HandPeaceO just another Font Awesome Icon
-const HandPeaceO = "hand-peace-o"
+const HandPeaceO = "fa-hand-peace-o"
 
 //HandPointerO just another Font Awesome Icon
-const HandPointerO = "hand-pointer-o"
+const HandPointerO = "fa-hand-pointer-o"
 
 //HandRockO just another Font Awesome Icon
-const HandRockO = "hand-rock-o"
+const HandRockO = "fa-hand-rock-o"
 
 //HandScissorsO just another Font Awesome Icon
-const HandScissorsO = "hand-scissors-o"
+const HandScissorsO = "fa-hand-scissors-o"
 
 //HandSpockO just another Font Awesome Icon
-const HandSpockO = "hand-spock-o"
+const HandSpockO = "fa-hand-spock-o"
 
 //HandStopOAlias just another Font Awesome Icon
-const HandStopOAlias = "hand-stop-o (alias)"
-const HardOfHearingAlias = "hard-of-hearing (alias)"
+const HandStopOAlias = "fa-hand-stop-o (alias)"
+const HardOfHearingAlias = "fa-hard-of-hearing (alias)"
 
 //Hashtag just another Font Awesome Icon
-const Hashtag = "hashtag"
+const Hashtag = "fa-hashtag"
 
 //HddO just another Font Awesome Icon
-const HddO = "hdd-o"
+const HddO = "fa-hdd-o"
 
 //Headphones just another Font Awesome Icon
-const Headphones = "headphones"
+const Headphones = "fa-headphones"
 
 //Heart just another Font Awesome Icon
-const Heart = "heart"
+const Heart = "fa-heart"
 
 //HeartO just another Font Awesome Icon
-const HeartO = "heart-o"
+const HeartO = "fa-heart-o"
 
 //Heartbeat just another Font Awesome Icon
-const Heartbeat = "heartbeat"
+const Heartbeat = "fa-heartbeat"
 
 //History just another Font Awesome Icon
-const History = "history"
+const History = "fa-history"
 
 //Home just another Font Awesome Icon
-const Home = "home"
+const Home = "fa-home"
 
 //HotelAlias just another Font Awesome Icon
-const HotelAlias = "hotel (alias)"
+const HotelAlias = "fa-hotel (alias)"
 
 //Hourglass just another Font Awesome Icon
-const Hourglass = "hourglass"
+const Hourglass = "fa-hourglass"
 
 //Hourglass1Alias just another Font Awesome Icon
-const Hourglass1Alias = "hourglass-1 (alias)"
+const Hourglass1Alias = "fa-hourglass-1 (alias)"
 
 //Hourglass2Alias just another Font Awesome Icon
-const Hourglass2Alias = "hourglass-2 (alias)"
+const Hourglass2Alias = "fa-hourglass-2 (alias)"
 
 //Hourglass3Alias just another Font Awesome Icon
-const Hourglass3Alias = "hourglass-3 (alias)"
+const Hourglass3Alias = "fa-hourglass-3 (alias)"
 
 //HourglassEnd just another Font Awesome Icon
-const HourglassEnd = "hourglass-end"
+const HourglassEnd = "fa-hourglass-end"
 
 //HourglassHalf just another Font Awesome Icon
-const HourglassHalf = "hourglass-half"
+const HourglassHalf = "fa-hourglass-half"
 
 //HourglassO just another Font Awesome Icon
-const HourglassO = "hourglass-o"
+const HourglassO = "fa-hourglass-o"
 
 //HourglassStart just another Font Awesome Icon
-const HourglassStart = "hourglass-start"
+const HourglassStart = "fa-hourglass-start"
 
 //ICursor just another Font Awesome Icon
-const ICursor = "i-cursor"
+const ICursor = "fa-i-cursor"
 
 //ImageAlias just another Font Awesome Icon
-const ImageAlias = "image (alias)"
+const ImageAlias = "fa-image (alias)"
 
 //Inbox just another Font Awesome Icon
-const Inbox = "inbox"
+const Inbox = "fa-inbox"
 
 //Industry just another Font Awesome Icon
-const Industry = "industry"
+const Industry = "fa-industry"
 
 //Info just another Font Awesome Icon
-const Info = "info"
+const Info = "fa-info"
 
 //InfoCircle just another Font Awesome Icon
-const InfoCircle = "info-circle"
+const InfoCircle = "fa-info-circle"
 
 //InstitutionAlias just another Font Awesome Icon
-const InstitutionAlias = "institution (alias)"
+const InstitutionAlias = "fa-institution (alias)"
 
 //Key just another Font Awesome Icon
-const Key = "key"
+const Key = "fa-key"
 
 //KeyboardO just another Font Awesome Icon
-const KeyboardO = "keyboard-o"
+const KeyboardO = "fa-keyboard-o"
 
 //Language just another Font Awesome Icon
-const Language = "language"
+const Language = "fa-language"
 
 //Laptop just another Font Awesome Icon
-const Laptop = "laptop"
+const Laptop = "fa-laptop"
 
 //Leaf just another Font Awesome Icon
-const Leaf = "leaf"
+const Leaf = "fa-leaf"
 
 //LegalAlias just another Font Awesome Icon
-const LegalAlias = "legal (alias)"
+const LegalAlias = "fa-legal (alias)"
 
 //LemonO just another Font Awesome Icon
-const LemonO = "lemon-o"
+const LemonO = "fa-lemon-o"
 
 //LevelDown just another Font Awesome Icon
-const LevelDown = "level-down"
+const LevelDown = "fa-level-down"
 
 //LevelUp just another Font Awesome Icon
-const LevelUp = "level-up"
+const LevelUp = "fa-level-up"
 
 //LifeBouyAlias just another Font Awesome Icon
-const LifeBouyAlias = "life-bouy (alias)"
+const LifeBouyAlias = "fa-life-bouy (alias)"
 
 //LifeBuoyAlias just another Font Awesome Icon
-const LifeBuoyAlias = "life-buoy (alias)"
+const LifeBuoyAlias = "fa-life-buoy (alias)"
 
 //LifeRing just another Font Awesome Icon
-const LifeRing = "life-ring"
+const LifeRing = "fa-life-ring"
 
 //LifeSaverAlias just another Font Awesome Icon
-const LifeSaverAlias = "life-saver (alias)"
+const LifeSaverAlias = "fa-life-saver (alias)"
 
 //LightbulbO just another Font Awesome Icon
-const LightbulbO = "lightbulb-o"
+const LightbulbO = "fa-lightbulb-o"
 
 //LineChart just another Font Awesome Icon
-const LineChart = "line-chart"
+const LineChart = "fa-line-chart"
 
 //LocationArrow just another Font Awesome Icon
-const LocationArrow = "location-arrow"
+const LocationArrow = "fa-location-arrow"
 
 //Lock just another Font Awesome Icon
-const Lock = "lock"
+const Lock = "fa-lock"
 
 //LowVision just another Font Awesome Icon
-const LowVision = "low-vision"
+const LowVision = "fa-low-vision"
 
 //Magic just another Font Awesome Icon
-const Magic = "magic"
+const Magic = "fa-magic"
 
 //Magnet just another Font Awesome Icon
-const Magnet = "magnet"
+const Magnet = "fa-magnet"
 
 //MailForwardAlias just another Font Awesome Icon
-const MailForwardAlias = "mail-forward (alias)"
+const MailForwardAlias = "fa-mail-forward (alias)"
 
 //MailReplyAlias just another Font Awesome Icon
-const MailReplyAlias = "mail-reply (alias)"
+const MailReplyAlias = "fa-mail-reply (alias)"
 
 //MailReplyAllAlias just another Font Awesome Icon
-const MailReplyAllAlias = "mail-reply-all (alias)"
+const MailReplyAllAlias = "fa-mail-reply-all (alias)"
 
 //Male just another Font Awesome Icon
-const Male = "male"
+const Male = "fa-male"
 
 //Map just another Font Awesome Icon
-const Map = "map"
+const Map = "fa-map"
 
 //MapMarker just another Font Awesome Icon
-const MapMarker = "map-marker"
+const MapMarker = "fa-map-marker"
 
 //MapO just another Font Awesome Icon
-const MapO = "map-o"
+const MapO = "fa-map-o"
 
 //MapPin just another Font Awesome Icon
-const MapPin = "map-pin"
+const MapPin = "fa-map-pin"
 
 //MapSigns just another Font Awesome Icon
-const MapSigns = "map-signs"
+const MapSigns = "fa-map-signs"
 
 //MehO just another Font Awesome Icon
-const MehO = "meh-o"
+const MehO = "fa-meh-o"
 
 //Microphone just another Font Awesome Icon
-const Microphone = "microphone"
+const Microphone = "fa-microphone"
 
 //MicrophoneSlash just another Font Awesome Icon
-const MicrophoneSlash = "microphone-slash"
+const MicrophoneSlash = "fa-microphone-slash"
 
 //Minus just another Font Awesome Icon
-const Minus = "minus"
+const Minus = "fa-minus"
 
 //MinusCircle just another Font Awesome Icon
-const MinusCircle = "minus-circle"
+const MinusCircle = "fa-minus-circle"
 
 //MinusSquare just another Font Awesome Icon
-const MinusSquare = "minus-square"
+const MinusSquare = "fa-minus-square"
 
 //MinusSquareO just another Font Awesome Icon
-const MinusSquareO = "minus-square-o"
+const MinusSquareO = "fa-minus-square-o"
 
 //Mobile just another Font Awesome Icon
-const Mobile = "mobile"
+const Mobile = "fa-mobile"
 
 //MobilePhoneAlias just another Font Awesome Icon
-const MobilePhoneAlias = "mobile-phone (alias)"
+const MobilePhoneAlias = "fa-mobile-phone (alias)"
 
 //Money just another Font Awesome Icon
-const Money = "money"
+const Money = "fa-money"
 
 //MoonO just another Font Awesome Icon
-const MoonO = "moon-o"
+const MoonO = "fa-moon-o"
 
 //MortarBoardAlias just another Font Awesome Icon
-const MortarBoardAlias = "mortar-board (alias)"
+const MortarBoardAlias = "fa-mortar-board (alias)"
 
 //Motorcycle just another Font Awesome Icon
-const Motorcycle = "motorcycle"
+const Motorcycle = "fa-motorcycle"
 
 //MousePointer just another Font Awesome Icon
-const MousePointer = "mouse-pointer"
+const MousePointer = "fa-mouse-pointer"
 
 //Music just another Font Awesome Icon
-const Music = "music"
+const Music = "fa-music"
 
 //NaviconAlias just another Font Awesome Icon
-const NaviconAlias = "navicon (alias)"
+const NaviconAlias = "fa-navicon (alias)"
 
 //NewspaperO just another Font Awesome Icon
-const NewspaperO = "newspaper-o"
+const NewspaperO = "fa-newspaper-o"
 
 //ObjectGroup just another Font Awesome Icon
-const ObjectGroup = "object-group"
+const ObjectGroup = "fa-object-group"
 
 //ObjectUngroup just another Font Awesome Icon
-const ObjectUngroup = "object-ungroup"
+const ObjectUngroup = "fa-object-ungroup"
 
 //PaintBrush just another Font Awesome Icon
-const PaintBrush = "paint-brush"
+const PaintBrush = "fa-paint-brush"
 
 //PaperPlane just another Font Awesome Icon
-const PaperPlane = "paper-plane"
+const PaperPlane = "fa-paper-plane"
 
 //PaperPlaneO just another Font Awesome Icon
-const PaperPlaneO = "paper-plane-o"
+const PaperPlaneO = "fa-paper-plane-o"
 
 //Paw just another Font Awesome Icon
-const Paw = "paw"
+const Paw = "fa-paw"
 
 //Pencil just another Font Awesome Icon
-const Pencil = "pencil"
+const Pencil = "fa-pencil"
 
 //PencilSquare just another Font Awesome Icon
-const PencilSquare = "pencil-square"
+const PencilSquare = "fa-pencil-square"
 
 //PencilSquareO just another Font Awesome Icon
-const PencilSquareO = "pencil-square-o"
+const PencilSquareO = "fa-pencil-square-o"
 
 //Percent just another Font Awesome Icon
-const Percent = "percent"
+const Percent = "fa-percent"
 
 //Phone just another Font Awesome Icon
-const Phone = "phone"
+const Phone = "fa-phone"
 
 //PhoneSquare just another Font Awesome Icon
-const PhoneSquare = "phone-square"
+const PhoneSquare = "fa-phone-square"
 
 //PhotoAlias just another Font Awesome Icon
-const PhotoAlias = "photo (alias)"
+const PhotoAlias = "fa-photo (alias)"
 
 //PictureO just another Font Awesome Icon
-const PictureO = "picture-o"
+const PictureO = "fa-picture-o"
 
 //PieChart just another Font Awesome Icon
-const PieChart = "pie-chart"
+const PieChart = "fa-pie-chart"
 
 //Plane just another Font Awesome Icon
-const Plane = "plane"
+const Plane = "fa-plane"
 
 //Plug just another Font Awesome Icon
-const Plug = "plug"
+const Plug = "fa-plug"
 
 //Plus just another Font Awesome Icon
-const Plus = "plus"
+const Plus = "fa-plus"
 
 //PlusCircle just another Font Awesome Icon
-const PlusCircle = "plus-circle"
+const PlusCircle = "fa-plus-circle"
 
 //PlusSquare just another Font Awesome Icon
-const PlusSquare = "plus-square"
+const PlusSquare = "fa-plus-square"
 
 //PlusSquareO just another Font Awesome Icon
-const PlusSquareO = "plus-square-o"
+const PlusSquareO = "fa-plus-square-o"
 
 //PowerOff just another Font Awesome Icon
-const PowerOff = "power-off"
+const PowerOff = "fa-power-off"
 
 //Print just another Font Awesome Icon
-const Print = "print"
+const Print = "fa-print"
 
 //PuzzlePiece just another Font Awesome Icon
-const PuzzlePiece = "puzzle-piece"
+const PuzzlePiece = "fa-puzzle-piece"
 
 //Qrcode just another Font Awesome Icon
-const Qrcode = "qrcode"
+const Qrcode = "fa-qrcode"
 
 //Question just another Font Awesome Icon
-const Question = "question"
+const Question = "fa-question"
 
 //QuestionCircle just another Font Awesome Icon
-const QuestionCircle = "question-circle"
+const QuestionCircle = "fa-question-circle"
 
 //QuestionCircleO just another Font Awesome Icon
-const QuestionCircleO = "question-circle-o"
+const QuestionCircleO = "fa-question-circle-o"
 
 //QuoteLeft just another Font Awesome Icon
-const QuoteLeft = "quote-left"
+const QuoteLeft = "fa-quote-left"
 
 //QuoteRight just another Font Awesome Icon
-const QuoteRight = "quote-right"
+const QuoteRight = "fa-quote-right"
 
 //Random just another Font Awesome Icon
-const Random = "random"
+const Random = "fa-random"
 
 //Recycle just another Font Awesome Icon
-const Recycle = "recycle"
+const Recycle = "fa-recycle"
 
 //Refresh just another Font Awesome Icon
-const Refresh = "refresh"
+const Refresh = "fa-refresh"
 
 //Registered just another Font Awesome Icon
-const Registered = "registered"
+const Registered = "fa-registered"
 
 //RemoveAlias just another Font Awesome Icon
-const RemoveAlias = "remove (alias)"
+const RemoveAlias = "fa-remove (alias)"
 
 //ReorderAlias just another Font Awesome Icon
-const ReorderAlias = "reorder (alias)"
+const ReorderAlias = "fa-reorder (alias)"
 
 //Reply just another Font Awesome Icon
-const Reply = "reply"
+const Reply = "fa-reply"
 
 //ReplyAll just another Font Awesome Icon
-const ReplyAll = "reply-all"
+const ReplyAll = "fa-reply-all"
 
 //Retweet just another Font Awesome Icon
-const Retweet = "retweet"
+const Retweet = "fa-retweet"
 
 //Road just another Font Awesome Icon
-const Road = "road"
+const Road = "fa-road"
 
 //Rocket just another Font Awesome Icon
-const Rocket = "rocket"
+const Rocket = "fa-rocket"
 
 //Rss just another Font Awesome Icon
-const Rss = "rss"
+const Rss = "fa-rss"
 
 //RssSquare just another Font Awesome Icon
-const RssSquare = "rss-square"
+const RssSquare = "fa-rss-square"
 
 //Search just another Font Awesome Icon
-const Search = "search"
+const Search = "fa-search"
 
 //SearchMinus just another Font Awesome Icon
-const SearchMinus = "search-minus"
+const SearchMinus = "fa-search-minus"
 
 //SearchPlus just another Font Awesome Icon
-const SearchPlus = "search-plus"
+const SearchPlus = "fa-search-plus"
 
 //SendAlias just another Font Awesome Icon
-const SendAlias = "send (alias)"
+const SendAlias = "fa-send (alias)"
 
 //SendOAlias just another Font Awesome Icon
-const SendOAlias = "send-o (alias)"
+const SendOAlias = "fa-send-o (alias)"
 
 //Server just another Font Awesome Icon
-const Server = "server"
+const Server = "fa-server"
 
 //Share just another Font Awesome Icon
-const Share = "share"
+const Share = "fa-share"
 
 //ShareAlt just another Font Awesome Icon
-const ShareAlt = "share-alt"
+const ShareAlt = "fa-share-alt"
 
 //ShareAltSquare just another Font Awesome Icon
-const ShareAltSquare = "share-alt-square"
+const ShareAltSquare = "fa-share-alt-square"
 
 //ShareSquare just another Font Awesome Icon
-const ShareSquare = "share-square"
+const ShareSquare = "fa-share-square"
 
 //ShareSquareO just another Font Awesome Icon
-const ShareSquareO = "share-square-o"
+const ShareSquareO = "fa-share-square-o"
 
 //Shield just another Font Awesome Icon
-const Shield = "shield"
+const Shield = "fa-shield"
 
 //Ship just another Font Awesome Icon
-const Ship = "ship"
+const Ship = "fa-ship"
 
 //ShoppingBag just another Font Awesome Icon
-const ShoppingBag = "shopping-bag"
+const ShoppingBag = "fa-shopping-bag"
 
 //ShoppingBasket just another Font Awesome Icon
-const ShoppingBasket = "shopping-basket"
+const ShoppingBasket = "fa-shopping-basket"
 
 //ShoppingCart just another Font Awesome Icon
-const ShoppingCart = "shopping-cart"
+const ShoppingCart = "fa-shopping-cart"
 
 //SignIn just another Font Awesome Icon
-const SignIn = "sign-in"
+const SignIn = "fa-sign-in"
 
 //SignLanguage just another Font Awesome Icon
-const SignLanguage = "sign-language"
+const SignLanguage = "fa-sign-language"
 
 //SignOut just another Font Awesome Icon
-const SignOut = "sign-out"
+const SignOut = "fa-sign-out"
 
 //Signal just another Font Awesome Icon
-const Signal = "signal"
+const Signal = "fa-signal"
 
 //SigningAlias just another Font Awesome Icon
-const SigningAlias = "signing (alias)"
+const SigningAlias = "fa-signing (alias)"
 
 //Sitemap just another Font Awesome Icon
-const Sitemap = "sitemap"
+const Sitemap = "fa-sitemap"
 
 //Sliders just another Font Awesome Icon
-const Sliders = "sliders"
+const Sliders = "fa-sliders"
 
 //SmileO just another Font Awesome Icon
-const SmileO = "smile-o"
+const SmileO = "fa-smile-o"
 
 //SoccerBallOAlias just another Font Awesome Icon
-const SoccerBallOAlias = "soccer-ball-o (alias)"
+const SoccerBallOAlias = "fa-soccer-ball-o (alias)"
 
 //Sort just another Font Awesome Icon
-const Sort = "sort"
+const Sort = "fa-sort"
 
 //SortAlphaAsc just another Font Awesome Icon
-const SortAlphaAsc = "sort-alpha-asc"
+const SortAlphaAsc = "fa-sort-alpha-asc"
 
 //SortAlphaDesc just another Font Awesome Icon
-const SortAlphaDesc = "sort-alpha-desc"
+const SortAlphaDesc = "fa-sort-alpha-desc"
 
 //SortAmountAsc just another Font Awesome Icon
-const SortAmountAsc = "sort-amount-asc"
+const SortAmountAsc = "fa-sort-amount-asc"
 
 //SortAmountDesc just another Font Awesome Icon
-const SortAmountDesc = "sort-amount-desc"
+const SortAmountDesc = "fa-sort-amount-desc"
 
 //SortAsc just another Font Awesome Icon
-const SortAsc = "sort-asc"
+const SortAsc = "fa-sort-asc"
 
 //SortDesc just another Font Awesome Icon
-const SortDesc = "sort-desc"
+const SortDesc = "fa-sort-desc"
 
 //SortDownAlias just another Font Awesome Icon
-const SortDownAlias = "sort-down (alias)"
+const SortDownAlias = "fa-sort-down (alias)"
 
 //SortNumericAsc just another Font Awesome Icon
-const SortNumericAsc = "sort-numeric-asc"
+const SortNumericAsc = "fa-sort-numeric-asc"
 
 //SortNumericDesc just another Font Awesome Icon
-const SortNumericDesc = "sort-numeric-desc"
+const SortNumericDesc = "fa-sort-numeric-desc"
 
 //SortUpAlias just another Font Awesome Icon
-const SortUpAlias = "sort-up (alias)"
+const SortUpAlias = "fa-sort-up (alias)"
 
 //SpaceShuttle just another Font Awesome Icon
-const SpaceShuttle = "space-shuttle"
+const SpaceShuttle = "fa-space-shuttle"
 
 //Spinner just another Font Awesome Icon
-const Spinner = "spinner"
+const Spinner = "fa-spinner"
 
 //Spoon just another Font Awesome Icon
-const Spoon = "spoon"
+const Spoon = "fa-spoon"
 
 //Square just another Font Awesome Icon
-const Square = "square"
+const Square = "fa-square"
 
 //SquareO just another Font Awesome Icon
-const SquareO = "square-o"
+const SquareO = "fa-square-o"
 
 //Star just another Font Awesome Icon
-const Star = "star"
+const Star = "fa-star"
 
 //StarHalf just another Font Awesome Icon
-const StarHalf = "star-half"
+const StarHalf = "fa-star-half"
 
 //StarHalfEmptyAlias just another Font Awesome Icon
-const StarHalfEmptyAlias = "star-half-empty (alias)"
+const StarHalfEmptyAlias = "fa-star-half-empty (alias)"
 
 //StarHalfFullAlias just another Font Awesome Icon
-const StarHalfFullAlias = "star-half-full (alias)"
+const StarHalfFullAlias = "fa-star-half-full (alias)"
 
 //StarHalfO just another Font Awesome Icon
-const StarHalfO = "star-half-o"
+const StarHalfO = "fa-star-half-o"
 
 //StarO just another Font Awesome Icon
-const StarO = "star-o"
+const StarO = "fa-star-o"
 
 //StickyNote just another Font Awesome Icon
-const StickyNote = "sticky-note"
+const StickyNote = "fa-sticky-note"
 
 //StickyNoteO just another Font Awesome Icon
-const StickyNoteO = "sticky-note-o"
+const StickyNoteO = "fa-sticky-note-o"
 
 //StreetView just another Font Awesome Icon
-const StreetView = "street-view"
+const StreetView = "fa-street-view"
 
 //Suitcase just another Font Awesome Icon
-const Suitcase = "suitcase"
+const Suitcase = "fa-suitcase"
 
 //SunO just another Font Awesome Icon
-const SunO = "sun-o"
+const SunO = "fa-sun-o"
 
 //SupportAlias just another Font Awesome Icon
-const SupportAlias = "support (alias)"
+const SupportAlias = "fa-support (alias)"
 
 //Tablet just another Font Awesome Icon
-const Tablet = "tablet"
+const Tablet = "fa-tablet"
 
 //Tachometer just another Font Awesome Icon
-const Tachometer = "tachometer"
+const Tachometer = "fa-tachometer"
 
 //Tag just another Font Awesome Icon
-const Tag = "tag"
+const Tag = "fa-tag"
 
 //Tags just another Font Awesome Icon
-const Tags = "tags"
+const Tags = "fa-tags"
 
 //Tasks just another Font Awesome Icon
-const Tasks = "tasks"
+const Tasks = "fa-tasks"
 
 //Taxi just another Font Awesome Icon
-const Taxi = "taxi"
+const Taxi = "fa-taxi"
 
 //Television just another Font Awesome Icon
-const Television = "television"
+const Television = "fa-television"
 
 //Terminal just another Font Awesome Icon
-const Terminal = "terminal"
+const Terminal = "fa-terminal"
 
 //ThumbTack just another Font Awesome Icon
-const ThumbTack = "thumb-tack"
+const ThumbTack = "fa-thumb-tack"
 
 //ThumbsDown just another Font Awesome Icon
-const ThumbsDown = "thumbs-down"
+const ThumbsDown = "fa-thumbs-down"
 
 //ThumbsODown just another Font Awesome Icon
-const ThumbsODown = "thumbs-o-down"
+const ThumbsODown = "fa-thumbs-o-down"
 
 //ThumbsOUp just another Font Awesome Icon
-const ThumbsOUp = "thumbs-o-up"
+const ThumbsOUp = "fa-thumbs-o-up"
 
 //ThumbsUp just another Font Awesome Icon
-const ThumbsUp = "thumbs-up"
+const ThumbsUp = "fa-thumbs-up"
 
 //Ticket just another Font Awesome Icon
-const Ticket = "ticket"
+const Ticket = "fa-ticket"
 
 //Times just another Font Awesome Icon
-const Times = "times"
+const Times = "fa-times"
 
 //TimesCircle just another Font Awesome Icon
-const TimesCircle = "times-circle"
+const TimesCircle = "fa-times-circle"
 
 //TimesCircleO just another Font Awesome Icon
-const TimesCircleO = "times-circle-o"
+const TimesCircleO = "fa-times-circle-o"
 
 //Tint just another Font Awesome Icon
-const Tint = "tint"
+const Tint = "fa-tint"
 
 //ToggleDownAlias just another Font Awesome Icon
-const ToggleDownAlias = "toggle-down (alias)"
+const ToggleDownAlias = "fa-toggle-down (alias)"
 
 //ToggleLeftAlias just another Font Awesome Icon
-const ToggleLeftAlias = "toggle-left (alias)"
+const ToggleLeftAlias = "fa-toggle-left (alias)"
 
 //ToggleOff just another Font Awesome Icon
-const ToggleOff = "toggle-off"
+const ToggleOff = "fa-toggle-off"
 
 //ToggleOn just another Font Awesome Icon
-const ToggleOn = "toggle-on"
+const ToggleOn = "fa-toggle-on"
 
 //ToggleRightAlias just another Font Awesome Icon
-const ToggleRightAlias = "toggle-right (alias)"
+const ToggleRightAlias = "fa-toggle-right (alias)"
 
 //ToggleUpAlias just another Font Awesome Icon
-const ToggleUpAlias = "toggle-up (alias)"
+const ToggleUpAlias = "fa-toggle-up (alias)"
 
 //Trademark just another Font Awesome Icon
-const Trademark = "trademark"
+const Trademark = "fa-trademark"
 
 //Trash just another Font Awesome Icon
-const Trash = "trash"
+const Trash = "fa-trash"
 
 //TrashO just another Font Awesome Icon
-const TrashO = "trash-o"
+const TrashO = "fa-trash-o"
 
 //Tree just another Font Awesome Icon
-const Tree = "tree"
+const Tree = "fa-tree"
 
 //Trophy just another Font Awesome Icon
-const Trophy = "trophy"
+const Trophy = "fa-trophy"
 
 //Truck just another Font Awesome Icon
-const Truck = "truck"
+const Truck = "fa-truck"
 
 //Tty just another Font Awesome Icon
-const Tty = "tty"
+const Tty = "fa-tty"
 
 //TvAlias just another Font Awesome Icon
-const TvAlias = "tv (alias)"
+const TvAlias = "fa-tv (alias)"
 
 //Umbrella just another Font Awesome Icon
-const Umbrella = "umbrella"
+const Umbrella = "fa-umbrella"
 
 //UniversalAccess just another Font Awesome Icon
-const UniversalAccess = "universal-access"
+const UniversalAccess = "fa-universal-access"
 
 //University just another Font Awesome Icon
-const University = "university"
+const University = "fa-university"
 
 //Unlock just another Font Awesome Icon
-const Unlock = "unlock"
+const Unlock = "fa-unlock"
 
 //UnlockAlt just another Font Awesome Icon
-const UnlockAlt = "unlock-alt"
+const UnlockAlt = "fa-unlock-alt"
 
 //UnsortedAlias just another Font Awesome Icon
-const UnsortedAlias = "unsorted (alias)"
+const UnsortedAlias = "fa-unsorted (alias)"
 
 //Upload just another Font Awesome Icon
-const Upload = "upload"
+const Upload = "fa-upload"
 
 //User just another Font Awesome Icon
-const User = "user"
+const User = "fa-user"
 
 //UserPlus just another Font Awesome Icon
-const UserPlus = "user-plus"
+const UserPlus = "fa-user-plus"
 
 //UserSecret just another Font Awesome Icon
-const UserSecret = "user-secret"
+const UserSecret = "fa-user-secret"
 
 //UserTimes just another Font Awesome Icon
-const UserTimes = "user-times"
+const UserTimes = "fa-user-times"
 
 //Users just another Font Awesome Icon
-const Users = "users"
+const Users = "fa-users"
 
 //VideoCamera just another Font Awesome Icon
-const VideoCamera = "video-camera"
+const VideoCamera = "fa-video-camera"
 
 //VolumeControlPhone just another Font Awesome Icon
-const VolumeControlPhone = "volume-control-phone"
+const VolumeControlPhone = "fa-volume-control-phone"
 
 //VolumeDown just another Font Awesome Icon
-const VolumeDown = "volume-down"
+const VolumeDown = "fa-volume-down"
 
 //VolumeOff just another Font Awesome Icon
-const VolumeOff = "volume-off"
+const VolumeOff = "fa-volume-off"
 
 //VolumeUp just another Font Awesome Icon
-const VolumeUp = "volume-up"
+const VolumeUp = "fa-volume-up"
 
 //WarningAlias just another Font Awesome Icon
-const WarningAlias = "warning (alias)"
+const WarningAlias = "fa-warning (alias)"
 
 //Wheelchair just another Font Awesome Icon
-const Wheelchair = "wheelchair"
+const Wheelchair = "fa-wheelchair"
 
 //WheelchairAlt just another Font Awesome Icon
-const WheelchairAlt = "wheelchair-alt"
+const WheelchairAlt = "fa-wheelchair-alt"
 
 //Wifi just another Font Awesome Icon
-const Wifi = "wifi"
+const Wifi = "fa-wifi"
 
 //Wrench just another Font Awesome Icon
-const Wrench = "wrench"
+const Wrench = "fa-wrench"
 
 //HandODown just another Font Awesome Icon
-const HandODown = "hand-o-down"
+const HandODown = "fa-hand-o-down"
 
 //HandOLeft just another Font Awesome Icon
-const HandOLeft = "hand-o-left"
+const HandOLeft = "fa-hand-o-left"
 
 //HandORight just another Font Awesome Icon
-const HandORight = "hand-o-right"
+const HandORight = "fa-hand-o-right"
 
 //HandOUp just another Font Awesome Icon
-const HandOUp = "hand-o-up"
+const HandOUp = "fa-hand-o-up"
 
 //Ambulance just another Font Awesome Icon
-const Ambulance = "ambulance"
+const Ambulance = "fa-ambulance"
 
 //Subway just another Font Awesome Icon
-const Subway = "subway"
+const Subway = "fa-subway"
 
 //Train just another Font Awesome Icon
-const Train = "train"
+const Train = "fa-train"
 
 //Genderless just another Font Awesome Icon
-const Genderless = "genderless"
+const Genderless = "fa-genderless"
 
 //IntersexAlias just another Font Awesome Icon
-const IntersexAlias = "intersex (alias)"
+const IntersexAlias = "fa-intersex (alias)"
 
 //Mars just another Font Awesome Icon
-const Mars = "mars"
+const Mars = "fa-mars"
 
 //MarsDouble just another Font Awesome Icon
-const MarsDouble = "mars-double"
+const MarsDouble = "fa-mars-double"
 
 //MarsStroke just another Font Awesome Icon
-const MarsStroke = "mars-stroke"
+const MarsStroke = "fa-mars-stroke"
 
 //MarsStrokeH just another Font Awesome Icon
-const MarsStrokeH = "mars-stroke-h"
+const MarsStrokeH = "fa-mars-stroke-h"
 
 //MarsStrokeV just another Font Awesome Icon
-const MarsStrokeV = "mars-stroke-v"
+const MarsStrokeV = "fa-mars-stroke-v"
 
 //Mercury just another Font Awesome Icon
-const Mercury = "mercury"
+const Mercury = "fa-mercury"
 
 //Neuter just another Font Awesome Icon
-const Neuter = "neuter"
+const Neuter = "fa-neuter"
 
 //Transgender just another Font Awesome Icon
-const Transgender = "transgender"
+const Transgender = "fa-transgender"
 
 //TransgenderAlt just another Font Awesome Icon
-const TransgenderAlt = "transgender-alt"
+const TransgenderAlt = "fa-transgender-alt"
 
 //Venus just another Font Awesome Icon
-const Venus = "venus"
+const Venus = "fa-venus"
 
 //VenusDouble just another Font Awesome Icon
-const VenusDouble = "venus-double"
+const VenusDouble = "fa-venus-double"
 
 //VenusMars just another Font Awesome Icon
-const VenusMars = "venus-mars"
+const VenusMars = "fa-venus-mars"
 
 //File just another Font Awesome Icon
-const File = "file"
+const File = "fa-file"
 
 //FileO just another Font Awesome Icon
-const FileO = "file-o"
+const FileO = "fa-file-o"
 
 //FileText just another Font Awesome Icon
-const FileText = "file-text"
+const FileText = "fa-file-text"
 
 //FileTextO just another Font Awesome Icon
-const FileTextO = "file-text-o"
+const FileTextO = "fa-file-text-o"
 
 //Icons just another Font Awesome Icon
-const Icons = "Icons"
+const Icons = "fa-Icons"
 
 //CcAmex just another Font Awesome Icon
-const CcAmex = "cc-amex"
+const CcAmex = "fa-cc-amex"
 
 //CcDinersClub just another Font Awesome Icon
-const CcDinersClub = "cc-diners-club"
+const CcDinersClub = "fa-cc-diners-club"
 
 //CcDiscover just another Font Awesome Icon
-const CcDiscover = "cc-discover"
+const CcDiscover = "fa-cc-discover"
 
 //CcJcb just another Font Awesome Icon
-const CcJcb = "cc-jcb"
+const CcJcb = "fa-cc-jcb"
 
 //CcMastercard just another Font Awesome Icon
-const CcMastercard = "cc-mastercard"
+const CcMastercard = "fa-cc-mastercard"
 
 //CcPaypal just another Font Awesome Icon
-const CcPaypal = "cc-paypal"
+const CcPaypal = "fa-cc-paypal"
 
 //CcStripe just another Font Awesome Icon
-const CcStripe = "cc-stripe"
+const CcStripe = "fa-cc-stripe"
 
 //CcVisa just another Font Awesome Icon
-const CcVisa = "cc-visa"
+const CcVisa = "fa-cc-visa"
 
 //GoogleWallet just another Font Awesome Icon
-const GoogleWallet = "google-wallet"
+const GoogleWallet = "fa-google-wallet"
 
 //Paypal just another Font Awesome Icon
-const Paypal = "paypal"
+const Paypal = "fa-paypal"
 
 //BitcoinAlias just another Font Awesome Icon
-const BitcoinAlias = "bitcoin (alias)"
+const BitcoinAlias = "fa-bitcoin (alias)"
 
 //Btc just another Font Awesome Icon
-const Btc = "btc"
+const Btc = "fa-btc"
 
 //CnyAlias just another Font Awesome Icon
-const CnyAlias = "cny (alias)"
+const CnyAlias = "fa-cny (alias)"
 
 //DollarAlias just another Font Awesome Icon
-const DollarAlias = "dollar (alias)"
+const DollarAlias = "fa-dollar (alias)"
 
 //Eur just another Font Awesome Icon
-const Eur = "eur"
+const Eur = "fa-eur"
 
 //EuroAlias just another Font Awesome Icon
-const EuroAlias = "euro (alias)"
+const EuroAlias = "fa-euro (alias)"
 
 //Gbp just another Font Awesome Icon
-const Gbp = "gbp"
+const Gbp = "fa-gbp"
 
 //Gg just another Font Awesome Icon
-const Gg = "gg"
+const Gg = "fa-gg"
 
 //GgCircle just another Font Awesome Icon
-const GgCircle = "gg-circle"
+const GgCircle = "fa-gg-circle"
 
 //Ils just another Font Awesome Icon
-const Ils = "ils"
+const Ils = "fa-ils"
 
 //Inr just another Font Awesome Icon
-const Inr = "inr"
+const Inr = "fa-inr"
 
 //Jpy just another Font Awesome Icon
-const Jpy = "jpy"
+const Jpy = "fa-jpy"
 
 //Krw just another Font Awesome Icon
-const Krw = "krw"
+const Krw = "fa-krw"
 
 //RmbAlias just another Font Awesome Icon
-const RmbAlias = "rmb (alias)"
+const RmbAlias = "fa-rmb (alias)"
 
 //RoubleAlias just another Font Awesome Icon
-const RoubleAlias = "rouble (alias)"
+const RoubleAlias = "fa-rouble (alias)"
 
 //Rub just another Font Awesome Icon
-const Rub = "rub"
+const Rub = "fa-rub"
 
 //RubleAlias just another Font Awesome Icon
-const RubleAlias = "ruble (alias)"
+const RubleAlias = "fa-ruble (alias)"
 
 //RupeeAlias just another Font Awesome Icon
-const RupeeAlias = "rupee (alias)"
+const RupeeAlias = "fa-rupee (alias)"
 
 //ShekelAlias just another Font Awesome Icon
-const ShekelAlias = "shekel (alias)"
+const ShekelAlias = "fa-shekel (alias)"
 
 //SheqelAlias just another Font Awesome Icon
-const SheqelAlias = "sheqel (alias)"
+const SheqelAlias = "fa-sheqel (alias)"
 
 //Try just another Font Awesome Icon
-const Try = "try"
+const Try = "fa-try"
 
 //TurkishLiraAlias just another Font Awesome Icon
-const TurkishLiraAlias = "turkish-lira (alias)"
+const TurkishLiraAlias = "fa-turkish-lira (alias)"
 
 //Usd just another Font Awesome Icon
-const Usd = "usd"
+const Usd = "fa-usd"
 
 //WonAlias just another Font Awesome Icon
-const WonAlias = "won (alias)"
+const WonAlias = "fa-won (alias)"
 
 //YenAlias just another Font Awesome Icon
-const YenAlias = "yen (alias)"
+const YenAlias = "fa-yen (alias)"
 
 //AlignCenter just another Font Awesome Icon
-const AlignCenter = "align-center"
+const AlignCenter = "fa-align-center"
 
 //AlignJustify just another Font Awesome Icon
-const AlignJustify = "align-justify"
+const AlignJustify = "fa-align-justify"
 
 //AlignLeft just another Font Awesome Icon
-const AlignLeft = "align-left"
+const AlignLeft = "fa-align-left"
 
 //AlignRight just another Font Awesome Icon
-const AlignRight = "align-right"
+const AlignRight = "fa-align-right"
 
 //Bold just another Font Awesome Icon
-const Bold = "bold"
+const Bold = "fa-bold"
 
 //ChainAlias just another Font Awesome Icon
-const ChainAlias = "chain (alias)"
+const ChainAlias = "fa-chain (alias)"
 
 //ChainBroken just another Font Awesome Icon
-const ChainBroken = "chain-broken"
+const ChainBroken = "fa-chain-broken"
 
 //Clipboard just another Font Awesome Icon
-const Clipboard = "clipboard"
+const Clipboard = "fa-clipboard"
 
 //Columns just another Font Awesome Icon
-const Columns = "columns"
+const Columns = "fa-columns"
 
 //CopyAlias just another Font Awesome Icon
-const CopyAlias = "copy (alias)"
+const CopyAlias = "fa-copy (alias)"
 
 //CutAlias just another Font Awesome Icon
-const CutAlias = "cut (alias)"
+const CutAlias = "fa-cut (alias)"
 
 //DedentAlias just another Font Awesome Icon
-const DedentAlias = "dedent (alias)"
+const DedentAlias = "fa-dedent (alias)"
 
 //FilesO just another Font Awesome Icon
-const FilesO = "files-o"
+const FilesO = "fa-files-o"
 
 //FloppyO just another Font Awesome Icon
-const FloppyO = "floppy-o"
+const FloppyO = "fa-floppy-o"
 
 //Font just another Font Awesome Icon
-const Font = "font"
+const Font = "fa-font"
 
 //Header just another Font Awesome Icon
-const Header = "header"
+const Header = "fa-header"
 
 //Indent just another Font Awesome Icon
-const Indent = "indent"
+const Indent = "fa-indent"
 
 //Italic just another Font Awesome Icon
-const Italic = "italic"
+const Italic = "fa-italic"
 
 //Link just another Font Awesome Icon
-const Link = "link"
+const Link = "fa-link"
 
 //List just another Font Awesome Icon
-const List = "list"
+const List = "fa-list"
 
 //ListAlt just another Font Awesome Icon
-const ListAlt = "list-alt"
+const ListAlt = "fa-list-alt"
 
 //ListOl just another Font Awesome Icon
-const ListOl = "list-ol"
+const ListOl = "fa-list-ol"
 
 //ListUl just another Font Awesome Icon
-const ListUl = "list-ul"
+const ListUl = "fa-list-ul"
 
 //Outdent just another Font Awesome Icon
-const Outdent = "outdent"
+const Outdent = "fa-outdent"
 
 //Paperclip just another Font Awesome Icon
-const Paperclip = "paperclip"
+const Paperclip = "fa-paperclip"
 
 //Paragraph just another Font Awesome Icon
-const Paragraph = "paragraph"
+const Paragraph = "fa-paragraph"
 
 //PasteAlias just another Font Awesome Icon
-const PasteAlias = "paste (alias)"
+const PasteAlias = "fa-paste (alias)"
 
 //Repeat just another Font Awesome Icon
-const Repeat = "repeat"
+const Repeat = "fa-repeat"
 
 //RotateLeftAlias just another Font Awesome Icon
-const RotateLeftAlias = "rotate-left (alias)"
+const RotateLeftAlias = "fa-rotate-left (alias)"
 
 //RotateRightAlias just another Font Awesome Icon
-const RotateRightAlias = "rotate-right (alias)"
+const RotateRightAlias = "fa-rotate-right (alias)"
 
 //SaveAlias just another Font Awesome Icon
-const SaveAlias = "save (alias)"
+const SaveAlias = "fa-save (alias)"
 
 //Scissors just another Font Awesome Icon
-const Scissors = "scissors"
+const Scissors = "fa-scissors"
 
 //Strikethrough just another Font Awesome Icon
-const Strikethrough = "strikethrough"
+const Strikethrough = "fa-strikethrough"
 
 //Subscript just another Font Awesome Icon
-const Subscript = "subscript"
+const Subscript = "fa-subscript"
 
 //Superscript just another Font Awesome Icon
-const Superscript = "superscript"
+const Superscript = "fa-superscript"
 
 //Table just another Font Awesome Icon
-const Table = "table"
+const Table = "fa-table"
 
 //TextHeight just another Font Awesome Icon
-const TextHeight = "text-height"
+const TextHeight = "fa-text-height"
 
 //TextWidth just another Font Awesome Icon
-const TextWidth = "text-width"
+const TextWidth = "fa-text-width"
 
 //Th just another Font Awesome Icon
-const Th = "th"
+const Th = "fa-th"
 
 //ThLarge just another Font Awesome Icon
-const ThLarge = "th-large"
+const ThLarge = "fa-th-large"
 
 //ThList just another Font Awesome Icon
-const ThList = "th-list"
+const ThList = "fa-th-list"
 
 //Underline just another Font Awesome Icon
-const Underline = "underline"
+const Underline = "fa-underline"
 
 //Undo just another Font Awesome Icon
-const Undo = "undo"
+const Undo = "fa-undo"
 
 //UnlinkAlias just another Font Awesome Icon
-const UnlinkAlias = "unlink (alias)"
+const UnlinkAlias = "fa-unlink (alias)"
 
 //AngleDoubleDown just another Font Awesome Icon
-const AngleDoubleDown = "angle-double-down"
+const AngleDoubleDown = "fa-angle-double-down"
 
 //AngleDoubleLeft just another Font Awesome Icon
-const AngleDoubleLeft = "angle-double-left"
+const AngleDoubleLeft = "fa-angle-double-left"
 
 //AngleDoubleRight just another Font Awesome Icon
-const AngleDoubleRight = "angle-double-right"
+const AngleDoubleRight = "fa-angle-double-right"
 
 //AngleDoubleUp just another Font Awesome Icon
-const AngleDoubleUp = "angle-double-up"
+const AngleDoubleUp = "fa-angle-double-up"
 
 //AngleDown just another Font Awesome Icon
-const AngleDown = "angle-down"
+const AngleDown = "fa-angle-down"
 
 //AngleLeft just another Font Awesome Icon
-const AngleLeft = "angle-left"
+const AngleLeft = "fa-angle-left"
 
 //AngleRight just another Font Awesome Icon
-const AngleRight = "angle-right"
+const AngleRight = "fa-angle-right"
 
 //AngleUp just another Font Awesome Icon
-const AngleUp = "angle-up"
+const AngleUp = "fa-angle-up"
 
 //ArrowCircleDown just another Font Awesome Icon
-const ArrowCircleDown = "arrow-circle-down"
+const ArrowCircleDown = "fa-arrow-circle-down"
 
 //ArrowCircleLeft just another Font Awesome Icon
-const ArrowCircleLeft = "arrow-circle-left"
+const ArrowCircleLeft = "fa-arrow-circle-left"
 
 //ArrowCircleODown just another Font Awesome Icon
-const ArrowCircleODown = "arrow-circle-o-down"
+const ArrowCircleODown = "fa-arrow-circle-o-down"
 
 //ArrowCircleOLeft just another Font Awesome Icon
-const ArrowCircleOLeft = "arrow-circle-o-left"
+const ArrowCircleOLeft = "fa-arrow-circle-o-left"
 
 //ArrowCircleORight just another Font Awesome Icon
-const ArrowCircleORight = "arrow-circle-o-right"
+const ArrowCircleORight = "fa-arrow-circle-o-right"
 
 //ArrowCircleOUp just another Font Awesome Icon
-const ArrowCircleOUp = "arrow-circle-o-up"
+const ArrowCircleOUp = "fa-arrow-circle-o-up"
 
 //ArrowCircleRight just another Font Awesome Icon
-const ArrowCircleRight = "arrow-circle-right"
+const ArrowCircleRight = "fa-arrow-circle-right"
 
 //ArrowCircleUp just another Font Awesome Icon
-const ArrowCircleUp = "arrow-circle-up"
+const ArrowCircleUp = "fa-arrow-circle-up"
 
 //ArrowDown just another Font Awesome Icon
-const ArrowDown = "arrow-down"
+const ArrowDown = "fa-arrow-down"
 
 //ArrowLeft just another Font Awesome Icon
-const ArrowLeft = "arrow-left"
+const ArrowLeft = "fa-arrow-left"
 
 //ArrowRight just another Font Awesome Icon
-const ArrowRight = "arrow-right"
+const ArrowRight = "fa-arrow-right"
 
 //ArrowUp just another Font Awesome Icon
-const ArrowUp = "arrow-up"
+const ArrowUp = "fa-arrow-up"
 
 //ArrowsAlt just another Font Awesome Icon
-const ArrowsAlt = "arrows-alt"
+const ArrowsAlt = "fa-arrows-alt"
 
 //CaretDown just another Font Awesome Icon
-const CaretDown = "caret-down"
+const CaretDown = "fa-caret-down"
 
 //CaretLeft just another Font Awesome Icon
-const CaretLeft = "caret-left"
+const CaretLeft = "fa-caret-left"
 
 //CaretRight just another Font Awesome Icon
-const CaretRight = "caret-right"
+const CaretRight = "fa-caret-right"
 
 //CaretUp just another Font Awesome Icon
-const CaretUp = "caret-up"
+const CaretUp = "fa-caret-up"
 
 //ChevronCircleDown just another Font Awesome Icon
-const ChevronCircleDown = "chevron-circle-down"
+const ChevronCircleDown = "fa-chevron-circle-down"
 
 //ChevronCircleLeft just another Font Awesome Icon
-const ChevronCircleLeft = "chevron-circle-left"
+const ChevronCircleLeft = "fa-chevron-circle-left"
 
 //ChevronCircleRight just another Font Awesome Icon
-const ChevronCircleRight = "chevron-circle-right"
+const ChevronCircleRight = "fa-chevron-circle-right"
 
 //ChevronCircleUp just another Font Awesome Icon
-const ChevronCircleUp = "chevron-circle-up"
+const ChevronCircleUp = "fa-chevron-circle-up"
 
 //ChevronDown just another Font Awesome Icon
-const ChevronDown = "chevron-down"
+const ChevronDown = "fa-chevron-down"
 
 //ChevronLeft just another Font Awesome Icon
-const ChevronLeft = "chevron-left"
+const ChevronLeft = "fa-chevron-left"
 
 //ChevronRight just another Font Awesome Icon
-const ChevronRight = "chevron-right"
+const ChevronRight = "fa-chevron-right"
 
 //ChevronUp just another Font Awesome Icon
-const ChevronUp = "chevron-up"
+const ChevronUp = "fa-chevron-up"
 
 //LongArrowDown just another Font Awesome Icon
-const LongArrowDown = "long-arrow-down"
+const LongArrowDown = "fa-long-arrow-down"
 
 //LongArrowLeft just another Font Awesome Icon
-const LongArrowLeft = "long-arrow-left"
+const LongArrowLeft = "fa-long-arrow-left"
 
 //LongArrowRight just another Font Awesome Icon
-const LongArrowRight = "long-arrow-right"
+const LongArrowRight = "fa-long-arrow-right"
 
 //LongArrowUp just another Font Awesome Icon
-const LongArrowUp = "long-arrow-up"
+const LongArrowUp = "fa-long-arrow-up"
 
 //Backward just another Font Awesome Icon
-const Backward = "backward"
+const Backward = "fa-backward"
 
 //Compress just another Font Awesome Icon
-const Compress = "compress"
+const Compress = "fa-compress"
 
 //Eject just another Font Awesome Icon
-const Eject = "eject"
+const Eject = "fa-eject"
 
 //Expand just another Font Awesome Icon
-const Expand = "expand"
+const Expand = "fa-expand"
 
 //FastBackward just another Font Awesome Icon
 const FastBackward = "fast-backward"
@@ -1859,130 +1889,130 @@ const FastBackward = "fast-backward"
 const FastForward = "fast-forward"
 
 //Forward just another Font Awesome Icon
-const Forward = "forward"
+const Forward = "fa-forward"
 
 //Pause just another Font Awesome Icon
-const Pause = "pause"
+const Pause = "fa-pause"
 
 //PauseCircle just another Font Awesome Icon
-const PauseCircle = "pause-circle"
+const PauseCircle = "fa-pause-circle"
 
 //PauseCircleO just another Font Awesome Icon
-const PauseCircleO = "pause-circle-o"
+const PauseCircleO = "fa-pause-circle-o"
 
 //Play just another Font Awesome Icon
-const Play = "play"
+const Play = "fa-play"
 
 //PlayCircle just another Font Awesome Icon
-const PlayCircle = "play-circle"
+const PlayCircle = "fa-play-circle"
 
 //PlayCircleO just another Font Awesome Icon
-const PlayCircleO = "play-circle-o"
+const PlayCircleO = "fa-play-circle-o"
 
 //StepBackward just another Font Awesome Icon
-const StepBackward = "step-backward"
+const StepBackward = "fa-step-backward"
 
 //StepForward just another Font Awesome Icon
-const StepForward = "step-forward"
+const StepForward = "fa-step-forward"
 
 //Stop just another Font Awesome Icon
-const Stop = "stop"
+const Stop = "fa-stop"
 
 //StopCircle just another Font Awesome Icon
-const StopCircle = "stop-circle"
+const StopCircle = "fa-stop-circle"
 
 //StopCircleO just another Font Awesome Icon
-const StopCircleO = "stop-circle-o"
+const StopCircleO = "fa-stop-circle-o"
 
 //YoutubePlay just another Font Awesome Icon
-const YoutubePlay = "youtube-play"
+const YoutubePlay = "fa-youtube-play"
 
 //500px just another Font Awesome Icon
-const FiveHundredpx = "500px"
+const FiveHundredpx = "fa-500px"
 
 //Adn just another Font Awesome Icon
-const Adn = "adn"
+const Adn = "fa-adn"
 
 //Amazon just another Font Awesome Icon
-const Amazon = "amazon"
+const Amazon = "fa-amazon"
 
 //Android just another Font Awesome Icon
-const Android = "android"
+const Android = "fa-android"
 
 //Angellist just another Font Awesome Icon
-const Angellist = "angellist"
+const Angellist = "fa-angellist"
 
 //Apple just another Font Awesome Icon
-const Apple = "apple"
+const Apple = "fa-apple"
 
 //Behance just another Font Awesome Icon
-const Behance = "behance"
+const Behance = "fa-behance"
 
 //BehanceSquare just another Font Awesome Icon
-const BehanceSquare = "behance-square"
+const BehanceSquare = "fa-behance-square"
 
 //Bitbucket just another Font Awesome Icon
-const Bitbucket = "bitbucket"
+const Bitbucket = "fa-bitbucket"
 
 //BitbucketSquare just another Font Awesome Icon
-const BitbucketSquare = "bitbucket-square"
+const BitbucketSquare = "fa-bitbucket-square"
 
 //BlackTie just another Font Awesome Icon
-const BlackTie = "black-tie"
+const BlackTie = "fa-black-tie"
 
 //Buysellads just another Font Awesome Icon
-const Buysellads = "buysellads"
+const Buysellads = "fa-buysellads"
 
 //Chrome just another Font Awesome Icon
-const Chrome = "chrome"
+const Chrome = "fa-chrome"
 
 //Codepen just another Font Awesome Icon
-const Codepen = "codepen"
+const Codepen = "fa-codepen"
 
 //Codiepie just another Font Awesome Icon
-const Codiepie = "codiepie"
+const Codiepie = "fa-codiepie"
 
 //Connectdevelop just another Font Awesome Icon
-const Connectdevelop = "connectdevelop"
+const Connectdevelop = "fa-connectdevelop"
 
 //Contao just another Font Awesome Icon
-const Contao = "contao"
+const Contao = "fa-contao"
 
 //Css3 just another Font Awesome Icon
-const Css3 = "css3"
+const Css3 = "fa-css3"
 
 //Dashcube just another Font Awesome Icon
-const Dashcube = "dashcube"
+const Dashcube = "fa-dashcube"
 
 //Delicious just another Font Awesome Icon
-const Delicious = "delicious"
+const Delicious = "fa-delicious"
 
 //Deviantart just another Font Awesome Icon
-const Deviantart = "deviantart"
+const Deviantart = "fa-deviantart"
 
 //Digg just another Font Awesome Icon
-const Digg = "digg"
+const Digg = "fa-digg"
 
 //Dribbble just another Font Awesome Icon
-const Dribbble = "dribbble"
+const Dribbble = "fa-dribbble"
 
 //Dropbox just another Font Awesome Icon
-const Dropbox = "dropbox"
+const Dropbox = "fa-dropbox"
 
 //Drupal just another Font Awesome Icon
-const Drupal = "drupal"
+const Drupal = "fa-drupal"
 
 //Edge just another Font Awesome Icon
-const Edge = "edge"
+const Edge = "fa-edge"
 
 //Empire just another Font Awesome Icon
-const Empire = "empire"
+const Empire = "fa-empire"
 
 //Envira just another Font Awesome Icon
-const Envira = "envira"
+const Envira = "fa-envira"
 
 //Expeditedssl just another Font Awesome Icon
-const Expeditedssl = "expeditedssl"
+const Expeditedssl = "fa-expeditedssl"
 
 //FaAlias just another Font Awesome Icon
 const FaAlias = "fa (alias)"
@@ -2000,370 +2030,370 @@ const FacebookOfficial = "facebook-official"
 const FacebookSquare = "facebook-square"
 
 //Firefox just another Font Awesome Icon
-const Firefox = "firefox"
+const Firefox = "fa-firefox"
 
 //FirstOrder just another Font Awesome Icon
-const FirstOrder = "first-order"
+const FirstOrder = "fa-first-order"
 
 //Flickr just another Font Awesome Icon
-const Flickr = "flickr"
+const Flickr = "fa-flickr"
 
 //FontAwesome just another Font Awesome Icon
-const FontAwesome = "font-awesome"
+const FontAwesome = "fa-font-awesome"
 
 //Fonticons just another Font Awesome Icon
-const Fonticons = "fonticons"
+const Fonticons = "fa-fonticons"
 
 //FortAwesome just another Font Awesome Icon
-const FortAwesome = "fort-awesome"
+const FortAwesome = "fa-fort-awesome"
 
 //Forumbee just another Font Awesome Icon
-const Forumbee = "forumbee"
+const Forumbee = "fa-forumbee"
 
 //Foursquare just another Font Awesome Icon
-const Foursquare = "foursquare"
+const Foursquare = "fa-foursquare"
 
 //GeAlias just another Font Awesome Icon
-const GeAlias = "ge (alias)"
+const GeAlias = "fa-ge (alias)"
 
 //GetPocket just another Font Awesome Icon
-const GetPocket = "get-pocket"
+const GetPocket = "fa-get-pocket"
 
 //Git just another Font Awesome Icon
-const Git = "git"
+const Git = "fa-git"
 
 //GitSquare just another Font Awesome Icon
-const GitSquare = "git-square"
+const GitSquare = "fa-git-square"
 
 //Github just another Font Awesome Icon
-const Github = "github"
+const Github = "fa-github"
 
 //GithubAlt just another Font Awesome Icon
-const GithubAlt = "github-alt"
+const GithubAlt = "fa-github-alt"
 
 //GithubSquare just another Font Awesome Icon
-const GithubSquare = "github-square"
+const GithubSquare = "fa-github-square"
 
 //Gitlab just another Font Awesome Icon
-const Gitlab = "gitlab"
+const Gitlab = "fa-gitlab"
 
 //GittipAlias just another Font Awesome Icon
-const GittipAlias = "gittip (alias)"
+const GittipAlias = "fa-gittip (alias)"
 
 //Glide just another Font Awesome Icon
-const Glide = "glide"
+const Glide = "fa-glide"
 
 //GlideG just another Font Awesome Icon
-const GlideG = "glide-g"
+const GlideG = "fa-glide-g"
 
 //Google just another Font Awesome Icon
-const Google = "google"
+const Google = "fa-google"
 
 //GooglePlus just another Font Awesome Icon
-const GooglePlus = "google-plus"
+const GooglePlus = "fa-google-plus"
 
 //GooglePlusCircleAlias just another Font Awesome Icon
-const GooglePlusCircleAlias = "google-plus-circle (alias)"
+const GooglePlusCircleAlias = "fa-google-plus-circle (alias)"
 
 //GooglePlusOfficial just another Font Awesome Icon
-const GooglePlusOfficial = "google-plus-official"
+const GooglePlusOfficial = "fa-google-plus-official"
 
 //GooglePlusSquare just another Font Awesome Icon
-const GooglePlusSquare = "google-plus-square"
+const GooglePlusSquare = "fa-google-plus-square"
 
 //Gratipay just another Font Awesome Icon
-const Gratipay = "gratipay"
+const Gratipay = "fa-gratipay"
 
 //HackerNews just another Font Awesome Icon
-const HackerNews = "hacker-news"
+const HackerNews = "fa-hacker-news"
 
 //Houzz just another Font Awesome Icon
-const Houzz = "houzz"
+const Houzz = "fa-houzz"
 
 //Html5 just another Font Awesome Icon
-const Html5 = "html5"
+const Html5 = "fa-html5"
 
 //Instagram just another Font Awesome Icon
-const Instagram = "instagram"
+const Instagram = "fa-instagram"
 
 //InternetExplorer just another Font Awesome Icon
-const InternetExplorer = "internet-explorer"
+const InternetExplorer = "fa-internet-explorer"
 
 //Ioxhost just another Font Awesome Icon
-const Ioxhost = "ioxhost"
+const Ioxhost = "fa-ioxhost"
 
 //Joomla just another Font Awesome Icon
-const Joomla = "joomla"
+const Joomla = "fa-joomla"
 
 //Jsfiddle just another Font Awesome Icon
-const Jsfiddle = "jsfiddle"
+const Jsfiddle = "fa-jsfiddle"
 
 //Lastfm just another Font Awesome Icon
-const Lastfm = "lastfm"
+const Lastfm = "fa-lastfm"
 
 //LastfmSquare just another Font Awesome Icon
-const LastfmSquare = "lastfm-square"
+const LastfmSquare = "fa-lastfm-square"
 
 //Leanpub just another Font Awesome Icon
-const Leanpub = "leanpub"
+const Leanpub = "fa-leanpub"
 
 //Linkedin just another Font Awesome Icon
-const Linkedin = "linkedin"
+const Linkedin = "fa-linkedin"
 
 //LinkedinSquare just another Font Awesome Icon
-const LinkedinSquare = "linkedin-square"
+const LinkedinSquare = "fa-linkedin-square"
 
 //Linux just another Font Awesome Icon
-const Linux = "linux"
+const Linux = "fa-linux"
 
 //Maxcdn just another Font Awesome Icon
-const Maxcdn = "maxcdn"
+const Maxcdn = "fa-maxcdn"
 
 //Meanpath just another Font Awesome Icon
-const Meanpath = "meanpath"
+const Meanpath = "fa-meanpath"
 
 //Medium just another Font Awesome Icon
-const Medium = "medium"
+const Medium = "fa-medium"
 
 //Mixcloud just another Font Awesome Icon
-const Mixcloud = "mixcloud"
+const Mixcloud = "fa-mixcloud"
 
 //Modx just another Font Awesome Icon
-const Modx = "modx"
+const Modx = "fa-modx"
 
 //Odnoklassniki just another Font Awesome Icon
-const Odnoklassniki = "odnoklassniki"
+const Odnoklassniki = "fa-odnoklassniki"
 
 //OdnoklassnikiSquare just another Font Awesome Icon
-const OdnoklassnikiSquare = "odnoklassniki-square"
+const OdnoklassnikiSquare = "fa-odnoklassniki-square"
 
 //Opencart just another Font Awesome Icon
-const Opencart = "opencart"
+const Opencart = "fa-opencart"
 
 //Openid just another Font Awesome Icon
-const Openid = "openid"
+const Openid = "fa-openid"
 
 //Opera just another Font Awesome Icon
-const Opera = "opera"
+const Opera = "fa-opera"
 
 //OptinMonster just another Font Awesome Icon
-const OptinMonster = "optin-monster"
+const OptinMonster = "fa-optin-monster"
 
 //Pagelines just another Font Awesome Icon
-const Pagelines = "pagelines"
+const Pagelines = "fa-pagelines"
 
 //PiedPiper just another Font Awesome Icon
-const PiedPiper = "pied-piper"
+const PiedPiper = "fa-pied-piper"
 
 //PiedPiperAlt just another Font Awesome Icon
-const PiedPiperAlt = "pied-piper-alt"
+const PiedPiperAlt = "fa-pied-piper-alt"
 
 //PiedPiperPp just another Font Awesome Icon
-const PiedPiperPp = "pied-piper-pp"
+const PiedPiperPp = "fa-pied-piper-pp"
 
 //Pinterest just another Font Awesome Icon
-const Pinterest = "pinterest"
+const Pinterest = "fa-pinterest"
 
 //PinterestP just another Font Awesome Icon
-const PinterestP = "pinterest-p"
+const PinterestP = "fa-pinterest-p"
 
 //PinterestSquare just another Font Awesome Icon
-const PinterestSquare = "pinterest-square"
+const PinterestSquare = "fa-pinterest-square"
 
 //ProductHunt just another Font Awesome Icon
-const ProductHunt = "product-hunt"
+const ProductHunt = "fa-product-hunt"
 
 //Qq just another Font Awesome Icon
-const Qq = "qq"
+const Qq = "fa-qq"
 
 //RaAlias just another Font Awesome Icon
-const RaAlias = "ra (alias)"
+const RaAlias = "fa-ra (alias)"
 
 //Rebel just another Font Awesome Icon
-const Rebel = "rebel"
+const Rebel = "fa-rebel"
 
 //Reddit just another Font Awesome Icon
-const Reddit = "reddit"
+const Reddit = "fa-reddit"
 
 //RedditAlien just another Font Awesome Icon
-const RedditAlien = "reddit-alien"
+const RedditAlien = "fa-reddit-alien"
 
 //RedditSquare just another Font Awesome Icon
-const RedditSquare = "reddit-square"
+const RedditSquare = "fa-reddit-square"
 
 //Renren just another Font Awesome Icon
-const Renren = "renren"
+const Renren = "fa-renren"
 
 //ResistanceAlias just another Font Awesome Icon
-const ResistanceAlias = "resistance (alias)"
+const ResistanceAlias = "fa-resistance (alias)"
 
 //Safari just another Font Awesome Icon
-const Safari = "safari"
+const Safari = "fa-safari"
 
 //Scribd just another Font Awesome Icon
-const Scribd = "scribd"
+const Scribd = "fa-scribd"
 
 //Sellsy just another Font Awesome Icon
-const Sellsy = "sellsy"
+const Sellsy = "fa-sellsy"
 
 //Shirtsinbulk just another Font Awesome Icon
-const Shirtsinbulk = "shirtsinbulk"
+const Shirtsinbulk = "fa-shirtsinbulk"
 
 //Simplybuilt just another Font Awesome Icon
-const Simplybuilt = "simplybuilt"
+const Simplybuilt = "fa-simplybuilt"
 
 //Skyatlas just another Font Awesome Icon
-const Skyatlas = "skyatlas"
+const Skyatlas = "fa-skyatlas"
 
 //Skype just another Font Awesome Icon
-const Skype = "skype"
+const Skype = "fa-skype"
 
 //Slack just another Font Awesome Icon
-const Slack = "slack"
+const Slack = "fa-slack"
 
 //Slideshare just another Font Awesome Icon
-const Slideshare = "slideshare"
+const Slideshare = "fa-slideshare"
 
 //Snapchat just another Font Awesome Icon
-const Snapchat = "snapchat"
+const Snapchat = "fa-snapchat"
 
 //SnapchatGhost just another Font Awesome Icon
-const SnapchatGhost = "snapchat-ghost"
+const SnapchatGhost = "fa-snapchat-ghost"
 
 //SnapchatSquare just another Font Awesome Icon
-const SnapchatSquare = "snapchat-square"
+const SnapchatSquare = "fa-snapchat-square"
 
 //Soundcloud just another Font Awesome Icon
-const Soundcloud = "soundcloud"
+const Soundcloud = "fa-soundcloud"
 
 //Spotify just another Font Awesome Icon
-const Spotify = "spotify"
+const Spotify = "fa-spotify"
 
 //StackExchange just another Font Awesome Icon
-const StackExchange = "stack-exchange"
+const StackExchange = "fa-stack-exchange"
 
 //StackOverflow just another Font Awesome Icon
-const StackOverflow = "stack-overflow"
+const StackOverflow = "fa-stack-overflow"
 
 //Steam just another Font Awesome Icon
-const Steam = "steam"
+const Steam = "fa-steam"
 
 //SteamSquare just another Font Awesome Icon
-const SteamSquare = "steam-square"
+const SteamSquare = "fa-steam-square"
 
 //Stumbleupon just another Font Awesome Icon
-const Stumbleupon = "stumbleupon"
+const Stumbleupon = "fa-stumbleupon"
 
 //StumbleuponCircle just another Font Awesome Icon
-const StumbleuponCircle = "stumbleupon-circle"
+const StumbleuponCircle = "fa-stumbleupon-circle"
 
 //TencentWeibo just another Font Awesome Icon
-const TencentWeibo = "tencent-weibo"
+const TencentWeibo = "fa-tencent-weibo"
 
 //Themeisle just another Font Awesome Icon
-const Themeisle = "themeisle"
+const Themeisle = "fa-themeisle"
 
 //Trello just another Font Awesome Icon
-const Trello = "trello"
+const Trello = "fa-trello"
 
 //Tripadvisor just another Font Awesome Icon
-const Tripadvisor = "tripadvisor"
+const Tripadvisor = "fa-tripadvisor"
 
 //Tumblr just another Font Awesome Icon
-const Tumblr = "tumblr"
+const Tumblr = "fa-tumblr"
 
 //TumblrSquare just another Font Awesome Icon
-const TumblrSquare = "tumblr-square"
+const TumblrSquare = "fa-tumblr-square"
 
 //Twitch just another Font Awesome Icon
-const Twitch = "twitch"
+const Twitch = "fa-twitch"
 
 //Twitter just another Font Awesome Icon
-const Twitter = "twitter"
+const Twitter = "fa-twitter"
 
 //TwitterSquare just another Font Awesome Icon
-const TwitterSquare = "twitter-square"
+const TwitterSquare = "fa-twitter-square"
 
 //Usb just another Font Awesome Icon
-const Usb = "usb"
+const Usb = "fa-usb"
 
 //Viacoin just another Font Awesome Icon
-const Viacoin = "viacoin"
+const Viacoin = "fa-viacoin"
 
 //Viadeo just another Font Awesome Icon
-const Viadeo = "viadeo"
+const Viadeo = "fa-viadeo"
 
 //ViadeoSquare just another Font Awesome Icon
-const ViadeoSquare = "viadeo-square"
+const ViadeoSquare = "fa-viadeo-square"
 
 //Vimeo just another Font Awesome Icon
-const Vimeo = "vimeo"
+const Vimeo = "fa-vimeo"
 
 //VimeoSquare just another Font Awesome Icon
-const VimeoSquare = "vimeo-square"
+const VimeoSquare = "fa-vimeo-square"
 
 //Vine just another Font Awesome Icon
-const Vine = "vine"
+const Vine = "fa-vine"
 
 //Vk just another Font Awesome Icon
-const Vk = "vk"
+const Vk = "fa-vk"
 
 //WechatAlias just another Font Awesome Icon
-const WechatAlias = "wechat (alias)"
+const WechatAlias = "fa-wechat (alias)"
 
 //Weibo just another Font Awesome Icon
-const Weibo = "weibo"
+const Weibo = "fa-weibo"
 
 //Weixin just another Font Awesome Icon
-const Weixin = "weixin"
+const Weixin = "fa-weixin"
 
 //Whatsapp just another Font Awesome Icon
-const Whatsapp = "whatsapp"
+const Whatsapp = "fa-whatsapp"
 
 //WikipediaW just another Font Awesome Icon
-const WikipediaW = "wikipedia-w"
+const WikipediaW = "fa-wikipedia-w"
 
 //Windows just another Font Awesome Icon
-const Windows = "windows"
+const Windows = "fa-windows"
 
 //Wordpress just another Font Awesome Icon
-const Wordpress = "wordpress"
+const Wordpress = "fa-wordpress"
 
 //Wpbeginner just another Font Awesome Icon
-const Wpbeginner = "wpbeginner"
+const Wpbeginner = "fa-wpbeginner"
 
 //Wpforms just another Font Awesome Icon
-const Wpforms = "wpforms"
+const Wpforms = "fa-wpforms"
 
 //Xing just another Font Awesome Icon
-const Xing = "xing"
+const Xing = "fa-xing"
 
 //XingSquare just another Font Awesome Icon
-const XingSquare = "xing-square"
+const XingSquare = "fa-xing-square"
 
 //YCombinator just another Font Awesome Icon
-const YCombinator = "y-combinator"
+const YCombinator = "fa-y-combinator"
 
 //YCombinatorSquareAlias just another Font Awesome Icon
-const YCombinatorSquareAlias = "y-combinator-square (alias)"
+const YCombinatorSquareAlias = "fa-y-combinator-square (alias)"
 
 //Yahoo just another Font Awesome Icon
-const Yahoo = "yahoo"
+const Yahoo = "fa-yahoo"
 
 //YcAlias just another Font Awesome Icon
-const YcAlias = "yc (alias)"
+const YcAlias = "fa-yc (alias)"
 
 //YcSquareAlias just another Font Awesome Icon
-const YcSquareAlias = "yc-square (alias)"
+const YcSquareAlias = "fa-yc-square (alias)"
 
 //Yelp just another Font Awesome Icon
-const Yelp = "yelp"
+const Yelp = "fa-yelp"
 
 //Yoast just another Font Awesome Icon
-const Yoast = "yoast"
+const Yoast = "fa-yoast"
 
 //Youtube just another Font Awesome Icon
-const Youtube = "youtube"
+const Youtube = "fa-youtube"
 
 //YoutubeSquare just another Font Awesome Icon
-const YoutubeSquare = "youtube-square"
+const YoutubeSquare = "fa-youtube-square"

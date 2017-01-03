@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/DaKine23/webapp/hb/bsglyphicons"
+	"github.com/DaKine23/webapp/hb/faicons"
 )
 
 //HTMLOption represents an HTMLPart Option
@@ -90,6 +91,27 @@ func TooltipScript() *HTMLPart {
 
 	return NewHTMLPart("script", "", `$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});`).AddOption(&HTMLOption{"type", "text/javascript"})
 
+}
+
+type FontAwesomeIconDefinition struct {
+	Classes []string
+}
+
+func NewFontAwesomeIconDefinition(definition ...string) FontAwesomeIconDefinition {
+
+	definition = append([]string{faicons.BaseFontAwesome}, definition...)
+	return FontAwesomeIconDefinition{definition}
+
+}
+
+func NewFontAwesomeIcon(icons ...FontAwesomeIconDefinition) *HTMLPart {
+
+	result := NewHTMLPart("span", "", "").AddBootstrapClasses(faicons.ContainerStack, faicons.ModifyFixedWidth)
+	for _, v := range icons {
+		result.addSubPart(NewHTMLPart("i", "", "").AddBootstrapClasses(v.Classes...))
+	}
+
+	return result
 }
 
 //NewGlyphicon returns the HTMLPart needed to display the Icon
