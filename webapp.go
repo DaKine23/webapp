@@ -297,9 +297,11 @@ func page() string {
 	row1.AddSubParts(cell11)
 
 	row2 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-	cell21 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
-	cell21.AddSubParts(tp)
-	row2.AddSubParts(cell21)
+	cell21 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(2, bsgrid.Large))
+	cell22 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(8, bsgrid.Large))
+	cell23 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(2, bsgrid.Large))
+	cell22.AddSubParts(tp)
+	row2.AddSubParts(cell21, cell22, cell23)
 
 	row3 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
 	cell31 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
@@ -312,9 +314,11 @@ func page() string {
 	row4.AddSubParts(cell41)
 
 	row5 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-	cell51 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
-	cell51.AddSubParts(tp2)
-	row5.AddSubParts(cell51)
+	cell51 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(2, bsgrid.Large))
+	cell52 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(8, bsgrid.Large))
+	cell53 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(2, bsgrid.Large))
+	cell52.AddSubParts(tp2)
+	row5.AddSubParts(cell51, cell52, cell53)
 
 	row7 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
 
