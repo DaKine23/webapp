@@ -14,10 +14,8 @@ import (
 	"github.com/DaKine23/webapp/hb"
 	"github.com/DaKine23/webapp/hb/bsbutton"
 	"github.com/DaKine23/webapp/hb/bsbuttongroup"
-	"github.com/DaKine23/webapp/hb/bscontainer"
 	"github.com/DaKine23/webapp/hb/bsglyphicons"
 
-	"github.com/DaKine23/webapp/hb/bsgrid"
 	"github.com/DaKine23/webapp/hb/bstable"
 	"github.com/DaKine23/webapp/hb/jqaction"
 	"github.com/DaKine23/webapp/hb/svg"
@@ -265,17 +263,6 @@ func page() string {
 	searchedit := hb.NewLineEdit("myinput3", hb.NewGlyphicon(bsglyphicons.GlyphiconBook).String(false), "Search some thing", "", hb.Validation{nil}).AddLineEditSearchButton("searchbutton")
 	submitbutton := hb.NewHTMLPart("button", "submitbutton", "submit").AddBootstrapClasses(bsbutton.B, bsbutton.Primary, bsbutton.BlockLevel)
 
-	inputcell1 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(3, bsgrid.Medium))
-	inputcell1.AddSubParts(edit)
-	inputcell2 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(3, bsgrid.Medium))
-	inputcell2.AddSubParts(edit2)
-	inputcell3 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(3, bsgrid.Medium))
-	inputcell3.AddSubParts(searchedit)
-	inputcell4 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(3, bsgrid.Medium))
-	inputcell4.AddSubParts(submitbutton)
-	inputrow := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-	inputrow.AddSubParts(inputcell1, inputcell2, inputcell3, inputcell4)
-
 	// add some buttons  ("a" for bootstrap buttongroups)
 	button := hb.NewHTMLPart("a", "addbutton", "Add Table Entry").AddBootstrapClasses(bsbutton.B, bsbutton.Primary)
 	button3 := hb.NewHTMLPart("a", "addbutton2", "Add 1000 Table Entries").AddBootstrapClasses(bsbutton.B, bsbutton.Primary)
@@ -298,55 +285,14 @@ func page() string {
 	html.AddSubParts(head, body)
 
 	//create a bootstrap grid
-	root := hb.NewHTMLPart("root", "", "").AddBootstrapClasses(bscontainer.Container)
-	row1 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-	cell11 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
-	cell11.AddSubParts(buttongroup)
-	row1.AddSubParts(cell11)
-
-	row2 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-	cell21 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(2, bsgrid.Large))
-	cell22 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(8, bsgrid.Large))
-	cell23 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(2, bsgrid.Large))
-	cell22.AddSubParts(tp)
-	row2.AddSubParts(cell21, cell22, cell23)
-
-	row3 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-	cell31 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
-	cell31.AddSubParts(button2)
-	row3.AddSubParts(cell31)
-
-	row4 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-	cell41 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
-	cell41.AddSubParts(div2)
-	row4.AddSubParts(cell41)
-
-	row5 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-	cell51 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(2, bsgrid.Large))
-	cell52 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(8, bsgrid.Large))
-	cell53 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(2, bsgrid.Large))
-	cell52.AddSubParts(tp2)
-	row5.AddSubParts(cell51, cell52, cell53)
-
-	row7 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-
-	cell71 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(6, bsgrid.Large))
-	cell72 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(6, bsgrid.Large))
-
-	validator := "^[1-9]+[0-9]*$"
 
 	numberedit := hb.NewLineEdit("myinput4", "Numbers", "12.4", "", hb.Validation{nil})
+
+	validator := "^[1-9]+[0-9]*$"
 	intgeredit2 := hb.NewLineEdit("myinput5", hb.NewGlyphicon(bsglyphicons.GlyphiconKnight).String(false), "12345", "", hb.Validation{&validator})
 
 	intgeredit2.AddTooltip("I only accept Integer Values", "left")
 	body.AddScripts(hb.TooltipScript())
-
-	cell71.AddSubParts(numberedit)
-	cell72.AddSubParts(intgeredit2)
-
-	row7.AddSubParts(cell71, cell72)
-
-	root.AddSubParts(row1, row2, row3, row4, inputrow, row5, row7)
 
 	somediv := hb.NewHTMLPart("div", "keypressdiv", "here")
 	keypressscript := hb.NewHTMLPart("script", "", `$(document).ready(function(){$("#myinput4").keypress(function(event){
@@ -363,7 +309,18 @@ func page() string {
 	igscript2 := hb.NewInputGroupScript("myinput3", jqaction.Keypress, "event.which == 13", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
 
 	// add all the other html tags to the <body>
-	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, root, somediv)
+
+	grid := hb.BsGrid{&[][]hb.BsCell{
+		{{buttongroup, 0}},
+		{{nil, 2}, {tp, 8}},
+		{{button2, 0}},
+		{{div2, 0}},
+		{{edit, 0}, {edit2, 0}, {searchedit, 0}, {submitbutton, 0}},
+		{{nil, 2}, {tp2, 8}},
+		{{numberedit, 0}, {intgeredit2, 0}},
+	}, ""}
+
+	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, grid.HTMLPart(), somediv)
 	body.AddScripts(keypressscript, igscript, igscript2)
 
 	// return DOCTYPE definition + <html> as string (includes all the subparts)

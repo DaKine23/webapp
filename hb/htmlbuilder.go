@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/DaKine23/webapp/hb/bscontainer"
 	"github.com/DaKine23/webapp/hb/bsglyphicons"
+	"github.com/DaKine23/webapp/hb/bsgrid"
 	"github.com/DaKine23/webapp/hb/faicons"
 )
 
@@ -12,6 +14,57 @@ import (
 type HTMLOption struct {
 	Name  string
 	Value string
+}
+
+type BsGrid struct {
+	Grid *[][]BsCell
+	ID   string
+}
+
+type BsCell struct {
+	Content *HTMLPart
+	Colspan int
+}
+
+func (bsg BsGrid) HTMLPart() *HTMLPart {
+
+	container := NewHTMLPart("div", bsg.ID).AddBootstrapClasses(bscontainer.ContainerFluid)
+
+	for _, v := range *bsg.Grid {
+		row := NewHTMLPart(bsgrid.Row, "").AddBootstrapClasses(bsgrid.Row)
+		autocolspan := 12
+		for _, v2 := range v {
+			autocolspan -= v2.Colspan
+		}
+		autocolspan = autocolspan / len(v)
+		for _, v2 := range v {
+			cell := NewHTMLPart("cell", "")
+
+			switch {
+			case v2.Content == nil && v2.Colspan > 0:
+				cell.AddBootstrapClasses(bsgrid.Cell(v2.Colspan, bsgrid.Large))
+			case v2.Content == nil && v2.Colspan <= 0:
+				cell.AddBootstrapClasses(bsgrid.Cell(autocolspan, bsgrid.Large))
+			case v2.Colspan > 0:
+				cell.AddBootstrapClasses(bsgrid.Cell(v2.Colspan, bsgrid.Large)).
+					addSubPart(v2.Content)
+			case v2.Colspan <= 0:
+				cell.AddBootstrapClasses(bsgrid.Cell(autocolspan, bsgrid.Large)).
+					addSubPart(v2.Content)
+			}
+
+			row.addSubPart(cell)
+		}
+		container.addSubPart(row)
+	}
+	return container
+
+	// root := hb.NewHTMLPart("root", "", "").AddBootstrapClasses(bscontainer.Container)
+	// 	row1 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
+	// 	cell11 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
+	// 	cell11.AddSubParts(buttongroup)
+	// 	row1.AddSubParts(cell11)
+
 }
 
 //HTMLPart represents a general HTML Tag and its contents
@@ -30,13 +83,18 @@ type Script struct {
 }
 
 //NewHTMLPart should be used as an constructor for *HTMLPart objects
-func NewHTMLPart(class, id, content string) *HTMLPart {
+func NewHTMLPart(class, id string, content ...string) *HTMLPart {
 	subParts := []HTMLPart{}
 	scripts := []HTMLPart{}
 	options := []HTMLOption{}
+	concatcontent := []byte{}
+	for _, v := range content {
+		concatcontent = append(concatcontent, v...)
+
+	}
 	htmlp := HTMLPart{
 		Class:    class,
-		Content:  content,
+		Content:  string(concatcontent),
 		Options:  &options,
 		SubParts: &subParts,
 		Scripts:  &scripts,

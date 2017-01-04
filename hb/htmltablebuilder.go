@@ -237,7 +237,7 @@ func (ht HTMLTable) String() string {
 			NewHTMLPart("li", "", "").
 				AddBootstrapClasses(bspagination.Disabled).
 				AddSubParts(
-					NewHTMLPart("a", "", fmt.Sprintf("%d / %d  | %d - %d / %d ", ht.Page, lastpage, start, end, ht.Rowcount)),
+					NewHTMLPart("a", "", fmt.Sprintf("%d / %d<br>%d - %d / %d ", ht.Page, lastpage, start, end, ht.Rowcount)),
 				),
 		)
 		list[3].addSubPart(buttonnext)
