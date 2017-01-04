@@ -9,7 +9,7 @@ import (
 	"github.com/DaKine23/webapp/hb/bsgrid"
 	"github.com/DaKine23/webapp/hb/bspagination"
 	"github.com/DaKine23/webapp/hb/bstable"
-	"github.com/DaKine23/webapp/hb/faicons"
+	"github.com/DaKine23/webapp/hb/svg"
 )
 
 //HTMLTable represents a HTML table
@@ -200,33 +200,33 @@ func (ht HTMLTable) String() string {
 			list = append(list, NewHTMLPart("li", "", ""))
 		}
 
-		arrowleft := NewFontAwesomeIcon(
-			NewFontAwesomeIconDefinition(faicons.Circle, faicons.ModifyLargerStackIcon),
-			NewFontAwesomeIconDefinition(faicons.AngleLeft, faicons.ModifyRegularStackIcon, faicons.ModifyInverse),
-		).
-			String(false)
-		arrowright := NewFontAwesomeIcon(
-			NewFontAwesomeIconDefinition(faicons.Circle, faicons.ModifyLargerStackIcon),
-			NewFontAwesomeIconDefinition(faicons.AngleRight, faicons.ModifyRegularStackIcon, faicons.ModifyInverse),
-		).
-			String(false)
-		buttonfirst := NewHTMLPart("a", ht.ID+"buttonfirst", arrowleft+arrowleft)
-		buttonbefore := NewHTMLPart("a", ht.ID+"buttonbefore", arrowleft)
+		activatedarrowleft := NewSVGIcon(svg.CaretLeft, "#F08532").String(false)
+		activatedarrowright := NewSVGIcon(svg.CaretRight, "#F08532").String(false)
+		deactivatedarrowleft := NewSVGIcon(svg.CaretLeft, "#707070").String(false)
+		deactivatedarrowright := NewSVGIcon(svg.CaretRight, "#707070").String(false)
+		var buttonfirst, buttonbefore, buttonlast, buttonnext *HTMLPart
 		if ht.Page > 1 {
+			buttonfirst = NewHTMLPart("a", ht.ID+"buttonfirst", activatedarrowleft+activatedarrowleft)
+			buttonbefore = NewHTMLPart("a", ht.ID+"buttonbefore", activatedarrowleft)
+
 			buttonfirst.addSubPart(pagingScript(buttonfirst.ID, ht.ID, 1).HTMLPart)
 			buttonbefore.addSubPart(pagingScript(buttonbefore.ID, ht.ID, ht.Page-1).HTMLPart)
 		} else {
+			buttonfirst = NewHTMLPart("a", ht.ID+"buttonfirst", deactivatedarrowleft+deactivatedarrowleft)
+			buttonbefore = NewHTMLPart("a", ht.ID+"buttonbefore", deactivatedarrowleft)
+
 			list[0].AddBootstrapClasses(bspagination.Disabled)
 			list[1].AddBootstrapClasses(bspagination.Disabled)
 		}
 
-		buttonlast := NewHTMLPart("a", ht.ID+"buttonlast", arrowright+arrowright)
-		buttonnext := NewHTMLPart("a", ht.ID+"buttonnext", arrowright)
 		if ht.Page*ht.PageSize < ht.Rowcount {
-
+			buttonlast = NewHTMLPart("a", ht.ID+"buttonlast", activatedarrowright+activatedarrowright)
+			buttonnext = NewHTMLPart("a", ht.ID+"buttonnext", activatedarrowright)
 			buttonlast.addSubPart(pagingScript(buttonlast.ID, ht.ID, lastpage).HTMLPart)
 			buttonnext.addSubPart(pagingScript(buttonnext.ID, ht.ID, ht.Page+1).HTMLPart)
 		} else {
+			buttonlast = NewHTMLPart("a", ht.ID+"buttonlast", deactivatedarrowright+deactivatedarrowright)
+			buttonnext = NewHTMLPart("a", ht.ID+"buttonnext", deactivatedarrowright)
 			list[4].AddBootstrapClasses(bspagination.Disabled)
 			list[5].AddBootstrapClasses(bspagination.Disabled)
 		}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 	"runtime"
@@ -9,16 +10,17 @@ import (
 	"time"
 
 	_ "expvar"
-	"flag"
 
 	"github.com/DaKine23/webapp/hb"
 	"github.com/DaKine23/webapp/hb/bsbutton"
 	"github.com/DaKine23/webapp/hb/bsbuttongroup"
 	"github.com/DaKine23/webapp/hb/bscontainer"
 	"github.com/DaKine23/webapp/hb/bsglyphicons"
+
 	"github.com/DaKine23/webapp/hb/bsgrid"
 	"github.com/DaKine23/webapp/hb/bstable"
 	"github.com/DaKine23/webapp/hb/jqaction"
+	"github.com/DaKine23/webapp/hb/svg"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	cors "github.com/itsjamie/gin-cors"
@@ -212,7 +214,7 @@ func addCors(router *gin.Engine) {
 func page() string {
 
 	//define doctype
-	result := "<!DOCTYPE html>\n"
+	result := "<!DOCTYPE htpageml svg>\n"
 
 	//define <html>
 	html := hb.NewHTMLPart("html", "", "")
@@ -226,7 +228,12 @@ func page() string {
 	<link rel="stylesheet" href="static/zalos-bootstrap-theme.min.css">`).
 		AddSubParts(hb.NewHTMLPart("title", "", title))
 
-		//define js libraries you want to import
+	head.AddSubParts(hb.NewHTMLPart("style", "", `.icon {
+  width: 14px;
+  height: 14px;
+}
+	`))
+	//define js libraries you want to import
 	jsLibraries := []string{
 
 		"https://unpkg.com/jquery@3.1.0/dist/jquery.min.js",
@@ -242,7 +249,7 @@ func page() string {
 	}
 
 	//define <body>
-	body := hb.NewHTMLPart("body", "", "")
+	body := hb.NewHTMLPart("body", "", svg.Iconset)
 
 	// define two tables for demonstration
 	table := hb.NewHTMLTable("mytable", titles["mytable"], *data["mytable"], []string{}, pagesize["mytable"], 1)
@@ -351,12 +358,14 @@ func page() string {
 	ig := hb.InputGroup{
 		Member: []hb.InputGroupMember{{"myinput", "one"}, {"myinput2", "two"}, {"myinput3", "three"}},
 	}
+
 	igscript := hb.NewInputGroupScript(submitbutton.ID, jqaction.Click, "", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
 	igscript2 := hb.NewInputGroupScript("myinput3", jqaction.Keypress, "event.which == 13", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
 
 	// add all the other html tags to the <body>
 	body.AddSubParts(script.HTMLPart, scriptToAddARow.HTMLPart, scriptToAdd1000Rows.HTMLPart, root, somediv)
 	body.AddScripts(keypressscript, igscript, igscript2)
+
 	// return DOCTYPE definition + <html> as string (includes all the subparts)
 	return result + html.String(false)
 

@@ -104,6 +104,16 @@ func NewFontAwesomeIconDefinition(definition ...string) FontAwesomeIconDefinitio
 
 }
 
+func NewSVGIcon(icon, color string) *HTMLPart {
+
+	format := `<use xlink:href="%s">`
+	return NewHTMLPart("svg", "", fmt.Sprintf(format, icon)).
+		AddBootstrapClasses("icon").
+		AddOption(&HTMLOption{"viewBox", "0 0 8 8"}).
+		AddOption(&HTMLOption{"style", fmt.Sprintf("fill: %s;", color)})
+
+}
+
 func NewFontAwesomeIcon(icons ...FontAwesomeIconDefinition) *HTMLPart {
 
 	result := NewHTMLPart("span", "", "").AddBootstrapClasses(faicons.ContainerStack, faicons.ModifyFixedWidth)
