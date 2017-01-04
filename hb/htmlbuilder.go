@@ -33,10 +33,14 @@ func (bsg BsGrid) HTMLPart() *HTMLPart {
 	for _, v := range *bsg.Grid {
 		row := NewHTMLPart(bsgrid.Row, "").AddBootstrapClasses(bsgrid.Row)
 		autocolspan := 12
+		colspancounter := len(v)
 		for _, v2 := range v {
-			autocolspan -= v2.Colspan
+			if v2.Colspan > 0 {
+				autocolspan -= v2.Colspan
+				colspancounter--
+			}
 		}
-		autocolspan = autocolspan / len(v)
+		autocolspan = autocolspan / colspancounter
 		for _, v2 := range v {
 			cell := NewHTMLPart("cell", "")
 
@@ -58,12 +62,6 @@ func (bsg BsGrid) HTMLPart() *HTMLPart {
 		container.addSubPart(row)
 	}
 	return container
-
-	// root := hb.NewHTMLPart("root", "", "").AddBootstrapClasses(bscontainer.Container)
-	// 	row1 := hb.NewHTMLPart("row", "", "").AddBootstrapClasses(bsgrid.Row)
-	// 	cell11 := hb.NewHTMLPart("cell", "", "").AddBootstrapClasses(bsgrid.Cell(12, bsgrid.Large))
-	// 	cell11.AddSubParts(buttongroup)
-	// 	row1.AddSubParts(cell11)
 
 }
 
