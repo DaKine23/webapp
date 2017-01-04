@@ -214,7 +214,7 @@ func addCors(router *gin.Engine) {
 func page() string {
 
 	//define doctype
-	result := "<!DOCTYPE htpageml svg>\n"
+	result := "<!DOCTYPE html svg>\n"
 
 	//define <html>
 	html := hb.NewHTMLPart("html", "", "")

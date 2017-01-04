@@ -196,7 +196,7 @@ func (ht HTMLTable) String() string {
 		start++
 
 		list := []*HTMLPart{}
-		for i := 0; i < 6; i++ {
+		for i := 0; i < 5; i++ {
 			list = append(list, NewHTMLPart("li", "", ""))
 		}
 
@@ -227,8 +227,8 @@ func (ht HTMLTable) String() string {
 		} else {
 			buttonlast = NewHTMLPart("a", ht.ID+"buttonlast", deactivatedarrowright+deactivatedarrowright)
 			buttonnext = NewHTMLPart("a", ht.ID+"buttonnext", deactivatedarrowright)
+			list[3].AddBootstrapClasses(bspagination.Disabled)
 			list[4].AddBootstrapClasses(bspagination.Disabled)
-			list[5].AddBootstrapClasses(bspagination.Disabled)
 		}
 
 		list[0].addSubPart(buttonfirst).AddBootstrapClasses(bspagination.Previous)
@@ -236,19 +236,12 @@ func (ht HTMLTable) String() string {
 		list[2].addSubPart(
 			NewHTMLPart("li", "", "").
 				AddBootstrapClasses(bspagination.Disabled).
-				addSubPart(
-					NewHTMLPart("a", "", fmt.Sprintf("%d / %d ", ht.Page, lastpage)),
+				AddSubParts(
+					NewHTMLPart("a", "", fmt.Sprintf("%d / %d  | %d - %d / %d ", ht.Page, lastpage, start, end, ht.Rowcount)),
 				),
 		)
-		list[3].addSubPart(
-			NewHTMLPart("li", "", "").
-				AddBootstrapClasses(bspagination.Disabled).
-				addSubPart(
-					NewHTMLPart("a", "", fmt.Sprintf("%d - %d / %d ", start, end, ht.Rowcount)),
-				),
-		)
-		list[4].addSubPart(buttonnext)
-		list[5].addSubPart(buttonlast).AddBootstrapClasses(bspagination.Next)
+		list[3].addSubPart(buttonnext)
+		list[4].addSubPart(buttonlast).AddBootstrapClasses(bspagination.Next)
 		container.AddSubParts(list...).AddBootstrapClasses(bspagination.Pager, bspagination.Small)
 
 	}
