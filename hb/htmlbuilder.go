@@ -33,14 +33,18 @@ func (bsg BsGrid) HTMLPart() *HTMLPart {
 	for _, v := range *bsg.Grid {
 		row := NewHTMLPart(bsgrid.Row, "").AddBootstrapClasses(bsgrid.Row)
 		autocolspan := 12
+
 		colspancounter := len(v)
+
 		for _, v2 := range v {
 			if v2.Colspan > 0 {
 				autocolspan -= v2.Colspan
 				colspancounter--
 			}
 		}
-		autocolspan = autocolspan / colspancounter
+		if colspancounter > 0 {
+			autocolspan = autocolspan / colspancounter
+		}
 		for _, v2 := range v {
 			cell := NewHTMLPart("cell", "")
 
@@ -117,7 +121,7 @@ func script(source, action, target, restType, apicall string, newContent string)
 
 	part := NewHTMLPart("script", "", fmt.Sprintf(`$(document).ready(function(){
     $("#%s").%s(function(){
-        $.ajax({type: "%s", url: "%s, async: true, success: function(result){
+        $.ajax({type: "%s", url: "%s, async: false, success: function(result){
             $("#%s").html(%s);
         }});
     });
@@ -187,10 +191,12 @@ func NewGlyphicon(icon string) *HTMLPart {
 }
 
 //String returns the HTML String for the HTMLPart struct includes all subparts subsubparts ...
-func (hp HTMLPart) String(withScripts bool) string {
-
-	return string(hp.bytes(withScripts))
-
+func (hp HTMLPart) String(withScripts ...bool) string {
+	var ws bool
+	if len(withScripts) > 0 {
+		ws = withScripts[0]
+	}
+	return string(hp.bytes(ws))
 }
 
 func (hp HTMLPart) allScripts() *[]HTMLPart {

@@ -221,7 +221,7 @@ func page() string {
 	title := "Webapp Example"
 	head := hb.NewHTMLPart("head", "", `<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="static/bootstrap.min.css">
 	<link rel="stylesheet" href="static/font-awesome.min.css">
 	<link rel="stylesheet" href="static/zalos-bootstrap-theme.min.css">`).
 		AddSubParts(hb.NewHTMLPart("title", "", title))
@@ -234,7 +234,7 @@ func page() string {
 	//define js libraries you want to import
 	jsLibraries := []string{
 
-		"https://unpkg.com/jquery@3.1.0/dist/jquery.min.js",
+		"static/jquery.min.js",
 		"static/bootstrap.min.js",
 	}
 	//add js libraries you want to import to the <head>
@@ -258,9 +258,9 @@ func page() string {
 	tp2 := hb.NewHTMLTableContainer(table2)
 
 	// some input fields for table 2 to enter new rows
-	edit := hb.NewLineEdit("myinput", "Mighty Input", "may type sth here", "standard content", hb.Validation{nil})
-	edit2 := hb.NewLineEdit("myinput2", hb.NewGlyphicon(bsglyphicons.GlyphiconEurGlyphiconEuro).String(false), "money money money", "", hb.Validation{nil})
-	searchedit := hb.NewLineEdit("myinput3", hb.NewGlyphicon(bsglyphicons.GlyphiconBook).String(false), "Search some thing", "", hb.Validation{nil}).AddLineEditSearchButton("searchbutton")
+	edit := hb.NewLineEdit("myinput", "Mighty Input", "may type sth here", "standard content", nil)
+	edit2 := hb.NewLineEdit("myinput2", hb.NewGlyphicon(bsglyphicons.GlyphiconEurGlyphiconEuro).String(), "money money money", "", nil)
+	searchedit := hb.NewLineEdit("myinput3", hb.NewGlyphicon(bsglyphicons.GlyphiconBook).String(), "Search some thing", "", nil).AddLineEditSearchButton("searchbutton")
 	submitbutton := hb.NewHTMLPart("button", "submitbutton", "submit").AddBootstrapClasses(bsbutton.B, bsbutton.Primary, bsbutton.BlockLevel)
 
 	// add some buttons  ("a" for bootstrap buttongroups)
@@ -286,10 +286,10 @@ func page() string {
 
 	//create a bootstrap grid
 
-	numberedit := hb.NewLineEdit("myinput4", "Numbers", "12.4", "", hb.Validation{nil})
+	numberedit := hb.NewLineEdit("myinput4", "Numbers", "12.4", "", nil)
 
 	validator := "^[1-9]+[0-9]*$"
-	intgeredit2 := hb.NewLineEdit("myinput5", hb.NewGlyphicon(bsglyphicons.GlyphiconKnight).String(false), "12345", "", hb.Validation{&validator})
+	intgeredit2 := hb.NewLineEdit("myinput5", hb.NewGlyphicon(bsglyphicons.GlyphiconKnight).String(), "12345", "", &hb.Validation{RegEx: validator})
 
 	intgeredit2.AddTooltip("I only accept Integer Values", "left")
 	body.AddScripts(hb.TooltipScript())
@@ -297,12 +297,12 @@ func page() string {
 	somediv := hb.NewHTMLPart("div", "keypressdiv", "here")
 	keypressscript := hb.NewHTMLPart("script", "", `$(document).ready(function(){$("#myinput4").keypress(function(event){
     $("#keypressdiv").html("Key: " + event.which);
-	});});`).AddOption(&hb.HTMLOption{"type", "text/javascript"})
+	});});`).AddOption(&hb.HTMLOption{Name: "type", Value: "text/javascript"})
 
 	var onerr string
 	onsuc := hb.OnResult(tp2.ID, hb.JSONResultValue("table")) + `$("#myinput").focus();$("#myinput").val('');$("#myinput2").val('');$("#myinput3").val('');`
 	ig := hb.InputGroup{
-		Member: []hb.InputGroupMember{{"myinput", "one"}, {"myinput2", "two"}, {"myinput3", "three"}},
+		Member: []hb.InputGroupMember{{"myinput", "one"}, {"myinput2", "two"}, {"myinput3", "three"}, {"dropdownsample", "status"}},
 	}
 
 	igscript := hb.NewInputGroupScript(submitbutton.ID, jqaction.Click, "", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
@@ -310,12 +310,14 @@ func page() string {
 
 	// add all the other html tags to the <body>
 
+	dropdown := hb.NewDropDownInput("dropdownsample", hb.NewGlyphicon(bsglyphicons.GlyphiconEducation).String(), false, "active", "success", "info", "warning", "danger")
+
 	grid := hb.BsGrid{&[][]hb.BsCell{
 		{{buttongroup, 0}},
 		{{nil, 2}, {tp, 8}},
 		{{button2, 0}},
 		{{div2, 0}},
-		{{edit, 0}, {edit2, 0}, {searchedit, 0}, {submitbutton, 0}},
+		{{edit, 0}, {edit2, 0}, {searchedit, 0}, {dropdown, 0}, {submitbutton, 0}},
 		{{nil, 2}, {tp2, 8}},
 		{{numberedit, 0}, {intgeredit2, 0}},
 	}, ""}
@@ -324,7 +326,7 @@ func page() string {
 	body.AddScripts(keypressscript, igscript, igscript2)
 
 	// return DOCTYPE definition + <html> as string (includes all the subparts)
-	return result + html.String(false)
+	return result + html.String()
 
 }
 
@@ -411,8 +413,9 @@ func addNewLineToLowerTableHandler(c *gin.Context) {
 		//exists checks if field is part of the request
 		One string `json:"one" binding:"exists"`
 		//required checks if field is part of the request and not empty
-		Two   string `json:"two" binding:"required"`
-		Three string `json:"three" binding:"required"`
+		Two    string `json:"two" binding:"required"`
+		Three  string `json:"three" binding:"required"`
+		Status string `json:"status" binding:"required"`
 	}
 
 	lastpage := len(*data[tbn]) / pagesize[tbn]
@@ -423,7 +426,7 @@ func addNewLineToLowerTableHandler(c *gin.Context) {
 	var json Data
 	if c.BindJSON(&json) == nil {
 		newrow := []interface{}{json.One, json.Two, json.Three}
-		*data[tbn] = append(*data[tbn], hb.NewHTMLTableRow(newrow))
+		*data[tbn] = append(*data[tbn], hb.NewHTMLTableRow(newrow, json.Status))
 		table2 := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], lastpage)
 
 		c.JSON(http.StatusOK, gin.H{"table": table2.String()})
@@ -455,7 +458,7 @@ func addNewLineToUpperTableHandler(c *gin.Context) {
 
 		// data creation and appending could may be done on the database
 		// create a new row to insert
-		newrow := []interface{}{switchingValue, time.Now(), buttoncontainer.String(false), id}
+		newrow := []interface{}{switchingValue, time.Now(), buttoncontainer.String(), id}
 		// append it to the data
 		*data[tbn] = append(*data[tbn], hb.NewHTMLTableRow(newrow))
 	}

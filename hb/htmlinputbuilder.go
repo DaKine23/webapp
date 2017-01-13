@@ -117,14 +117,14 @@ func onResult(targetID, content string) string {
 
 //Validation contains a regex for validation on client side
 type Validation struct {
-	RegEx *string
+	RegEx string
 }
 
 //NewLineEdit creates an HTMLPart containing a LineEdit
-func NewLineEdit(ID, title, placeholder, content string, valid Validation) *HTMLPart {
+func NewLineEdit(ID, title, placeholder, content string, valid *Validation) *HTMLPart {
 
 	container := NewHTMLPart("div", ID+"inputgroup", "").AddBootstrapClasses(bsinput.InputGroup)
-	if valid.RegEx != nil {
+	if valid != nil {
 
 		format := `"use strict";
 		$(document).ready(function(){
@@ -142,7 +142,7 @@ func NewLineEdit(ID, title, placeholder, content string, valid Validation) *HTML
 		validJs := fmt.Sprintf(setclasses, ID+"inputgroup", bsinput.InputGroup)
 		notvalidJs := fmt.Sprintf(setclasses, ID+"inputgroup", bsinput.InputGroup+" "+bsinput.FormGroupHasFeedback+" "+bsinput.FormGroupHasWarning)
 
-		script := NewHTMLPart("script", "", fmt.Sprintf(format, ID, "keyup", ID, *valid.RegEx, ID, ID, notvalidJs, validJs))
+		script := NewHTMLPart("script", "", fmt.Sprintf(format, ID, "keyup", ID, valid.RegEx, ID, ID, notvalidJs, validJs))
 
 		script.AddOption(&HTMLOption{"type", "text/javascript"})
 		container.AddScripts(script)
@@ -174,12 +174,7 @@ func NewLineEdit(ID, title, placeholder, content string, valid Validation) *HTML
 
 }
 
-type Range struct {
-	Min *int
-	Max *int
-}
-
-//AddLineEditSearch adds a search button in the end of a lineedit button as ID as
+//AddLineEditSearchButton adds a search button in the end of a lineedit button as ID as
 func (hp *HTMLPart) AddLineEditSearchButton(ID string) *HTMLPart {
 
 	button := NewHTMLPart("div", "", "").AddBootstrapClasses(bsinput.InputGroupButton).addSubPart(
@@ -192,4 +187,25 @@ func (hp *HTMLPart) AddLineEditSearchButton(ID string) *HTMLPart {
 	hp.addSubPart(button)
 
 	return hp
+}
+
+//NewDropDownInput HTMLPart constructor for a DropDownInput Item
+func NewDropDownInput(ID, title string, isMulti bool, values ...string) *HTMLPart {
+
+	container := NewHTMLPart("div", ID+"inputgroup", "").AddBootstrapClasses(bsinput.InputGroup)
+
+	tag := "select"
+	if isMulti {
+		tag = " multiple"
+	}
+	input := NewHTMLPart(tag, ID).AddBootstrapClasses(bsinput.FormControl)
+	if len(title) > 0 {
+		label := NewHTMLPart("span", "", title).AddBootstrapClasses(bsinput.InputGroupAddon)
+		container.AddSubParts(label)
+	}
+
+	for _, v := range values {
+		input.addSubPart(NewHTMLPart("option", "", v))
+	}
+	return container.addSubPart(input)
 }
