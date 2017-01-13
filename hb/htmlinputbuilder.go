@@ -196,7 +196,7 @@ func NewDropDownInput(ID, title string, isMulti bool, values ...string) *HTMLPar
 
 	tag := "select"
 	if isMulti {
-		tag = " multiple"
+		tag += " multiple"
 	}
 	input := NewHTMLPart(tag, ID).AddBootstrapClasses(bsinput.FormControl)
 	if len(title) > 0 {
