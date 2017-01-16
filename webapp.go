@@ -11,14 +11,13 @@ import (
 
 	_ "expvar"
 
-	"github.com/DaKine23/webapp/hb"
-	"github.com/DaKine23/webapp/hb/bsbutton"
-	"github.com/DaKine23/webapp/hb/bsbuttongroup"
-	"github.com/DaKine23/webapp/hb/bsglyphicons"
+	"github.bus.zalan.do/ale/gowt"
+	"github.bus.zalan.do/ale/gowt/bsbutton"
+	"github.bus.zalan.do/ale/gowt/bsbuttongroup"
+	"github.bus.zalan.do/ale/gowt/bsglyphicons"
 
-	"github.com/DaKine23/webapp/hb/bstable"
-	"github.com/DaKine23/webapp/hb/jqaction"
-	"github.com/DaKine23/webapp/hb/svg"
+	"github.bus.zalan.do/ale/gowt/bstable"
+	"github.bus.zalan.do/ale/gowt/jqaction"
 	"github.com/gin-gonic/gin"
 	"github.com/golang/glog"
 	cors "github.com/itsjamie/gin-cors"
@@ -35,59 +34,59 @@ func main() {
 	configController()
 }
 
-var data = make(map[string]*[]*hb.HTMLTableRow)
+var data = make(map[string]*[]*gowt.HTMLTableRow)
 var titles = make(map[string][]string)
 var pagesize = make(map[string]int)
 
 func initData() {
 	titles["mytable"] = []string{"ping or pong", "timestamp", "delete", "id"}
-	data["mytable"] = &[]*hb.HTMLTableRow{}
+	data["mytable"] = &[]*gowt.HTMLTableRow{}
 	pagesize["mytable"] = 10
 	titles["mytable2"] = []string{"one", "two", "three"}
 	pagesize["mytable2"] = 10
-	data["mytable2"] = &[]*hb.HTMLTableRow{
-		&hb.HTMLTableRow{
+	data["mytable2"] = &[]*gowt.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row: &[]interface{}{"asome", "rontent", 1},
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row:    &[]interface{}{"bknow", "yblubb", 3},
 			Status: bstable.TableRowStatusDanger,
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row:    &[]interface{}{"csome", "xcontent", 2},
 			Status: bstable.TableRowStatusInfo,
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row:    &[]interface{}{"dknow", "cblubb", 6},
 			Status: bstable.TableRowStatusSuccess,
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row:    &[]interface{}{"esome", "fcontent", 5},
 			Status: bstable.TableRowStatusWarning,
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row: &[]interface{}{"fknow", "ablubb", 42},
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row: &[]interface{}{"asome", "rontent", 1},
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row:    &[]interface{}{"bknow", "yblubb", 3},
 			Status: bstable.TableRowStatusDanger,
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row:    &[]interface{}{"csome", "xcontent", 2},
 			Status: bstable.TableRowStatusInfo,
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row:    &[]interface{}{"dknow", "cblubb", 6},
 			Status: bstable.TableRowStatusSuccess,
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row:    &[]interface{}{"esome", "fcontent", 5},
 			Status: bstable.TableRowStatusWarning,
 		},
-		&hb.HTMLTableRow{
+		&gowt.HTMLTableRow{
 			Row: &[]interface{}{"fknow", "ablubb", 42},
 		},
 	}
@@ -178,9 +177,6 @@ func configController() {
 
 	router.GET("/index.html", func(c *gin.Context) {
 		c.Writer.WriteString(page())
-
-		//fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
-		//c.HTML(200, "index.html", gin.H{})
 	})
 
 	router.POST("/table/:tablename/add/:count", addNewLineToUpperTableHandler)
@@ -214,105 +210,75 @@ func page() string {
 	//define doctype
 	result := "<!DOCTYPE html svg>\n"
 
-	//define <html>
-	html := hb.NewHTMLPart("html", "", "")
-
-	//define <head> with title and include bootstrap
-	title := "Webapp Example"
-	head := hb.NewHTMLPart("head", "", `<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="static/bootstrap.min.css">
-	<link rel="stylesheet" href="static/font-awesome.min.css">
-	<link rel="stylesheet" href="static/zalos-bootstrap-theme.min.css">`).
-		AddSubParts(hb.NewHTMLPart("title", "", title))
-
-	head.AddSubParts(hb.NewHTMLPart("style", "", `.icon {
-  width: 14px;
-  height: 14px;
-}
-	`))
-	//define js libraries you want to import
-	jsLibraries := []string{
-
-		"static/jquery.min.js",
-		"static/bootstrap.min.js",
-	}
-	//add js libraries you want to import to the <head>
-	for _, v := range jsLibraries {
-		jsLibrariesPart := hb.NewHTMLPart("script", "", "").AddOption(&hb.HTMLOption{
-			Name:  "src",
-			Value: v,
-		})
-		head.AddSubParts(jsLibrariesPart)
-	}
-
-	//define <body>
-	body := hb.NewHTMLPart("body", "", svg.Iconset)
+	html, _, body := gowt.NewDefaultPage("Webapp example", []string{}, []string{"static/zalos-bootstrap-theme.min.css"})
 
 	// define two tables for demonstration
-	table := hb.NewHTMLTable("mytable", titles["mytable"], *data["mytable"], []string{}, pagesize["mytable"], 1)
-	table2 := hb.NewHTMLTable("mytable2", titles["mytable2"], *data["mytable2"], []string{}, pagesize["mytable2"], 1)
+	table := gowt.NewHTMLTable("mytable", titles["mytable"], *data["mytable"], []string{}, pagesize["mytable"], 1)
+	table2 := gowt.NewHTMLTable("mytable2", titles["mytable2"], *data["mytable2"], []string{}, pagesize["mytable2"], 1)
 
 	// tables should be used inside of containers when defining the layout will be used as drawing destination later on
-	tp := hb.NewHTMLTableContainer(table)
-	tp2 := hb.NewHTMLTableContainer(table2)
+	tp := gowt.NewHTMLTableContainer(table)
+	tp2 := gowt.NewHTMLTableContainer(table2)
 
 	// some input fields for table 2 to enter new rows
-	edit := hb.NewLineEdit("myinput", "Mighty Input", "may type sth here", "standard content", nil)
-	edit2 := hb.NewLineEdit("myinput2", hb.NewGlyphicon(bsglyphicons.GlyphiconEurGlyphiconEuro).String(), "money money money", "", nil)
-	searchedit := hb.NewLineEdit("myinput3", hb.NewGlyphicon(bsglyphicons.GlyphiconBook).String(), "Search some thing", "", nil).AddLineEditSearchButton("searchbutton")
-	submitbutton := hb.NewHTMLPart("button", "submitbutton", "submit").AddBootstrapClasses(bsbutton.B, bsbutton.Primary, bsbutton.BlockLevel)
+	edit := gowt.NewLineEdit("myinput", "Mighty Input", "may type sth here", "standard content", nil)
+	edit2 := gowt.NewLineEdit("myinput2", gowt.NewGlyphicon(bsglyphicons.GlyphiconEurGlyphiconEuro).String(), "money money money", "", nil)
+	searchedit := gowt.NewLineEdit("myinput3", gowt.NewGlyphicon(bsglyphicons.GlyphiconBook).String(), "Search some thing", "", nil).AddLineEditSearchButton("searchbutton")
+	submitbutton := gowt.NewHTMLPart("button", "submitbutton", "submit").AddBootstrapClasses(bsbutton.B, bsbutton.Primary, bsbutton.BlockLevel)
 
 	// add some buttons  ("a" for bootstrap buttongroups)
-	button := hb.NewHTMLPart("a", "addbutton", "Add Table Entry").AddBootstrapClasses(bsbutton.B, bsbutton.Primary)
-	button3 := hb.NewHTMLPart("a", "addbutton2", "Add 1000 Table Entries").AddBootstrapClasses(bsbutton.B, bsbutton.Primary)
-	button2 := hb.NewHTMLPart("button", "pongbutton", "Click Me").AddBootstrapClasses(bsbutton.B, bsbutton.Default)
+	button := gowt.NewHTMLPart("a", "addbutton", "Add Table Entry").AddBootstrapClasses(bsbutton.B, bsbutton.Primary)
+	button3 := gowt.NewHTMLPart("a", "addbutton2", "Add 1000 Table Entries").AddBootstrapClasses(bsbutton.B, bsbutton.Primary)
+	button2 := gowt.NewHTMLPart("button", "pongbutton", "Click Me").AddBootstrapClasses(bsbutton.B, bsbutton.Default)
 
 	//Create a buttongroup
-	buttongroup := hb.NewHTMLPart("div", "", "").
+	buttongroup := gowt.NewHTMLPart("div", "", "").
 		AddBootstrapClasses(bsbuttongroup.ButtonGroup, bsbuttongroup.JustifiedButtonGroup).
 		AddSubParts(button, button3)
 
 	// add some html <div>
-	div2 := hb.NewHTMLPart("div", "drawdestination", "content")
+	div2 := gowt.NewHTMLPart("div", "drawdestination", "content")
 
 	// define scripts (ajax calls)
-	scriptToAddARow := hb.NewScript(button.ID, jqaction.Click, table.ID+"container", "POST", "/table/mytable/add/1", hb.JSONResultValue("table"))
-	scriptToAdd1000Rows := hb.NewScript(button3.ID, jqaction.Click, table.ID+"container", "POST", "/table/mytable/add/1000", hb.JSONResultValue("table"))
-	script := hb.NewScript(button2.ID, jqaction.Click, div2.ID, "GET", "/pong", hb.JSONResultValue("message")+`+" !!! " +`+hb.JSONResultValue("timestamp"))
-
-	// add <head> and <body> to <html>
-	html.AddSubParts(head, body)
+	scriptToAddARow := gowt.NewScript(button.ID, jqaction.Click, table.ID+"container", "POST", "/table/mytable/add/1", gowt.JSONResultValue("table"))
+	scriptToAdd1000Rows := gowt.NewScript(button3.ID, jqaction.Click, table.ID+"container", "POST", "/table/mytable/add/1000", gowt.JSONResultValue("table"))
+	script := gowt.NewScript(button2.ID, jqaction.Click, div2.ID, "GET", "/pong", gowt.JSONResultValue("message")+`+" !!! " +`+gowt.JSONResultValue("timestamp"))
 
 	//create a bootstrap grid
 
-	numberedit := hb.NewLineEdit("myinput4", "Numbers", "12.4", "", nil)
+	numberedit := gowt.NewLineEdit("myinput4", "Numbers", "12.4", "", nil)
 
 	validator := "^[1-9]+[0-9]*$"
-	intgeredit2 := hb.NewLineEdit("myinput5", hb.NewGlyphicon(bsglyphicons.GlyphiconKnight).String(), "12345", "", &hb.Validation{RegEx: validator})
+	intgeredit2 := gowt.NewLineEdit("myinput5", gowt.NewGlyphicon(bsglyphicons.GlyphiconKnight).String(), "12345", "", &gowt.Validation{RegEx: validator})
 
 	intgeredit2.AddTooltip("I only accept Integer Values", "left")
-	body.AddScripts(hb.TooltipScript())
+	body.AddScripts(gowt.TooltipScript())
 
-	somediv := hb.NewHTMLPart("div", "keypressdiv", "here")
-	keypressscript := hb.NewHTMLPart("script", "", `$(document).ready(function(){$("#myinput4").keypress(function(event){
+	somediv := gowt.NewHTMLPart("div", "keypressdiv", "here")
+
+	// js for displaying the current keys number
+	keypressscript := gowt.NewHTMLPart("script", "", `$(document).ready(function(){$("#myinput4").keypress(function(event){
     $("#keypressdiv").html("Key: " + event.which);
-	});});`).AddOption(&hb.HTMLOption{Name: "type", Value: "text/javascript"})
+	});});`).AddOption(&gowt.HTMLOption{Name: "type", Value: "text/javascript"})
 
 	var onerr string
-	onsuc := hb.OnResult(tp2.ID, hb.JSONResultValue("table")) + `$("#myinput").focus();$("#myinput").val('');$("#myinput2").val('');$("#myinput3").val('');`
-	ig := hb.InputGroup{
-		Member: []hb.InputGroupMember{{"myinput", "one"}, {"myinput2", "two"}, {"myinput3", "three"}, {"dropdownsample", "status"}},
+
+	// js for set focus to first input and clean values
+	onsuc := gowt.OnResult(tp2.ID, gowt.JSONResultValue("table")) + `$("#myinput").focus();$("#myinput").val('');$("#myinput2").val('');$("#myinput3").val('');`
+	ig := gowt.InputGroup{
+		Member: []gowt.InputGroupMember{{"myinput", "one"}, {"myinput2", "two"}, {"myinput3", "three"}, {"dropdownsample", "status"}},
 	}
 
-	igscript := hb.NewInputGroupScript(submitbutton.ID, jqaction.Click, "", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
-	igscript2 := hb.NewInputGroupScript("myinput3", jqaction.Keypress, "event.which == 13", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
+	// InputGroup Scripts are jquery that is called when defined source is triggered by defined action. it sends a request with defined resttype containing the values in the defined inputs as json with defined valuenames
+	// onSuccess or onError are executed in addition! can be used to warn or inform the user clean inputs and so on
+	igscript := gowt.NewInputGroupScript(submitbutton.ID, jqaction.Click, "", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
+	igscript2 := gowt.NewInputGroupScript("myinput3", jqaction.Keypress, "event.which == 13", "POST", "/table/"+table2.ID, ig, onsuc, onerr)
 
 	// add all the other html tags to the <body>
 
-	dropdown := hb.NewDropDownInput("dropdownsample", hb.NewGlyphicon(bsglyphicons.GlyphiconEducation).String(), false, "active", "success", "info", "warning", "danger")
+	dropdown := gowt.NewDropDownInput("dropdownsample", gowt.NewGlyphicon(bsglyphicons.GlyphiconEducation).String(), false, "active", "success", "info", "warning", "danger")
 
-	grid := hb.BsGrid{&[][]hb.BsCell{
+	grid := gowt.BsGrid{&[][]gowt.BsCell{
 		{{buttongroup, 0}},
 		{{nil, 2}, {tp, 8}},
 		{{button2, 0}},
@@ -331,7 +297,7 @@ func page() string {
 }
 
 // hb tables enforce "/table/:tablename/sort/:column" api
-// hb.Sort helps you sort as it sorts the rows using the value on provided index
+// gowt.Sort helps you sort as it sorts the rows using the value on provided index
 // and discovers integer float64 and time.Time or uses the string representation for sorting
 func sortHandler(c *gin.Context) {
 
@@ -351,7 +317,7 @@ func sortHandler(c *gin.Context) {
 		// if found sort the data
 		if tbc == reducedTitle {
 
-			*data[tbn] = hb.Sort(i, *data[tbn])
+			*data[tbn] = gowt.Sort(i, *data[tbn])
 
 			break
 		}
@@ -359,7 +325,7 @@ func sortHandler(c *gin.Context) {
 	}
 
 	//draw the table
-	table := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], tbp)
+	table := gowt.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], tbp)
 	c.JSON(http.StatusOK, responseTableJSON{table.String()})
 }
 
@@ -370,7 +336,7 @@ func showHandler(c *gin.Context) {
 		tbp = itbp
 	}
 	//draw the table
-	table := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], tbp)
+	table := gowt.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], tbp)
 	c.JSON(http.StatusOK, responseTableJSON{table.String()})
 }
 
@@ -401,7 +367,7 @@ func deleteHandler(c *gin.Context) {
 		}
 	}
 
-	table := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], tbp)
+	table := gowt.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], tbp)
 	c.JSON(http.StatusOK, responseTableJSON{table.String()})
 }
 
@@ -426,8 +392,8 @@ func addNewLineToLowerTableHandler(c *gin.Context) {
 	var json Data
 	if c.BindJSON(&json) == nil {
 		newrow := []interface{}{json.One, json.Two, json.Three}
-		*data[tbn] = append(*data[tbn], hb.NewHTMLTableRow(newrow, json.Status))
-		table2 := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], lastpage)
+		*data[tbn] = append(*data[tbn], gowt.NewHTMLTableRow(newrow, json.Status))
+		table2 := gowt.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], lastpage)
 
 		c.JSON(http.StatusOK, gin.H{"table": table2.String()})
 
@@ -447,12 +413,12 @@ func addNewLineToUpperTableHandler(c *gin.Context) {
 
 		ids := fmt.Sprint(id)
 		//create a HTMLPart to hold a button and script
-		buttoncontainer := hb.NewHTMLPart("deletebutton", "", "")
+		buttoncontainer := gowt.NewHTMLPart("deletebutton", "")
 
 		// create a Bootstrap styled Button
-		button := hb.NewHTMLPart("button", "tablebutton"+ids, "del").AddBootstrapClasses(bsbutton.B, bsbutton.SizeVerySmall, bsbutton.Danger)
+		button := gowt.NewHTMLPart("button", "tablebutton"+ids, "del").AddBootstrapClasses(bsbutton.B, bsbutton.SizeVerySmall, bsbutton.Danger)
 		// create a deletion script for the Button to delete the row containing the button
-		script := hb.NewTableButtonScript(button.ID, jqaction.Click, tbn+"container", tbn, "DELETE", "table/"+tbn+"/delete/"+ids, hb.JSONResultValue("table"))
+		script := gowt.NewTableButtonScript(button.ID, jqaction.Click, tbn+"container", tbn, "DELETE", "table/"+tbn+"/delete/"+ids, gowt.JSONResultValue("table"))
 		// add button and script to the container
 		buttoncontainer.AddSubParts(script.HTMLPart, button)
 
@@ -460,7 +426,7 @@ func addNewLineToUpperTableHandler(c *gin.Context) {
 		// create a new row to insert
 		newrow := []interface{}{switchingValue, time.Now(), buttoncontainer.String(), id}
 		// append it to the data
-		*data[tbn] = append(*data[tbn], hb.NewHTMLTableRow(newrow))
+		*data[tbn] = append(*data[tbn], gowt.NewHTMLTableRow(newrow))
 	}
 	//create table using the Data and return the HTML
 
@@ -469,6 +435,6 @@ func addNewLineToUpperTableHandler(c *gin.Context) {
 		lastpage++
 	}
 
-	table := hb.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], lastpage)
+	table := gowt.NewHTMLTable(tbn, titles[tbn], *data[tbn], []string{}, pagesize[tbn], lastpage)
 	c.JSON(http.StatusOK, responseTableJSON{table.String()})
 }
